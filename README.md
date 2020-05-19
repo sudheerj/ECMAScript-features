@@ -68,6 +68,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |6  | [String matchAll](#string-matchall)|
 |7  | [globalThis](#globalthis)|
 |8  | [import.meta](#import.meta)|
+|9  | [for..in order](#for..in-order)|
 
 ## ES2015 Or ES6
 
@@ -156,10 +157,11 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
 
 ## ES2019 Or ES10
 
-ES2020 is the current newer version of ECMAScript corresponding to the year 2020. This is the eleventh edition of the ECMAScript Language Specification. Even though this release doesn't bring as many features as ES6, it included some really useful features. The candidate is set for review and approval by the ECMA general assembly in June, 2020.
+ES2020 is the current newer version of ECMAScript corresponding to the year 2020. This is the eleventh edition of the ECMAScript Language Specification. Even though this release doesn't bring as many features as ES6, it included some really useful features.
+Most of these features already supported by some browsers and try out with babel parser support for unsupported features. This edition is set for final approval by the ECMA general assembly in June, 2020. The [ECMAScript 2020 (ES2020) language specification](https://tc39.es/ecma262/2020/) is ready now.
 
 ### BigInt
-BigInt is the 7th primitive type to represent whole numbers(integers with arbitrary precision) larger than pow(2, 53) - 1(or 9007199254740991 or Number.MAX_SAFE_INTEGER), which is the largest number JavaScript can reliably represent with the `Number` primitive. It is created by appending n to the end of an integer literal or by calling the function BigInt().
+In earlier JavaScript version, there is a limitation of using the Number type. i.e, You cannot safely represent integer values(`Number` primitive) larger than pow(2, 53). In ES2020, `BigInt` is introduced as the 7th primitive type to represent whole numbers(integers with arbitrary precision) larger than pow(2, 53) - 1(or 9007199254740991 or Number.MAX_SAFE_INTEGER). This is been created by appending `n` to the end of an integer literal or by calling the function BigInt().
 ```js
 // 1. Current number system
 const max = Number.MAX_SAFE_INTEGER;
@@ -193,28 +195,40 @@ console.log(1n == 1); // true
 ```
 
 ### Dynamic Import
-The dynamic import is used to load a module conditionally or on demand. Since it returns a promise for the module namespace object of the requested module, the module can be resolved or import can now be assigned to a variable using async/await as below
+Static imports supports some of the important use cases such as static analysis, bundling tools, and tree shaking, it is also it's desirable to be able to dynamically load parts of a JavaScript application at runtime. The new feature `dynamic import` is introduced to load a module conditionally or on demand. Since it returns a promise for the module namespace object of the requested module, the module can be resolved or import can now be assigned to a variable using async/await as below
 ```js
-<script type="module">
+<script>
 const moduleSpecifier = './message.js';
 import(moduleSpecifier)
     .then((module) => {
         module.default(); // Hello, default export
-        module.sayBye(); //Bye, named export
+        module.sayGoodBye(); //Bye, named export
     })
     .catch( err => console.log('loading error'));
 </script>
 ```
 ```js
-<script type="module">
+<script>
 (async function() {
     const moduleSpecifier = './message.js';
     const messageModule = await import(moduleSpecifier);
     messageModule.default(); // Hello, default export
-    messageModule.sayBye(); //Bye, named export
+    messageModule.sayGoodBye(); //Bye, named export
 })();
 </script>
 ```
+and the imported module appears with both default and named exports
+```js
+export default () => {
+   return "Hello, default export";
+}
+export const sayGoodBye = () => {
+   return "Bye, named export"
+}
+```
+
+**Note:** Dynamic import does not require scripts of `type="module"`
+
 ### Nullish Coalescing Operator
 The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand when its left-hand side operand is `null` or `undefined`, and otherwise returns its left-hand side operand. This operator replaces `||` operator to provide default values if you treat empty value or '', 0 and NaN as valid values. This is because the logical OR(||) operator treats(empty value or '', 0 and NaN) as falsy values and returns the right operand value which is wrong in this case. Hence, this operator truely checks for `nullish` values instead `falsy` values.
 ```js
@@ -228,8 +242,8 @@ let employee = {
 console.log(employee.profile.name || "Unknown"); // Unknown
 console.log(employee.profile.age || 30); // 30
 
-console.log(employee.profile.name ?? "Unknown"); // ""
-console.log(employee.profile.age ?? 30); // 0
+console.log(employee.profile.name ?? "Unknown"); // ""(empty is valid case for name)
+console.log(employee.profile.age ?? 30); // 0(zero is valid case for name)
 ```
 In a short note, nullish operator returns a non-nullish value and || operator returns truthy values.
 ### String matchAll
@@ -248,14 +262,27 @@ When you this code in browser console, the matches iterator produces an array fo
 ```
 ### Optional chaining
 In JavaScript, Long chains of property accesses is quite error-prone if any of them evaluates to `null` or `undefined` value. Also, it is not a good idea to check property existence on each item which in turn leads to a deeply-nested structured `if` statements. Optional chaining is a new feature that can make your JavaScript code look cleaner and robust by appending(?.) operator to stop the evaluation and return undefined if the item is undefined or null.
-This operator can be used together with nullish coalescing operator to provide default values
+By the way, this operator can be used together with nullish coalescing operator to provide default values
 ```js
 let employee = {
 };
 
+let employee1 = {
+     profile: {
+        name: 'John',
+        age: 30
+     }
+};
 
-console.log(employee.profile?.name ?? "Unknown"); // Undefine
-console.log(employee.profile?.age ?? 30); // Undefine
+
+console.log(employee.profile?.name); // Undefined
+console.log(employee.profile?.age); // Undefined
+
+console.log(employee1.profile?.name); // John
+console.log(employee1.profile?.age); // 30
+
+console.log(employee.profile?.name ?? "Unknown"); // Unknown
+console.log(employee.profile?.age ?? 30); // 30
 ```
 ### Promise.allSettled
 It is really helpful to log(especially to debug errors) about each promise when you are handling multiple promises. The  `Promise.allSettled()` method returns a new promise that resolves after all of the given promises have either fulfilled or rejected, with an array of objects describing the outcome of each promise.
@@ -285,13 +312,13 @@ var getGlobal = function () {
 var globals = getGlobal();
 
 if (typeof globals.setTimeout !== 'function') {
-  // no setTimeout in this environment or runtime
+  console.log('no setTimeout in this environment or runtime');
 }
 ```
 In ES2020, `globalThis` property is introduced to provide a standard way of accessing the global this value across environments.
 ```js
 if (typeof globalThis.setTimeout !== 'function') {
-  // no setTimeout in this environment or runtime
+  console.log('no setTimeout in this environment or runtime');
 }
 ```
 
@@ -306,6 +333,22 @@ Now you can access meta information(base URL of the module) about the module usi
 console.log(import.meta); // { url: "file:///home/user/my-module.js" }
 ```
 The above URL can be either URL from which the script was obtained (for external scripts), or the document base URL of the containing document (for inline scripts).
+**Note:** Remember `import` is not really an object but `import.meta` is provided as an object which is extensible, and its properties are writable, configurable, and enumerable.
+
+### for..in order
+Prior to ES2020, the specifications did not specify in which order for (a in b)  should run. Even though most of the javascript engines/browsers loop over the properties of an object in the order in which they were defined, it is not the case with all scenarios. This has been officially standardized in ES2020.
+```js
+var object = {
+  'a': 2,
+  'b': 3,
+  'c': 4
+}
+
+
+for(let key in object) {
+  console.log(key); // a b c
+}
+```
 
 
 

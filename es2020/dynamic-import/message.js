@@ -1,7 +1,6 @@
-export default function() {
+export default () => {
    return "Hello, default export";
-};
-export function sayGoodBye() {
+}
+export const sayGoodBye = () => {
    return "Bye, named export"
 }
-export { sayBye as sayGoodBye };
