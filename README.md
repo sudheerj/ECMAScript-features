@@ -91,7 +91,7 @@ console.log(multiplyFunc(2, 5)); // 10
 var multiplyArrowFunc = (a, b) => a * b;
 console.log(multiplyArrowFunc(2, 5)); // 10
 ```
-You can also skip paranthesis(()) if the function has exactly one parameter(either zero or more than one parameter). Apart from this, you can wrap braces({}) if the function has more than one expression in the body.
+You can also skip parenthesis(()) if the function has exactly one parameter(either zero or more than one parameter). Apart from this, you can wrap braces({}) if the function has more than one expression in the body.
 Let's list down all the variations of arrow functions,
 ```js
 //1. Single parameter and single statement
@@ -139,6 +139,87 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
 
 ## ES2018 Or ES9
 
+### Array flat and flatMap
+
+### Object formEntries
+    In JavaScript, it is very commonn to transforming data from one format. ES2017 introduced `Object.entries()` method to objects into arrays.
+    **Object to Array:**
+    ```js
+    const obj = {'a': '1', 'b': '2', 'c': '3' };
+    const arr = Object.entries(obj);
+    console.log(obj); // [ ['a', '1'], ['b', '2'], ['c', '3'] ]
+    ```
+    But if you want to get the object back from an array then you need iterate and convert it as below,
+    ```js
+    const arr = [ ['a', '1'], ['b', '2'], ['c', '3'] ];
+    let obj = {}
+    for (let [key, val] of arr) {
+        obj[key] = val;
+    }
+    console.log(obj);
+    ```
+    We need a straightforward way to avoid this iteration. In ES2019, `Object.fromEntries()` method is introduced which performs the reverse of `Object.entries()` behavior. The above loop can be avoided easily as below,
+    **Iterable( e.g Array or Map) to Object**
+    ```js
+    const arr = [ ['a', '1'], ['b', '2'], ['c', '3'] ];
+    const obj = Object.fromEntries(arr);
+    console.log(obj); // { a: "1", b: "2", c: "3" }
+    ```
+    One of the common case of this method usage is working with query params of an URL,
+    ```js
+    const paramsString = 'param1=foo&param2=baz';
+    const searchParams = new URLSearchParams(paramsString);
+
+    Object.fromEntries(searchParams);    // => {param1: "foo", param2: "baz"}
+    ```
+
+### String trimStart and trimEnd
+    In order to make consistency with padStart/padEnd, ES2019 provided the standard functions named as `trimStart` and `trimEnd` to trim white spaces on the beginning and ending of a string. However for web compatilibity(avoid any breakage) `trimLeft` and `trimRight` will be an alias for `trimStart` and `trimEnd` respectively.
+    Let's see the usage with an example,
+    ```js
+    //Prior ES2019
+    let messageOne = "   Hello World!!    ";
+    console.log(messageOne.trimLeft()); //Hello World!!
+    console.log(messageOne.trimRight()); //   Hello World!!
+
+    //With ES2019
+    let messageTwo = "   Hello World!!    ";
+    console.log(messageTwo.trimStart()); //Hello World!!
+    console.log(messageTwo.trimEnd()); //   Hello World!!
+    ```
+
+### Promise finally
+
+### Dynamic import
+
+### Symbol description
+
+### Optional catch binding
+    Prior to ES9, if you don't need `error` variable and omit the same variable then catch() clause won't be invoked. Also, the linters complain about unused variables. Inorder to avoid this problem, the optional catch binding feature is introduced to make the binding parameter optional in the catch clause. If you want to completely ignore the error or you already know the error but you just want to react to that the this feature is going to be useful.
+    Let's see the below syntax difference between the versions,
+    ```js
+    // With binding parameter(<ES9)
+    try {
+        ···
+    } catch (error) {
+        ···
+    }
+    // Without binding parameter(ES9)
+    try {
+        ···
+    } catch {
+        ···
+    }
+    ```
+    For example, the feature detection on a browser is one of the most common case
+    ```js
+    let isTheFeatureImplemented = false;
+    try {
+      if(isFeatureSupported()) {
+       isTheFeatureImplemented = true;
+       }
+    } catch (unused) {}
+    ```
 ### Private Class Variables
  In ES6, the classes are introduced to create reusable modules and variables are declared in clousure to make them private. Where as in ES2020, private class variables are introduced to allow the variables used in the class only. By just adding a simple hash symbol in front of our variable or function, you can reserve them entirely for internal to the class.
  ```js
@@ -300,7 +381,7 @@ As per the output, each outcome object returns `status` field which denotes eith
 
 ### globalThis
 Prior to ES2020, you need to write different syntax in different JavaScript environments(cross-platforms) just to access the global object. It is really a hard time for developers because you need to use `window, self, or frames` on the browser side, `global` on the nodejs, `self` on the web workers side. On the other hand, `this` keyword can be used inside functions for non-strict mode but it gives undefined in strict mode. If you think about `Function('return this')()` as a solution for above environments, it will fail for CSP enabled environments(where eval() is disabled).
-In the older versions, you can use es6-shim as below
+In the older versions, you can use es6-shim as below,
 ```js
 var getGlobal = function () {
   if (typeof self !== 'undefined') { return self; }
