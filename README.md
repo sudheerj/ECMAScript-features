@@ -1,5 +1,14 @@
+# JavaScript Interview Questions & Answers
+
+> Click :star:if you like the project. Pull Request are highly appreciated. Follow me [@SudheerJonna](https://twitter.com/SudheerJonna) for technical updates.
+
+## Downloading PDF/Epub formats
+
+You can download the PDF and Epub version of this repository from the latest run on the [actions tab](https://github.com/sudheerj/ECMAScript-cheatsheet/actions).
+
 # ECMAScript-cheatsheet
-ECMAScript is the scripting language which acts as the basis of JavaScript. ECMAScript standardized by the ECMA International standards organization in the ECMA-262 and ECMA-402 specifications.
+
+**ECMAScript** is the scripting language which acts as the basis of JavaScript. ECMAScript standardized by the ECMA International standards organization in the ECMA-262 and ECMA-402 specifications.
 Each proposal for an ECMAScript feature goes through the following maturity stages:
 1. Stage 0: Strawman;
 2. Stage 1: Proposal;
@@ -12,7 +21,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
 | No. | Feature |
 | --- | --------- |
-|   | **ES2015 Or ES6** (Supported by Chrome(51), FF(54), IE/Edge(14), Safari(10), Opera(38)) |
+|   | **ES2015 Or ES6** |
 |1  | [Variable Scoping](#variable-scoping) |
 |2  | [Arrow functions](#arrow-functions) |
 |3  | [Classes](#classes) |
@@ -35,10 +44,10 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |20 | [Promises](#promises) |
 |21 | [Reflect](#reflect) |
 |22 | [Binary and Octal](#binary-and-octal) |
-|   | **ES2016 Or ES7** (Supported by Chrome(68), Opera(55))|
+|   | **ES2016 Or ES7** |
 |1  | [Array includes](#array-includes) |
 |2  | [Exponentiation Operator](#exponentiation-operator) |
-|   | **ES2017 Or ES8** (Supported by Chrome, FF, Opera, Safari)|
+|   | **ES2017 Or ES8** |
 |1  | [Async functions](#async-functions) |
 |2  | [Object entries](#object-entries) |
 |3  | [Object values](#object-values) |
@@ -92,6 +101,7 @@ var multiplyArrowFunc = (a, b) => a * b;
 console.log(multiplyArrowFunc(2, 5)); // 10
 ```
 You can also skip parenthesis(()) if the function has exactly one parameter(either zero or more than one parameter). Apart from this, you can wrap braces({}) if the function has more than one expression in the body.
+
 Let's list down all the variations of arrow functions,
 ```js
 //1. Single parameter and single statement
@@ -141,15 +151,26 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
 
 ### Array flat and flatMap
 
+   The `flat()` method is used to 'flattens' the nested arrays into the top-level array. The functionality of this method is similar to Lodash's `_.flattenDepth()` function.
+
+   ```js
+        const arr = [[1, 2], [[3], 4], [5, 6];
+        const flattenedArr = arr.flat(2);
+
+        console.log(flattenedArr);    // => ["1", "2", "3", "4", "5", "6"]
+   ```
+
 ### Object formEntries
-    In JavaScript, it is very commonn to transforming data from one format. ES2017 introduced `Object.entries()` method to objects into arrays.
-    **Object to Array:**
-    ```js
-    const obj = {'a': '1', 'b': '2', 'c': '3' };
-    const arr = Object.entries(obj);
-    console.log(obj); // [ ['a', '1'], ['b', '2'], ['c', '3'] ]
-    ```
-    But if you want to get the object back from an array then you need iterate and convert it as below,
+   In JavaScript, it is very commonn to transforming data from one format. ES2017 introduced `Object.entries()` method to objects into arrays.
+
+   **Object to Array:**
+
+   ```js
+        const obj = {'a': '1', 'b': '2', 'c': '3' };
+        const arr = Object.entries(obj);
+        console.log(obj); // [ ['a', '1'], ['b', '2'], ['c', '3'] ]
+   ```
+   But if you want to get the object back from an array then you need iterate and convert it as below,
     ```js
     const arr = [ ['a', '1'], ['b', '2'], ['c', '3'] ];
     let obj = {}
@@ -158,25 +179,26 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
     }
     console.log(obj);
     ```
-    We need a straightforward way to avoid this iteration. In ES2019, `Object.fromEntries()` method is introduced which performs the reverse of `Object.entries()` behavior. The above loop can be avoided easily as below,
-    **Iterable( e.g Array or Map) to Object**
-    ```js
+  We need a straightforward way to avoid this iteration. In ES2019, `Object.fromEntries()` method is introduced which performs the reverse of `Object.entries()` behavior. The above loop can be avoided easily as below,
+  **Iterable( e.g Array or Map) to Object**
+   ```js
     const arr = [ ['a', '1'], ['b', '2'], ['c', '3'] ];
     const obj = Object.fromEntries(arr);
     console.log(obj); // { a: "1", b: "2", c: "3" }
-    ```
-    One of the common case of this method usage is working with query params of an URL,
-    ```js
+   ```
+  One of the common case of this method usage is working with query params of an URL,
+   ```js
     const paramsString = 'param1=foo&param2=baz';
     const searchParams = new URLSearchParams(paramsString);
 
     Object.fromEntries(searchParams);    // => {param1: "foo", param2: "baz"}
-    ```
+   ```
 
 ### String trimStart and trimEnd
-    In order to make consistency with padStart/padEnd, ES2019 provided the standard functions named as `trimStart` and `trimEnd` to trim white spaces on the beginning and ending of a string. However for web compatilibity(avoid any breakage) `trimLeft` and `trimRight` will be an alias for `trimStart` and `trimEnd` respectively.
-    Let's see the usage with an example,
-    ```js
+   In order to make consistency with padStart/padEnd, ES2019 provided the standard functions named as `trimStart` and `trimEnd` to trim white spaces on the beginning and ending of a string. However for web compatilibity(avoid any breakage) `trimLeft` and `trimRight` will be an alias for `trimStart` and `trimEnd` respectively.
+
+   Let's see the usage with an example,
+   ```js
     //Prior ES2019
     let messageOne = "   Hello World!!    ";
     console.log(messageOne.trimLeft()); //Hello World!!
@@ -186,7 +208,7 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
     let messageTwo = "   Hello World!!    ";
     console.log(messageTwo.trimStart()); //Hello World!!
     console.log(messageTwo.trimEnd()); //   Hello World!!
-    ```
+   ```
 
 ### Promise finally
 
@@ -195,9 +217,10 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
 ### Symbol description
 
 ### Optional catch binding
-    Prior to ES9, if you don't need `error` variable and omit the same variable then catch() clause won't be invoked. Also, the linters complain about unused variables. Inorder to avoid this problem, the optional catch binding feature is introduced to make the binding parameter optional in the catch clause. If you want to completely ignore the error or you already know the error but you just want to react to that the this feature is going to be useful.
-    Let's see the below syntax difference between the versions,
-    ```js
+   Prior to ES9, if you don't need `error` variable and omit the same variable then catch() clause won't be invoked. Also, the linters complain about unused variables. Inorder to avoid this problem, the optional catch binding feature is introduced to make the binding parameter optional in the catch clause. If you want to completely ignore the error or you already know the error but you just want to react to that the this feature is going to be useful.
+
+   Let's see the below syntax difference between the versions,
+   ```js
     // With binding parameter(<ES9)
     try {
         ···
@@ -210,16 +233,16 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
     } catch {
         ···
     }
-    ```
-    For example, the feature detection on a browser is one of the most common case
-    ```js
+   ```
+   For example, the feature detection on a browser is one of the most common case
+   ```js
     let isTheFeatureImplemented = false;
     try {
       if(isFeatureSupported()) {
        isTheFeatureImplemented = true;
        }
     } catch (unused) {}
-    ```
+   ```
 ### Private Class Variables
  In ES6, the classes are introduced to create reusable modules and variables are declared in clousure to make them private. Where as in ES2020, private class variables are introduced to allow the variables used in the class only. By just adding a simple hash symbol in front of our variable or function, you can reserve them entirely for internal to the class.
  ```js
@@ -234,15 +257,20 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
  user.login() // Welcome to ES2020
  console.log(user.#message) // Uncaught SyntaxError: Private field '#
  ```
+
  **Note:** As shown in the above code, If you still try to access the variable directly from the object then you will receive syntax error.
 
 ## ES2019 Or ES10
 
 ES2020 is the current newer version of ECMAScript corresponding to the year 2020. This is the eleventh edition of the ECMAScript Language Specification. Even though this release doesn't bring as many features as ES6, it included some really useful features.
+
 Most of these features already supported by some browsers and try out with babel parser support for unsupported features. This edition is set for final approval by the ECMA general assembly in June, 2020. The [ECMAScript 2020 (ES2020) language specification](https://tc39.es/ecma262/2020/) is ready now.
 
 ### BigInt
-In earlier JavaScript version, there is a limitation of using the Number type. i.e, You cannot safely represent integer values(`Number` primitive) larger than pow(2, 53). In ES2020, `BigInt` is introduced as the 7th primitive type to represent whole numbers(integers with arbitrary precision) larger than pow(2, 53) - 1(or 9007199254740991 or Number.MAX_SAFE_INTEGER). This is been created by appending `n` to the end of an integer literal or by calling the function BigInt().
+In earlier JavaScript version, there is a limitation of using the Number type. i.e, You cannot safely represent integer values(`Number` primitive) larger than pow(2, 53). In ES2020,
+
+`BigInt` is introduced as the 7th primitive type to represent whole numbers(integers with arbitrary precision) larger than pow(2, 53) - 1(or 9007199254740991 or Number.MAX_SAFE_INTEGER). This is been created by appending `n` to the end of an integer literal or by calling the function BigInt().
+
 ```js
 // 1. Current number system
 const max = Number.MAX_SAFE_INTEGER;
@@ -276,7 +304,9 @@ console.log(1n == 1); // true
 ```
 
 ### Dynamic Import
-Static imports supports some of the important use cases such as static analysis, bundling tools, and tree shaking, it is also it's desirable to be able to dynamically load parts of a JavaScript application at runtime. The new feature `dynamic import` is introduced to load a module conditionally or on demand. Since it returns a promise for the module namespace object of the requested module, the module can be resolved or import can now be assigned to a variable using async/await as below
+Static imports supports some of the important use cases such as static analysis, bundling tools, and tree shaking, it is also it's desirable to be able to dynamically load parts of a JavaScript application at runtime.
+
+The new feature `dynamic import` is introduced to load a module conditionally or on demand. Since it returns a promise for the module namespace object of the requested module, the module can be resolved or import can now be assigned to a variable using async/await as below
 ```js
 <script>
 const moduleSpecifier = './message.js';
@@ -329,6 +359,7 @@ console.log(employee.profile.age ?? 30); // 0(zero is valid case for name)
 In a short note, nullish operator returns a non-nullish value and || operator returns truthy values.
 ### String matchAll
 There is `String#match` method to get all the matches of a string against a regular expression by iterating for each match. However this method gives you the substrings that match.
+
 The `String#matchAll()` is a new method added to String prototype, which returns an iterator of all results matching a string against a regular expression.
 ```js
 const regex = /t(e)(st(\d?))/g;
@@ -342,7 +373,9 @@ When you this code in browser console, the matches iterator produces an array fo
 ["test2", "e", "st2", "2", index: 5, input: "test1test2", groups: undefined]
 ```
 ### Optional chaining
-In JavaScript, Long chains of property accesses is quite error-prone if any of them evaluates to `null` or `undefined` value. Also, it is not a good idea to check property existence on each item which in turn leads to a deeply-nested structured `if` statements. Optional chaining is a new feature that can make your JavaScript code look cleaner and robust by appending(?.) operator to stop the evaluation and return undefined if the item is undefined or null.
+In JavaScript, Long chains of property accesses is quite error-prone if any of them evaluates to `null` or `undefined` value. Also, it is not a good idea to check property existence on each item which in turn leads to a deeply-nested structured `if` statements.
+
+Optional chaining is a new feature that can make your JavaScript code look cleaner and robust by appending(?.) operator to stop the evaluation and return undefined if the item is undefined or null.
 By the way, this operator can be used together with nullish coalescing operator to provide default values
 ```js
 let employee = {
@@ -380,7 +413,10 @@ Promise.allSettled([promise1, promise2]).then(data => console.log(data)); // [
 As per the output, each outcome object returns `status` field which denotes either "fulfilled"(value present) or "rejected"(reason present)
 
 ### globalThis
-Prior to ES2020, you need to write different syntax in different JavaScript environments(cross-platforms) just to access the global object. It is really a hard time for developers because you need to use `window, self, or frames` on the browser side, `global` on the nodejs, `self` on the web workers side. On the other hand, `this` keyword can be used inside functions for non-strict mode but it gives undefined in strict mode. If you think about `Function('return this')()` as a solution for above environments, it will fail for CSP enabled environments(where eval() is disabled).
+Prior to ES2020, you need to write different syntax in different JavaScript environments(cross-platforms) just to access the global object. It is really a hard time for developers because you need to use `window, self, or frames` on the browser side, `global` on the nodejs, `self` on the web workers side.
+
+On the other hand, `this` keyword can be used inside functions for non-strict mode but it gives undefined in strict mode. If you think about `Function('return this')()` as a solution for above environments, it will fail for CSP enabled environments(where eval() is disabled).
+
 In the older versions, you can use es6-shim as below,
 ```js
 var getGlobal = function () {
@@ -404,7 +440,7 @@ if (typeof globalThis.setTimeout !== 'function') {
 ```
 
 ### import.meta
-The import.meta object was created by the ECMAScript implementation with a null prototype to get context-specific metadata about a JavaScript module.
+The `import.meta` object was created by the ECMAScript implementation with a null prototype to get context-specific metadata about a JavaScript module.
 Let's say you are trying to load `my-module` from a script,
 ```js
 <script type="module" src="my-module.js"></script>
@@ -414,6 +450,7 @@ Now you can access meta information(base URL of the module) about the module usi
 console.log(import.meta); // { url: "file:///home/user/my-module.js" }
 ```
 The above URL can be either URL from which the script was obtained (for external scripts), or the document base URL of the containing document (for inline scripts).
+
 **Note:** Remember `import` is not really an object but `import.meta` is provided as an object which is extensible, and its properties are writable, configurable, and enumerable.
 
 ### for..in order
