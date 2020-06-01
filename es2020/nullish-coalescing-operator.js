@@ -1,12 +1,12 @@
-let employee = {
-    profile: {
+let vehicle = {
+    car: {
         name: "",
-        age: 0
+        speed: 0
     }
 };
 
-console.log(employee.profile.name || "Unknown"); // Unknown
-console.log(employee.profile.age || 30); // 30
+console.log(vehicle.car.name || "Unknown"); // Unknown
+console.log(vehicle.car.speed || 90); // 90
 
-console.log(employee.profile.name ?? "Unknown"); // ""(empty is valid case for name)
-console.log(employee.profile.age ?? 30); // 0(zero is valid case for name)
+console.log(vehicle.car.name ?? "Unknown"); // ""(empty is valid case for name)
+console.log(vehicle.car.speed ?? 90); // 0(zero is valid case for speed)

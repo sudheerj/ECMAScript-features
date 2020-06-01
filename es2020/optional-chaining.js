@@ -1,19 +1,19 @@
-let employee = {
+let vehicle = {
 };
 
-let employee1 = {
-    profile: {
-        name: 'John',
-        age: 30
+let vehicle1 = {
+    car: {
+        name: 'ABC',
+        speed: 90
     }
 };
 
 
-console.log(employee.profile?.name); // Undefined
-console.log(employee.profile?.age); // Undefined
+console.log(vehicle.car?.name); // Undefined
+console.log(vehicle.car?.speed); // Undefined
 
-console.log(employee1.profile?.name); // John
-console.log(employee1.profile?.age); // 30
+console.log(vehicle1.car?.name); // ABC
+console.log(vehicle1.car?.speed); // 90
 
-console.log(employee.profile?.name ?? "Unknown"); // Unknown
-console.log(employee.profile?.age ?? 30); // 30
+console.log(vehicle.car?.name ?? "Unknown"); // Unknown
+console.log(vehicle.car?.speed ?? 90); // 90

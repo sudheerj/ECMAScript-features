@@ -6,6 +6,12 @@
 
 You can download the PDF and Epub version of this repository from the latest run on the [actions tab](https://github.com/sudheerj/ECMAScript-cheatsheet/actions).
 
+## How to run examples
+```cmd
+npm install
+npx babel-node es2020/bigint // Try other examples too
+```
+
 # ECMAScript-cheatsheet
 
 **ECMAScript** is the scripting language which acts as the basis of JavaScript. ECMAScript standardized by the ECMA International standards organization in the ECMA-262 and ECMA-402 specifications.
@@ -49,8 +55,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |2  | [Exponentiation Operator](#exponentiation-operator) |
 |   | **ES2017 Or ES8** |
 |1  | [Async functions](#async-functions) |
-|2  | [Object entries](#object-entries) |
-|3  | [Object values](#object-values) |
+|2  | [Object values](#object-values) |
+|3  | [Object entries](#object-entries) |
 |4  | [Object property descriptors](#object-property-descriptors) |
 |5  | [Trailing commas](#trailing-commas) |
 |   | **ES2018 Or ES9**|
@@ -62,12 +68,10 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |1  | [Array flat and flatMap](#array-flat-and-flatmap) |
 |2  | [Object formEntries](#object-formentries) |
 |3  | [String trimStart and trimEnd](#string-trimstart-and-trimend) |
-|4  | [Promise finally](#promise-finally) |
-|5  | [Dynamic import](#dynamic-import)|
-|6  | [Symbol description](#symbol-description)|
-|7  | [Optional Catch Binding](#optional-catch-binding)|
-|8  | [JSON Improvements](#json-improvements)|
-|9  | [Private Class Variables](#private-class-variables)|
+|4  | [Symbol description](#symbol-description)|
+|5  | [Optional Catch Binding](#optional-catch-binding)|
+|6  | [JSON Improvements](#json-improvements)|
+|7  | [Private Class Variables](#private-class-variables)|
 |   | **ES2020 Or ES11**|
 |1  | [BigInt](#bigint) |
 |2  | [Dynamic Import](#dynamic-import) |
@@ -190,6 +194,48 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
    ```
 
 ## ES2017 Or ES8
+
+### Async functions
+
+### Object values
+   Similar to Object.keys which iterate over JavaScript object’s keys, Object.values will do the same thing on values. i.e, The Object.values() method is introduced to returns an array of a given object's own enumerable property values in the same order as `for...in` loop.
+
+   ```js
+    const countries = {
+      IN: 'India',
+      SG: 'Singapore',
+    }
+    Object.values(countries) // ['India', 'Singapore']
+   ```
+
+   By the way, non-object argument will be coerced to an object
+
+   ```js
+    console.log(Object.values(['India', 'Singapore'])); // ['India', 'Singapore']
+    console.log(Object.values('India')); // ['I', 'n', 'd', 'i', 'a']
+   ```
+
+### Object entries
+   The `Object.entries()` method is introduced to returns an array of a given object's own enumerable string-keyed property [key, value] pairsin the same order as `for...in` loop.
+   ```js
+       const countries = {
+         IN: 'India',
+         SG: 'Singapore',
+       }
+       Object.entries(countries) // [["IN", "India"], ["SG", "Singapore"]]
+   ```
+   By the way, non-object argument will be coerced to an object
+   ```js
+      const countries = ['India', 'Singapore'];
+      console.log(Object.entries(countries)); // [ ['0', 'India'], ['1', 'Singapore']]
+
+      const country = 'India';
+      console.log(Object.entries(country)); // [["0", "I"], ["1", "n"], ["2", "d"], ["3", "i"], ["4", "a"]]
+
+      console.log(Object.entries(100)); // [], an empty array for any primitive type because it won't have any own properties
+   ```
+
+###
 
 ## ES2018 Or ES9
 
@@ -387,18 +433,18 @@ export const sayGoodBye = () => {
 ### Nullish Coalescing Operator
 The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand when its left-hand side operand is `null` or `undefined`, and otherwise returns its left-hand side operand. This operator replaces `||` operator to provide default values if you treat empty value or '', 0 and NaN as valid values. This is because the logical OR(||) operator treats(empty value or '', 0 and NaN) as falsy values and returns the right operand value which is wrong in this case. Hence, this operator truely checks for `nullish` values instead `falsy` values.
 ```js
-let employee = {
-  profile: {
-    name: "",
-    age: 0
-  }
+let vehicle = {
+    car: {
+        name: "",
+        speed: 0
+    }
 };
 
-console.log(employee.profile.name || "Unknown"); // Unknown
-console.log(employee.profile.age || 30); // 30
+console.log(vehicle.car.name || "Unknown"); // Unknown
+console.log(vehicle.car.speed || 90); // 90
 
-console.log(employee.profile.name ?? "Unknown"); // ""(empty is valid case for name)
-console.log(employee.profile.age ?? 30); // 0(zero is valid case for name)
+console.log(vehicle.car.name ?? "Unknown"); // ""(empty is valid case for name)
+console.log(vehicle.car.speed ?? 90); // 0(zero is valid case for speed)
 ```
 In a short note, nullish operator returns a non-nullish value and || operator returns truthy values.
 ### String matchAll
@@ -422,25 +468,26 @@ In JavaScript, Long chains of property accesses is quite error-prone if any of t
 Optional chaining is a new feature that can make your JavaScript code look cleaner and robust by appending(?.) operator to stop the evaluation and return undefined if the item is undefined or null.
 By the way, this operator can be used together with nullish coalescing operator to provide default values
 ```js
-let employee = {
+let vehicle = {
 };
 
-let employee1 = {
-     profile: {
-        name: 'John',
-        age: 30
-     }
+let vehicle1 = {
+    car: {
+        name: 'ABC',
+        speed: 90
+    }
 };
 
+console.log(vehicle.car?.name); // TypeError: Cannot read property 'name' of undefined
 
-console.log(employee.profile?.name); // Undefined
-console.log(employee.profile?.age); // Undefined
+console.log(vehicle.car?.name); // Undefined
+console.log(vehicle.car?.speed); // Undefined
 
-console.log(employee1.profile?.name); // John
-console.log(employee1.profile?.age); // 30
+console.log(vehicle1.car?.name); // ABC
+console.log(vehicle1.car?.speed); // 90
 
-console.log(employee.profile?.name ?? "Unknown"); // Unknown
-console.log(employee.profile?.age ?? 30); // 30
+console.log(vehicle.car?.name ?? "Unknown"); // Unknown
+console.log(vehicle.car?.speed ?? 90); // 90
 ```
 ### Promise.allSettled
 It is really helpful to log(especially to debug errors) about each promise when you are handling multiple promises. The  `Promise.allSettled()` method returns a new promise that resolves after all of the given promises have either fulfilled or rejected, with an array of objects describing the outcome of each promise.

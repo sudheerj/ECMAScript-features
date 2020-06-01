@@ -4,3 +4,6 @@ npm-debug.log
 .idea
 *.idea/
 .idea/workspace.xml
+
+# Dependency directories
+node_modules/
