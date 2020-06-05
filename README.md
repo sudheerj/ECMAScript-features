@@ -234,8 +234,45 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
 
       console.log(Object.entries(100)); // [], an empty array for any primitive type because it won't have any own properties
    ```
+### Object property descriptors
+   Property descriptors describe the attributes of a property. The `Object.getOwnPropertyDescriptors()` method returns all own property descriptors of a given object.
 
-###
+   It provides the below attributes,
+
+   1. **value:** The value associated with the property (data descriptors only).
+   2. **writable:** true if and only if the value associated with the property may be changed
+   3. **get:** A function which serves as a getter for the property.
+   4. **set:** A function which serves as a setter for the property.
+   5. **configurable:** true if and only if the type of this property descriptor may be changed or deleted.
+   6. **enumerable:** true if and only if this property shows up during enumeration of the property.
+
+   The usage of finding property descriptors for any property seems to be as below,
+
+   ```js
+    const profile = {
+      age: 42
+    };
+
+    const descriptors = Object.getOwnPropertyDescriptors(profile);
+    console.log(descriptors); //  {age: {configurable: true, enumerable: true, writable: true }}
+   ```
+### Trailing commas
+   Trailing commas are  allowed in parameter definitions and function calls
+   ```js
+   function func(a,b,) { // declaration
+     console.log(a, b);
+   }
+   func(1,2,); // invocation
+   ```
+   But if the function parameter definition or function call only contains a comma, a syntax error will be thrown
+   ```js
+   function func(,) {  // SyntaxError: missing formal parameter
+     console.log('no args');
+   };
+   func(,); // SyntaxError: expected expression, got ','
+   ```
+
+   **Note:** Trailing commas are not allowed in Rest Parameters and JSON.
 
 ## ES2018 Or ES9
 
