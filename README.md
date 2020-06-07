@@ -63,9 +63,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |7  | [Trailing commas](#trailing-commas) |
 |   | **ES2018 Or ES9**|
 |1  | [Async iterators](#async-iterators) |
-|2  | [Object rest properties](#object-rest-properties) |
-|3  | [Object spread properties](#object-spread-properties) |
-|4  | [Promise finally](#promise-finally) |
+|2  | [Object rest and spread operators](#object-rest-and-spread-operators) |
+|3  | [Promise finally](#promise-finally) |
 |   | **ES2019 Or ES10**|
 |1  | [Array flat and flatMap](#array-flat-and-flatmap) |
 |2  | [Object formEntries](#object-formentries) |
@@ -393,6 +392,77 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
 
 ## ES2018 Or ES9
 
+### Object rest and spread operators
+   ES2015 or ES6 introduced both rest parameters and spread operators to convert arguments to array and vice versa using three-dot(...) notation.
+   1. Rest parameters can be used to convert function arguments to an array
+
+       ```js
+        function myfunc(p1, p2, ...p3) {
+          console.log(p1, p2, p3); // 1, 2, [3, 4, 5, 6]
+        }
+       myfunc(1, 2, 3, 4, 5, 6);
+       ```
+
+   2. The spread operator works in the opposite way by converting an array into separate arguments in order to pass to a function
+
+       ```js
+        const myArray = [10, 5, 25, -100, 200, -200];
+        console.log( Math.max(...myArray) ); // 200
+       ```
+
+   ES2018 enables this rest/spread behavior for objects as well.
+
+   1. You can pass object to a function
+
+       ```js
+        function myfunc({ a, ...x }) {
+            console.log(a, x); // 1, { b: 2, c: 3, d:4 }
+        }
+        myfunc({
+          a: 1,
+          b: 2,
+          c: 3,
+          d: 4
+        });
+       ```
+
+   2. The spread operator can be used within other objects
+
+        ```js
+        const myObject = { a: 1, b: 2, c: 3, d:4 };
+        const myNewObject = { ...myObject, e: 5 }; // { a: 1, b: 2, c: 3, d: 4, e: 5 }
+        ```
+
+### Promise finally
+   Sometimes you may need to avoid duplicate code in the then() and catch() methods.
+
+   ```js
+   myPromise
+       .then(result => {
+           // process the result and then clean up the resources
+       })
+       .catch(error => {
+           // handle the error and then clean up the resources
+       });
+   ```
+
+   The `finally()` method is useful if you want to do some processing or resource cleanup once the promise is settled(i.e either fulfilled or rejected).
+
+   Let's take a below example to hide the loading spinner after the data is fetched and processed.
+
+   ```js
+     let isLoading = true;
+     fetch('http://somesite.com/users')
+        .then(data => data.json())
+        .catch(err => console.error(err))
+        .finally(() => {
+            isLoading = false;
+            console.log('Finished loading!!');
+          })
+   ```
+
+## ES2019 Or ES10
+
 ### Array flat and flatMap
 
    The `flat()` method is used to 'flattens' the nested arrays into the top-level array. The functionality of this method is similar to Lodash's `_.flattenDepth()` function.
@@ -454,10 +524,6 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
     console.log(messageTwo.trimEnd()); //   Hello World!!
    ```
 
-### Promise finally
-
-### Dynamic import
-
 ### Symbol description
 
 ### Optional catch binding
@@ -504,7 +570,7 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
 
  **Note:** As shown in the above code, If you still try to access the variable directly from the object then you will receive syntax error.
 
-## ES2019 Or ES10
+## ES2020 Or ES11
 
 ES2020 is the current newer version of ECMAScript corresponding to the year 2020. This is the eleventh edition of the ECMAScript Language Specification. Even though this release doesn't bring as many features as ES6, it included some really useful features.
 
