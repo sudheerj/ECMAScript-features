@@ -1,4 +1,4 @@
-# JavaScript Interview Questions & Answers
+# ECMAScript Features or Cheatsheet
 
 > Click :star:if you like the project. Pull Request are highly appreciated. Follow me [@SudheerJonna](https://twitter.com/SudheerJonna) for technical updates.
 
@@ -12,7 +12,7 @@ npm install
 npx babel-node es2020/bigint // Try other examples too
 ```
 
-# ECMAScript-cheatsheet
+# What is ECMAScript?
 
 **ECMAScript** is the scripting language which acts as the basis of JavaScript. ECMAScript standardized by the ECMA International standards organization in the ECMA-262 and ECMA-402 specifications.
 Each proposal for an ECMAScript feature goes through the following maturity stages:
@@ -58,7 +58,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |2  | [Object values](#object-values) |
 |3  | [Object entries](#object-entries) |
 |4  | [Object property descriptors](#object-property-descriptors) |
-|5  | [Trailing commas](#trailing-commas) |
+|5  | [String padding](#string-padding)|
+|6  | [Shared memory and atomics](#shared-memory-and-atomics)|
+|7  | [Trailing commas](#trailing-commas) |
 |   | **ES2018 Or ES9**|
 |1  | [Async iterators](#async-iterators) |
 |2  | [Object rest properties](#object-rest-properties) |
@@ -196,7 +198,32 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
 ## ES2017 Or ES8
 
 ### Async functions
+   In ES6, Promises were introduced to solve the famous callback hell problem. When a series of nested asynchronous functions need to be executed in order, it leads to a callback hell
+   ```js
+   function task() {
+     task1((response1) => {
+       task2(response1, (response2) => {
+         task3(response2, (response3) => {
+           // etc...
+         };
+       });
+     });
+   }
+   ```
+   But the Chained Promises creates complex flow for asynchronous code.
 
+   Async functions were introduced as a combination of promises and generators to give us the possibility of writing asynchronous in a synchronous manner. i.e, This function is going to be declared with the `async` keyword which enable asynchronous, promise-based behavior to be written in a cleaner style by avoiding promise chains.  These functions can contain zero or more `await` expressions.
+
+   Let's take a below async function example,
+
+     ```js
+     async function logger() {
+
+       let data = await fetch('http://someapi.com/users'); // pause until fetch returns
+       console.log(data)
+     }
+     logger();
+     ```
 ### Object values
    Similar to Object.keys which iterate over JavaScript object’s keys, Object.values will do the same thing on values. i.e, The Object.values() method is introduced to returns an array of a given object's own enumerable property values in the same order as `for...in` loop.
 
@@ -256,6 +283,96 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
     const descriptors = Object.getOwnPropertyDescriptors(profile);
     console.log(descriptors); //  {age: {configurable: true, enumerable: true, writable: true }}
    ```
+
+### String padding
+   Some strings and numbers(money, date, timers etc) need to be represented in a particular format. Both `padStart() & padEnd()` methods introduced to pad a string with another string until the resulting string reaches the supplied length.
+
+   1. **padStart():** Using this method, padding is applied to the left or beginning side of the string.
+
+    For example, you may want to show only the last four digits of credit card number for security reasons,
+
+    ```js
+    const cardNumber = '01234567891234';
+    const lastFourDigits = cardNumber.slice(-4);
+    const maskedCardNumber = lastFourDigits.padStart(cardNumber.length, '*');
+    console.log(maskedCardNumber); // expected output: "**********1234"
+    ```
+
+   2. **padEnd():** Using this method, padding is applied to the right or ending side of the string.
+
+   For example, the profile information padded for label and values as below
+   ```js
+   const label1 = "Name";
+   const label2 = "Phone Number";
+   const value1 = "John"
+   const value2 = "(222)-333-3456";
+
+   console.log((label1 + ': ').padEnd(20, ' ') + value1);
+   console.log(label2 + ": " + value2); // Name:                John
+                                        // Phone Number: (222)-333-3456
+   ```
+
+### Shared memory and atomics
+   The Atomics is a global object which provides atomic operations to be performed as static methods. They are used with SharedArrayBuffer(fixed-length binary data buffer) objects. The main use cases of these methods are,
+
+   1. **atomic operations:** When memory is shared, multiple threads can read and write the same data in memory. So there would be a chance of loss of data. But atomic operations make sure that predictable values are written and read, that operations are finished before the next operation starts and that operations are not interrupted.
+
+      It provides static methods such as add, or, and, xor, load, store, isLockFree etc as demonstrated below.
+
+        ```js
+        const sharedMemory = new SharedArrayBuffer(1024);
+        const sharedArray = new Uint8Array(sharedMemory);
+        sharedArray[0] = 10;
+
+        Atomics.add(sharedArray, 0, 20);
+        console.log(Atomics.load(sharedArray, 0)); // 30
+
+        Atomics.sub(sharedArray, 0, 10);
+        console.log(Atomics.load(sharedArray, 0)); // 20
+
+        Atomics.and(sharedArray, 0, 5);
+        console.log(Atomics.load(sharedArray, 0));  // 4
+
+        Atomics.or(sharedArray, 0, 1);
+        console.log(Atomics.load(sharedArray, 0));  // 5
+
+        Atomics.xor(sharedArray, 0, 1);
+        console.log(Atomics.load(sharedArray, 0)); // 4
+
+        Atomics.store(sharedArray, 0, 10); // 10
+
+        Atomics.compareExchange(sharedArray, 0, 5, 10);
+        console.log(Atomics.load(sharedArray, 0)); // 10
+
+        Atomics.exchange(sharedArray, 0, 10);
+        console.log(Atomics.load(sharedArray, 0)); //10
+
+        Atomics.isLockFree(1); // true
+        ```
+
+   2. **waiting to be notified:**
+      Both `wait()` and `notify()` methods provides ways for waiting until a certain condition becomes true and are typically used as blocking constructs.
+
+      Let's demonstrate this functionality with reading and writing threads.
+
+      First define a shared memory and array
+      ```js
+      const sharedMemory = new SharedArrayBuffer(1024);
+      const sharedArray = new Int32Array(sharedMemory);
+      ```
+
+      A reading thread is sleeping and waiting on location 0 which is expected to be 10. You can observe a different value after the value overwritten by a writing thread.
+      ```js
+      Atomics.wait(sharedArray, 0, 10);
+      console.log(sharedArray[0]); // 100
+      ```
+
+      Now a writing thread stores a new value(e.g, 100) and notifies the waiting thread,
+      ```js
+      Atomics.store(sharedArray, 0, 100);
+      Atomics.notify(sharedArray, 0, 1);
+      ```
+
 ### Trailing commas
    Trailing commas are  allowed in parameter definitions and function calls
    ```js
