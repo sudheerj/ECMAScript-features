@@ -148,6 +148,182 @@ The classes are introduced as syntactic sugar over existing prototype based inhe
 ### Reflect
 Reflection is the ability of a code to inspect and manipulate variables, properties, and methods of objects at runtime. JavaScript already provides Object.keys(), Object.getOwnPropertyDescriptor(), and Array.isArray() methods as classic refection features. In ES6, it has been officially provided through Reflect object. Reflect is a new global object which is used to call methods, construct objects, get and set properties, manipulate and extend properties. It is similar to Math and JSON objects and all the methods of this object are static.
 
+### Set
+Set is a built-in object to store collections of unique values of any type.
+```js
+let mySet = new Set()
+
+mySet.add(1);
+mySet.add(2);
+mySet.add(2);
+mySet.add('some text here');
+mySet.add({one: 1, two: 2 , three: 3});
+console.log(mySet); // Set [ 1, 2, 'some text here', {one: 1, two: 2 , three: 3} ]
+console.log(mySet.size) // 4
+console.log(mySet.has(2)); // true
+```
+### Weakset
+The Set is used to store any type of data such as primitives and object types. Whereas WeakSet is an object to store weakly held objects in a collection. (i.e, WeakSet is the collections of objects only). Here weak means,  If no other references to an object stored in the WeakSet exist, those objects can be garbage collected.
+
+```js
+let myUserSet = new WeakSet();
+
+let john = { name: "John" };
+let rocky = { name: "Rocky" };
+let alex = { name: "Alex" };
+let nick = { name: "Nick" };
+
+myUserSet.add(john);
+myUserSet.add(rocky);
+myUserSet.add(john);
+myUserSet.add(nick);
+
+console.log(myUserSet.has(john)); // true
+console.log(myUserSet.has(alex)); // false
+console.log(myUserSet.delete(nick));
+console.log(myUserSet.has(nick)); // false
+
+john = null;
+```
+### Map
+Map is a collection of elements where each element is stored as a Key, value pair. It can hold both objects and primitive values as either key or value and iterates its elements in insertion order.
+
+Let's take a map with different types of primitives and objects as key-value pairs and various methods on it,
+
+   ```js
+    let typeMap = new Map();
+
+    var keyObj = {'one': 1}
+
+    typeMap.set('10', 'string');   // a string key
+    typeMap.set(10, 'number');     // a numeric key
+    typeMap.set(true, 'boolean'); // a boolean key
+    typeMap.set(keyObj, 'object'); // an object key
+
+
+    console.log(typeMap.get(10)   ); // number
+    console.log(typeMap.get('10') ); // string
+    console.log(typeMap.get(keyObj)) // object
+    console.log(typeMap.get({'one': 1})) // undefined
+
+    console.log(typeMap.size ); // 3
+
+    for(let item of typeMap) {
+       console.log(item);
+    }
+
+
+    for(let item in typeMap) {
+       console.log(item);
+    }
+   ```
+
+### Weakmap
+WeakMap object is a collection of key/value pairs in which the keys are weakly referenced. For this object, the keys must be objects and the values can be arbitrary values.
+
+Let's see various methods of weakmap with below example,
+
+```js
+var weakMap = new WeakMap();
+
+var obj1  = {}
+var obj2  = {}
+
+
+weakMap.set(obj1, 1);
+weakMap.set(obj2, 2);
+weakMap.set({}, {"four": 4});
+
+console.log(weakMap.get(obj2)); // 2
+console.log(weakMap.has({})); // return false even though empty object exists as key. Because the keys have different references
+
+delete obj2;
+console.log(weakMap.get(obj2)); // 2
+weakMap.delete(obj1)
+console.log(weakMap.get(obj1)); //undefined
+```
+
+### Unicode
+Prior to ES6, JavaScript strings are represented by 16-bit character encoding (UTF-16). Each character is represented by 16-bit sequence known as code unit. Since the character set is been expanded by Unicode, you will get unexpected results from UTF-16 encoded strings containing surrogate pairs(i.e, Since it is not sufficient to represent certain characters in just 16-bits, you need two 16-bit code units).
+
+```js
+let str = '𠮷';
+
+console.log(str.length);             // 2
+console.log(text.charAt(0));        // ""
+console.log(text.charAt(1));        // ""
+console.log(text.charCodeAt(0));    // 55362(1st code unit)
+console.log(text.charCodeAt(1));    // 57271(2nd code unit)
+
+console.log(/^.$/.test(str)); // false, because length is 2
+console.log('\u20BB7); // 7!(wrong value)
+console.log(str === '\uD842\uDFB7'); // true
+
+```
+
+ECMAScript 6 added full support for UTF-16 within strings and regular expressions. It introduces new Unicode literal form in strings and new RegExp u mode to handle code points, as well as new APIs(codePointAt, fromCodePoint) to process strings.
+
+```js
+let str = '𠮷';
+
+// new string form
+console.log('\u{20BB7}'); // "𠮷"
+
+// new RegExp u mode
+console.log(new RegExp('\u{20BB7}', 'u'));
+console.log(/^.$/u.test(str)); // true
+
+//API methods
+console.log(str.codePointAt(0)); // 134071
+console.log(str.codePointAt(1)); // 57271
+
+console.log(String.fromCodePoint(134071));  // "𠮷"
+```
+
+### Symbols
+
+Symbol is a new peculiar primitive data type of JavaScript, along with other primitive types such as string, number, boolean, null and undefined. The new symbol is created just by calling the Symbol function. i.e, Every time you call the Symbol function, you’ll get a new and completely unique value. You can also pass a parameter to Symbol(), which is useful for debugging purpose only.
+
+Even though equality checks on two symbols is always false, it will be true while comparing symbols with `.for` method due to global registry (i.e, Symbols.for('key') === Symbols.for('key'))
+
+These symbols are useful to uniquely identify properties or unique constants,
+
+```js
+//1. Object properties
+let id = Symbol("id");
+let user = {
+  name: "John",
+  age: 40,
+  [id]: 111
+};
+
+for (let key in user) {
+console.log(key); // name, age without symbols
+}
+
+console.log(JSON.stringify(user)); // {"name":"John", "age": 40}
+console.log(Object.keys(user)); // ["name", "age"]
+
+console.log( "User Id: " + user[id] ); // Direct access by the symbol works
+
+//2. Unique constants
+const logLevels = {
+  DEBUG: Symbol('debug'),
+  INFO: Symbol('info'),
+  WARN: Symbol('warn'),
+  ERROR: Symbol('error'),
+};
+console.log(logLevels.DEBUG, 'debug message');
+console.log(logLevels.INFO, 'info message');
+
+//3. Equality Checks
+
+console.log(Symbol('foo') === Symbol('foo'));  // false
+console.log(Symbol.for('foo') === Symbol.for('foo'));  // true
+```
+
+### Proper Tail Calls
+
 ## ES2016 Or ES7
 
    ES2015/ES6 introduced a huge set of new features. But ECMAScript 2016 Or ES7 introduced only two new features:
@@ -391,6 +567,24 @@ Reflection is the ability of a code to inspect and manipulate variables, propert
    **Note:** Trailing commas are not allowed in Rest Parameters and JSON.
 
 ## ES2018 Or ES9
+
+### Async iterators
+   ECMAScript 6 provides built-in support for synchronously iterating over data using iterators. Both strings and collections objects such as Set, Map, and Array come with a Symbol.iterator property which makes them iterable.
+
+   ```js
+    const arr = ['a', 'b', 'c', 'd'];
+    const syncIterator = arr[Symbol.iterator]();
+
+    console.log(syncIterator.next());    //{value: a, done: false}
+    console.log(syncIterator.next());    //{value: b, done: false}
+    console.log(syncIterator.next());    //{value: c, done: false}
+    console.log(syncIterator.next());    //{value: d, done: false}
+    console.log(syncIterator.next());    //{value: undefined, done: true}
+   ```
+
+   But these iterators are only suitable for representing synchronous data sources.
+
+   In order to access asynchronous data sources, ES2018 introduced the AsyncIterator interface, an asynchronous iteration statement (for-await-of), and async generator functions.
 
 ### Object rest and spread operators
    ES2015 or ES6 introduced both rest parameters and spread operators to convert arguments to array and vice versa using three-dot(...) notation.
