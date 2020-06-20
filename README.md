@@ -145,9 +145,6 @@ greet(); // Hello World!
 ### Classes
 The classes are introduced as syntactic sugar over existing prototype based inheritance and constructor functions. So this feature doesn't bring new object-oriented inheritance model to JavaScript.
 
-### Reflect
-Reflection is the ability of a code to inspect and manipulate variables, properties, and methods of objects at runtime. JavaScript already provides Object.keys(), Object.getOwnPropertyDescriptor(), and Array.isArray() methods as classic refection features. In ES6, it has been officially provided through Reflect object. Reflect is a new global object which is used to call methods, construct objects, get and set properties, manipulate and extend properties. It is similar to Math and JSON objects and all the methods of this object are static.
-
 ### Set
 Set is a built-in object to store collections of unique values of any type.
 ```js
@@ -322,7 +319,47 @@ console.log(Symbol('foo') === Symbol('foo'));  // false
 console.log(Symbol.for('foo') === Symbol.for('foo'));  // true
 ```
 
+### Promises
+
+### Reflect
+Reflection is the ability of a code to inspect and manipulate variables, properties, and methods of objects at runtime. JavaScript already provides Object.keys(), Object.getOwnPropertyDescriptor(), and Array.isArray() methods as classic refection features. In ES6, it has been officially provided through Reflect object. Reflect is a new global object which is used to call methods, construct objects, get and set properties, manipulate and extend properties. It is similar to Math and JSON objects and all the methods of this object are static.
+
 ### Proper Tail Calls
+ **Proper tail call(PTC)** is a technique where the program or code will not create additional stack frames for a recursion when the function call is a tail call.
+
+   For example, the below classic or head recursion of factorial function relies on stack for each step. Each step need to be processed upto `n * factorial(n - 1)`
+
+   ```js
+     function factorial(n) {
+       if (n === 0) {
+         return 1
+       }
+       return n * factorial(n - 1)
+     }
+     console.log(factorial(5)); //120
+   ```
+
+   But if you use Tail recursion functions, they keep passing all the necessary data it needs down the recursion without relying on the stack.
+
+   ```js
+     function factorial(n, acc = 1) {
+       if (n === 0) {
+         return acc
+       }
+       return factorial(n - 1, n * acc)
+     }
+     console.log(factorial(5)); //120
+   ```
+
+   The above pattern returns the same output as first one. But the accumulator keeps track of total as an argument without using stack memory on recursive calls.
+
+   The browsers which supports PTC do not generate stack overflow instead shows Infinity with below inputs,
+   ```js
+    console.log(factorial(10));
+    console.log(factorial(100));
+    console.log(factorial(1000));
+    console.log(factorial(10000));
+   ```
 
 ## ES2016 Or ES7
 
@@ -659,13 +696,23 @@ console.log(Symbol.for('foo') === Symbol.for('foo'));  // true
 
 ### Array flat and flatMap
 
-   The `flat()` method is used to 'flattens' the nested arrays into the top-level array. The functionality of this method is similar to Lodash's `_.flattenDepth()` function.
+   Prior to ES2019, you need to use `reduce() or concat()` methods to get a flat array.
+   ```js
+   function flatten(arr) {
+     const flat = [].concat(...arr);
+     return flat.some(Array.isArray) ? flatten(flat) : flat;
+   }
+   flatten([ [1, 2, 3], ['one', 'two', 'three', [22, 33] ], ['a', 'b', 'c'] ]);
+
+   ```
+
+   In ES2019, the `flat()` method is introduced to 'flattens' the nested arrays into the top-level array. The functionality of this method is similar to Lodash's `_.flattenDepth()` function.
 
    ```js
-        const arr = [[1, 2], [[3], 4], [5, 6];
-        const flattenedArr = arr.flat(2);
+    const arr = [[1, 2], [[3], 4], [5, 6];
+    const flattenedArr = arr.flat(2);
 
-        console.log(flattenedArr);    // => ["1", "2", "3", "4", "5", "6"]
+    console.log(flattenedArr);    // => ["1", "2", "3", "4", "5", "6"]
    ```
 
 ### Object formEntries
@@ -719,6 +766,22 @@ console.log(Symbol.for('foo') === Symbol.for('foo'));  // true
    ```
 
 ### Symbol description
+ While creating symbols, you also can add a description to it for debugging purposes. But there was no method to access the description directly before ES2019. Considering this, ES2019 introduced a read-only description property to retrieve a string containing the description of the Symbol.
+
+ This gives the possibility to access symbol description for different variations of Symbol objects
+
+ ```js
+ console.log(Symbol('one').description); // one
+
+ console.log(Symbol.for('one').description); // "one"
+
+ console.log(Symbol('').description); // ''
+
+ console.log(Symbol().description); // unefined
+
+ console.log(Symbol.iterator.description); // "Symbol.iterator"
+
+ ```
 
 ### Optional catch binding
    Prior to ES9, if you don't need `error` variable and omit the same variable then catch() clause won't be invoked. Also, the linters complain about unused variables. Inorder to avoid this problem, the optional catch binding feature is introduced to make the binding parameter optional in the catch clause. If you want to completely ignore the error or you already know the error but you just want to react to that the this feature is going to be useful.
