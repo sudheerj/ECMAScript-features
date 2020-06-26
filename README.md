@@ -320,6 +320,67 @@ console.log(logLevels.INFO, 'info message');
 console.log(Symbol('foo') === Symbol('foo'));  // false
 console.log(Symbol.for('foo') === Symbol.for('foo'));  // true
 ```
+### Proxies
+The Proxy object is used to create a proxy for another object, which can intercept and redefine fundamental operations for that object such as property lookup, assignment, enumeration, function invocation etc. These are used in many libraries and some browser frameworks.
+
+The proxy object is created with two parameters with below syntax,
+
+```js
+let proxy = new Proxy(target, handler)
+```
+
+1. **target:** Object on which you want to proxy
+2. **handler:** An object that defines which operations will be intercepted and how to redefine them.
+
+The property Lookup Behavior of a user proxied object will be as below,
+
+```js
+const target = {
+  name: "John",
+  age: 3
+};
+
+const handler = {
+  get: function(target, prop) {
+    return prop in target ?
+        target[prop] :
+        `${prop} does not exist';
+  }
+};
+
+const user = new Proxy(target, handler);
+console.log(user.name); // John
+console.log(user.age); // John
+console.log(user.gender); // gender does not exist
+```
+
+These proxies also enforce value validations. Let's take an example with set handler,
+
+```js
+let ageValidator = {
+  set: function(obj, prop, value) {
+    if (prop === 'age') {
+      if (!Number.isInteger(value)) {
+        throw new TypeError('The age is not an integer');
+      }
+      if (value > 200) {
+        throw new RangeError('Invalid age');
+      }
+    }
+
+    obj[prop] = value; // The default behavior to store the value
+
+    return true; // Indicate success
+  }
+};
+
+const person = new Proxy({}, validator);
+
+person.age = 30;
+console.log(person.age); // 30
+person.age = 'old';    // Throws an exception
+person.age = 200;        // Throws an exception
+```
 
 ### Promises
 
