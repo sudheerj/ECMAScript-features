@@ -384,9 +384,89 @@ person.age = 200;        // Throws an exception
 
 ### Promises
 
-### Reflect
-Reflection is the ability of a code to inspect and manipulate variables, properties, and methods of objects at runtime. JavaScript already provides Object.keys(), Object.getOwnPropertyDescriptor(), and Array.isArray() methods as classic refection features. In ES6, it has been officially provided through Reflect object. Reflect is a new global object which is used to call methods, construct objects, get and set properties, manipulate and extend properties. It is similar to Math and JSON objects and all the methods of this object are static.
+A promise is an object which represent the eventual completion or failure of an asynchronous operation.
 
+It is in one of these states:
+
+**pending:**  Represents initial state, neither fulfilled nor rejected.
+**fulfilled:** Indicates that the operation is completed successfully.
+**rejected:** Indicates that the operation is failed.
+
+A promise is said to be settled if it is either fulfilled or rejected, but not pending. The instance methods `promise.then()`, `promise.catch()`, and `promise.finally()` are used to associate further action with a promise that becomes settled. And these methods also return a newly generated promise object, which can optionally be used for chaining.
+
+![Screenshot](images/promises.png)
+
+The promise chaining structure would be as below,
+
+```js
+    const promise = new Promise(function(resolve, reject) {
+                    setTimeout(() => resolve(1), 1000);
+                });
+
+    promise.then(function(result) {
+
+          console.log(result); // 1
+          return result * 2;
+
+        }).then(function(result) {
+
+          console.log(result); // 2
+          return result * 3;
+
+        }).then(function(result) {
+
+          console.log(result); // 6
+          return result * 4;
+
+        }).catch(function(error){
+           console.log(error);
+        });
+```
+
+### Reflect
+Reflection is the ability of a code to inspect and manipulate variables, properties, and methods of objects at runtime. JavaScript already provides `Object.keys(), Object.getOwnPropertyDescriptor(), and Array.isArray()` methods as classic refection features. In ES6, it has been officially provided through Reflect object. Reflect is a new global object which is used to call methods, construct objects, get and set properties, manipulate and extend properties.
+
+Unlike most global objects, Reflect is not a constructor. i.e, You cannot use Reflect with the new operator or invoke the Reflect as a function. It is similar to Math and JSON objects in which all the methods of this object are static.
+
+Let's see the usage of Reflect API with below examples,
+
+1. **Creating objects using Reflect.construct();**
+
+ The `construct()` method behaves like the regular new operator, but as a function. It is equivalent to calling new target(...args) with an option to specify a different prototype. The syntax looks like as below,
+
+ ```js
+ Reflect.construct(target, args [, newTarget]);
+ ```
+
+ The method has below parameters,
+
+ 1. target: The target function to call.
+ 2. argumentsList: An array-like object specifying the arguments with which target should be called.
+ 3. newTarget: The constructor whose prototype should be used. This is an optional parameter. i.e, If newTarget is not present, its value defaults to target.
+
+
+**Example:**
+```js
+class User {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+};
+
+let args = ['John', 'Emma'];
+
+let john = Reflect.construct(
+    User,
+    args
+);
+
+console.log(john instanceof User);
+console.log(john.fullName); // John Doe
+```
 ### Proper Tail Calls
  **Proper tail call(PTC)** is a technique where the program or code will not create additional stack frames for a recursion when the function call is a tail call.
 
