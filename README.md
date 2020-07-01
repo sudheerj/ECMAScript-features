@@ -147,6 +147,57 @@ greet(); // Hello World!
 ### Classes
 The classes are introduced as syntactic sugar over existing prototype based inheritance and constructor functions. So this feature doesn't bring new object-oriented inheritance model to JavaScript.
 
+### Modules
+Modules are small units of independent, reusable code to be used as the building blocks in a Javascript application.
+
+Prior to ES6, there was no native modules support in JavaScript. There were 3 major module standards used,
+
+   1. Asynchronous Module Definition (AMD)
+   2. RequireJS Modules
+   3. CommonJS Modules (module.exports and require syntax used in Node.js)
+
+ES6 has provided the built-in support for modules. Everything inside a module is private by default, and runs in strict mode. Public variables, functions and classes are exposed using `export` statement.
+
+**Export Statement:**
+There are two types of exports:
+
+1. Named Exports (Zero or more exports per module)
+
+You can export each element or a single export statement to export all the elements at once
+
+```js
+const PI = Math.PI;
+
+function add(...args) {
+  return args.reduce((num, tot) => tot + num);
+}
+
+function multiply(...args) {
+  return args.reduce((num, tot) => tot * num);
+}
+
+// private function
+function print(msg) {
+  console.log(msg);
+}
+
+export { PI, add, multiply };
+```
+
+2. Default Exports (One per module)
+
+If we want to export a single value, you could use a default export
+
+```js
+// module "my-module.js"
+
+export default function add(...args) {
+                 return args.reduce((num, tot) => tot + num);
+}
+```
+
+**Import Statement:**
+
 ### Set
 Set is a built-in object to store collections of unique values of any type.
 ```js
@@ -467,6 +518,85 @@ let john = Reflect.construct(
 console.log(john instanceof User);
 console.log(john.fullName); // John Doe
 ```
+
+2. **Calling a function using Reflect.apply():**
+Prior to ES6, you can invoke a function with a specified `this` value and arguments by using the `Function.prototype.apply()` method.
+
+For example, you can call `max()` static method of Math object,
+```js
+const max = Function.prototype.apply.call(Math.max, Math, [100, 200, 300]);
+console.log(max);
+```
+
+In ES6, Reflect.apply() provides the same features as Function.prototype.apply() but in a less verbose syntax.
+
+```js
+const max = Reflect.apply(Math.max, Math, [100, 200, 300]);
+console.log(max);
+```
+3. **Defining a property using Reflect.defineProperty():**
+The `Reflect.defineProperty()` method is similar to `Object.defineProperty()` but it returns a Boolean value indicating whether or not the property was defined successfully instead of throwing an exception.
+
+The syntax of this method looks like below,
+```js
+Reflect.defineProperty(target, propertyName, propertyDescriptor)
+```
+
+Let's define the age property on user object,
+```js
+class User {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+};
+
+let john = new User('John', 'Resig');
+
+if (Reflect.defineProperty(john, 'age', {
+        writable: true,
+        configurable: true,
+        enumerable: false,
+        value: 33,
+    })) {
+    console.log(john.age);
+} else {
+    console.log('Cannot define the age property on the user object.');
+
+}
+```
+
+4. **Delete property using Reflect.deleteProperty():**
+
+The `Reflect.deleteProperty()` method is used to delete properties like the delete operator but as a function. It returns Boolean value indicating whether or not the property was successfully deleted.
+
+```js
+const user = {
+  name: 'John',
+  age: 33
+};
+
+console.log(Reflect.deleteProperty(user, 'age')); // true
+console.log(user.age); // undefined
+```
+
+5. **Get property of an object using Reflect.get():**
+The `Reflect.get` method is used to get a property on an object like the property accessor syntax but as a function.
+
+```js
+const user = {
+  name: 'John',
+  age: 33
+};
+
+console.log(Reflect.get(user, 'age')); // 33
+```
+
+6. **:**
+
 ### Proper Tail Calls
  **Proper tail call(PTC)** is a technique where the program or code will not create additional stack frames for a recursion when the function call is a tail call.
 
