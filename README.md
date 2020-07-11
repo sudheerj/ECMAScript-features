@@ -32,7 +32,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |2  | [Arrow functions](#arrow-functions) |
 |3  | [Classes](#classes) |
 |4  | [Enhanced object literals](#Enhanced-object-literals) |
-|5  | [String interpolation](#string-interpolation) |
+|5  | [Template literals](#template-literals) |
 |6  | [Destructuring](#destructuring) |
 |7  | [Default parameters](#default-parameters) |
 |8  | [Rest parameter](#rest-parameter) |
@@ -147,6 +147,266 @@ greet(); // Hello World!
 ### Classes
 The classes are introduced as syntactic sugar over existing prototype based inheritance and constructor functions. So this feature doesn't bring new object-oriented inheritance model to JavaScript.
 
+### Enhanced object literals
+Object literals are extended to support setting the prototype at construction, shorthand for foo: foo assignments, defining methods, making super calls, and computing property names with expressions.
+
+The important enhancements of object literals are,
+
+1. **Property Shorthand:**
+
+Object's properties are often created from variables with the same name.
+
+Let's see the ES5 representation
+
+```js
+var a = 1, b = 2, c = 3;
+  obj = {
+    a: a,
+    b: b,
+    c: c
+  };
+  console.log(obj);
+```
+and it can be represented in a shorter syntax as below,
+
+```js
+var a = 1, b = 2, c = 3;
+  obj = {
+    a,
+    b,
+    c
+  };
+  console.log(obj);
+```
+
+2. **Method Shorthand:**
+In ES5, Object methods require the function statement as below,
+
+```js
+var calculation = {
+  sum:  function(a, b) { return a + b; },
+  multiply: function(a, b) { return a * b; }
+};
+
+console.log( calculation.add(5, 3) );  // 15
+console.log( calculation.multiply(5, 3) ); // 15
+```
+
+This can be avoided in ES6,
+
+```js
+var calculation = {
+  sum(a, b) { return a + b; },
+  multiply(a, b) { return a * b; }
+};
+
+console.log( calculation.add(5, 3) );  // 15
+console.log( calculation.multiply(5, 3) ); // 15
+```
+
+3. **Computed Property Names:**
+In ES5, it wasn’t possible to use a variable for a key name during object creation stage.
+
+```js
+var
+  key = 'three',
+  obj = {
+    one: 1,
+    two: 2
+  };
+
+obj[key] = 3;
+```
+
+Object keys can be dynamically assigned in ES6 by placing an expression in square brackets([])
+
+```js
+const
+  key = 'three',
+  obj = {
+    one: 1,
+    two: 2,
+    [key]: 3
+  };
+```
+
+### Template literals
+Prior to ES6, JavaScript developers would need to do ugly string concatenation to creat dynamic strings.
+
+Template literals allows you to work with strings in a new way compared to ES5. These are just string literals allowing embedded expressions denoted by the dollar sign and curly braces (${expression}). Also, these literals are enclosed by the backtick (` `) character instead of double or single quotes.
+
+ES6 has two new kinds of literals:
+
+1. template literals: string literals which exists across multiple lines and include interpolated expressions(i.e, ${expression})
+
+```js
+const firstName = 'John';
+console.log(`Hello ${firstName}!
+Good morning!`);
+```
+
+2. tagged template literals: Function calls which are created by mentioning a function before a template literal.
+
+The real world use case is creating components in CSS-In-JS styled components to use across the application
+
+```js
+const Button = styled.a`
+  display: inline-block;
+  border-radius: 3px;
+`
+```
+
+### Destructuring
+Destructuring is a javascript expression for extracting multiple values from data stored in objects(properties of an object) and Arrays.
+
+**Object destructuring:**
+
+This feature is used to extract values from an object.
+
+```js
+const user = { firstName: 'John', lastName: 'Kary' };
+const {firstName, lastName} = user;
+console.log(firstName, lastName); // John, Kary
+```
+
+**Array destructuring:**
+
+This feature is used to extract values from an array.
+
+```js
+const [one, two, three] = ['one', 'two', 'three'];
+console.log(one, two, three); // one, two, three
+```
+
+You can use destructing in below places,
+
+1. Variable declarations
+2. Assignments
+3. Parameter definitions
+4. for-of loop
+
+### Default parameters
+
+Default parameters allow named parameters of a function to be initialized with default values if no value or undefined is passed.
+
+Prior to ES6, you need check for undefined values and provide the default value for undefined values using if/else or ternary operator
+```js
+function add(a, b) {
+  a = (typeof a !== 'undefined') ? a : 10;
+  b = (typeof b !== 'undefined') ? b : 20;
+  return a + b;
+}
+add(20); // 40
+add(); // 30
+```
+In ES6, these checks can be avoided using default parameters
+
+```js
+function add(a = 10, b = 20) {
+  return a + b;
+}
+add(20); // 40
+add(); // 30
+```
+
+### Rest parameter
+The rest parameter is used to represent an indefinite number of arguments as an array. The important point here is only the function's last parameter can be a "rest parameter". This feature has been introduced to reduce the boilerplate code that was induced by the arguments.
+
+```js
+function sum(...args) {
+  return args.reduce((previous, current) => {
+    return previous + current;
+  });
+}
+
+console.log(sum(1, 2, 3)); // 6
+console.log(sum(1, 2, 3, 4)); // 10
+console.log(sum(1, 2, 3, 4, 5)); // 15
+```
+
+### Spread Operator
+Spread Operator allows iterables( arrays / objects / strings ) to be expanded into single arguments/elements.
+
+1. In function and constructor calls, the spread operator turns iterable values into arguments
+
+```js
+console.log(Math.max(...[-10, 30, 10, 20])); //30
+console.log(Math.max(-10, ...[-50, 10], 30)); //30
+```
+2. In Array literals and strings, the spread operator turns iterable values into Array elements
+
+```js
+console.log([1, ...[2,3], 4, ...[5, 6, 7]]); // 1, 2, 3, 4, 5, 6, 7
+```
+
+**Note:** The spread syntax is opposite of rest parameter.
+
+### Iterators & For..of
+String, Array, TypedArray, Map, and Set are all built-in iterables but objects are not iterables by default.
+Iterators are a new way to loop over any collection in JavaScript. These are objects which defines a sequence and potentially a return value upon its termination.
+An iterator implements the Iterator protocol by having a next() method that returns an object with two properties:
+
+1. value: The next value in the iteration sequence.
+2. done: returns rue if the last value in the sequence has already been consumed.
+
+You can make the object iterable by defining a `Symbol.iterator` property on it.
+
+```js
+     const collection = {
+       one: 1,
+       two: 2,
+       three: 3,
+       [Symbol.iterator]() {
+         const values = Object.keys(this);
+         let i = 0;
+         return {
+           next: () => {
+             return {
+               value: this[values[i++]],
+               done: i > values.length
+             }
+           }
+         };
+       }
+     };
+
+     const iterator = collection[Symbol.iterator]();
+
+     console.log(iterator.next());    // → {value: 1, done: false}
+     console.log(iterator.next());    // → {value: 2, done: false}
+     console.log(iterator.next());    // → {value: 3, done: false}
+     console.log(iterator.next());    // → {value: undefined, done: true}
+
+     for (const value of collection) {
+       console.log(value);
+     }
+```
+
+The for...of statement creates a loop iterating over user defined collection object. But this loop can be used for built-in objects too.
+
+**Note:** The abrupt iteration termination can be caused by break, throw or return.
+
+### Generators
+A generator is a function that can stop or suspend midway and then continue from where it stopped while maintaining the context(saved across re-entrances). It can be defined using a function keyword followed by an asterisk(i.e, function* ()).
+
+This function returns an iterator object and this iterator's **next()** method returns an object with a value property containing the yielded value and a done property which indicates whether the generator has yielded its last value.
+
+```js
+function* myGenerator(i) {
+  yield i + 10;
+  yield i + 20;
+  return i + 30;
+}
+
+const myGenObj = myGenerator(10);
+
+console.log(myGenObj.next().value); // 20
+console.log(myGenObj.next().value); // 30
+console.log(myGenObj.next().value); // 40
+```
+
+**Note:** We can use `yield*` to delegate to another generator function
+
 ### Modules
 Modules are small units of independent, reusable code to be used as the building blocks in a Javascript application.
 
@@ -156,7 +416,7 @@ Prior to ES6, there was no native modules support in JavaScript. There were 3 ma
    2. RequireJS Modules
    3. CommonJS Modules (module.exports and require syntax used in Node.js)
 
-ES6 has provided the built-in support for modules. Everything inside a module is private by default, and runs in strict mode. Public variables, functions and classes are exposed using `export` statement.
+ES6 has provided the built-in support for modules. Everything inside a module is private by default, and runs in strict mode. Public variables, functions and classes are exposed using `export` statement and import the same using `import` statement.
 
 **Export Statement:**
 There are two types of exports:
@@ -166,6 +426,8 @@ There are two types of exports:
 You can export each element or a single export statement to export all the elements at once
 
 ```js
+// module "my-module.js"
+
 const PI = Math.PI;
 
 function add(...args) {
@@ -197,6 +459,28 @@ export default function add(...args) {
 ```
 
 **Import Statement:**
+
+The static import statement is used to import read only live bindings which are exported by another module.
+
+There are many variations of import scenarios as below,
+
+```js
+// 1. Import an entire module's contents
+import * as name from "my-module";
+
+//2.Import a single export from a module
+import { export1 } from "my-module";
+
+//3.Import multiple exports from a module
+import { export1 , export2 } from "my-module";
+
+//4.Import default export from a module
+import defaultExport from "my-module";
+
+//5.Import an export with an alias
+import { export1 as alias1 } from "my-module";
+
+```
 
 ### Set
 Set is a built-in object to store collections of unique values of any type.
