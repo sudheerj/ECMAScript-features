@@ -160,6 +160,41 @@ greet(); // Hello World!
 ### Classes
 The classes are introduced as syntactic sugar over existing prototype based inheritance and constructor functions. So this feature doesn't bring new object-oriented inheritance model to JavaScript.
 
+There are two ways to define classes,
+
+1. **Class declarations:**
+```js
+class Square {
+  constructor(length) {
+    this.length = length;
+  }
+
+  get area() {
+    return this.length * this.length;
+  }
+
+  set area(value) {
+    this.area = value;
+  }
+}
+```
+2. **Class expressions:**
+```js
+const square = class Square {
+  constructor(length) {
+    this.length = length;
+  }
+
+  get area() {
+    return this.length * this.length;
+  }
+
+  set area(value) {
+    this.area = value;
+  }
+}
+```
+
 ### Enhanced object literals
 Object literals are extended to support setting the prototype at construction, shorthand for foo: foo assignments, defining methods, making super calls, and computing property names with expressions.
 
@@ -902,15 +937,15 @@ ES5 provided numeric literals in octal (prefix 0), decimal (no prefix), and hexa
 Prior to ES5, JavaScript didn’t provide any literal form of binary numbers. So you need to use a binary string with the help of `parseInt()`
 
 ```js
-const num = parseInt('111',2);
-console.log(num); // 7
+const num = parseInt('110',2);
+console.log(num); // 6
 ```
 
 Whereas ES6 added support for binary literals using the **0b** prefix followed by a sequence of binary numbers (i.e, 0 and 1).
 
 ```js
-const num = 0b111;
-console.log(num); // 7
+const num = 0b110;
+console.log(num); // 6
 ```
 
 **2. Octal literals:**
@@ -931,14 +966,14 @@ Whereas ES6 represents the octal literal by using the prefix **0o** followed by 
 const num = 055;
 console.log(num); // 45
 
-const invalidNum = 058;
-console.log(invalidNum); // treated as decimal 58
+const invalidNum = 028;
+console.log(invalidNum); // treated as decimal 28
 ```
 
 Remember If you use an invalid number in the octal literal, JavaScript will throw a SyntaxError as below,
 
 ```js
-const invalidNum = 058;
+const invalidNum = 028;
 console.log(invalidNum); // SyntaxError
 ```
 
