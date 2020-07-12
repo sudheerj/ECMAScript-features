@@ -23,6 +23,18 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 5. Stage 4: Finished.
 
 
+## Version History
+
+| Edition | Date |
+| --- | --------- |
+| ES2015 Or ES6  | June2015 |
+| ES2016 Or ES7  | June2016 |
+| ES2017 Or ES8  | June2017 |
+| ES2018 Or ES9  | June2018 |
+| ES2019 Or ES10  | June2019 |
+| ES2020 Or ES11  | June2020 |
+
+
 ### Table of Contents
 
 | No. | Feature |
@@ -50,6 +62,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |20 | [Promises](#promises) |
 |21 | [Reflect](#reflect) |
 |22 | [Binary and Octal](#binary-and-octal) |
+|23 | [Proper Tail calls](#proper-tail-calls)|
 |   | **ES2016 Or ES7** |
 |1  | [Array includes](#array-includes) |
 |2  | [Exponentiation Operator](#exponentiation-operator) |
@@ -881,6 +894,55 @@ console.log(Reflect.get(user, 'age')); // 33
 
 6. **:**
 
+### Binary and Octal
+ES5 provided numeric literals in octal (prefix 0), decimal (no prefix), and hexadecimal ( 0x) representation. ES6 added support for binary literals and improvements on octal literals.
+
+**1. Binary literals:**
+
+Prior to ES5, JavaScript didn’t provide any literal form of binary numbers. So you need to use a binary string with the help of `parseInt()`
+
+```js
+const num = parseInt('111',2);
+console.log(num); // 7
+```
+
+Whereas ES6 added support for binary literals using the **0b** prefix followed by a sequence of binary numbers (i.e, 0 and 1).
+
+```js
+const num = 0b111;
+console.log(num); // 7
+```
+
+**2. Octal literals:**
+
+In ES5, to represent an octal literal, you use the zero prefix (0) followed by a sequence of octal digits (from 0 to 7).
+
+```js
+const num = 055;
+console.log(num); // 45
+
+let invalidNum = 058;
+console.log(invalidNum); // treated as decimal 58
+```
+
+Whereas ES6 represents the octal literal by using the prefix **0o** followed by a sequence of octal digits from 0 through 7.
+
+```js
+const num = 055;
+console.log(num); // 45
+
+const invalidNum = 058;
+console.log(invalidNum); // treated as decimal 58
+```
+
+Remember If you use an invalid number in the octal literal, JavaScript will throw a SyntaxError as below,
+
+```js
+const invalidNum = 058;
+console.log(invalidNum); // SyntaxError
+```
+
+
 ### Proper Tail Calls
  **Proper tail call(PTC)** is a technique where the program or code will not create additional stack frames for a recursion when the function call is a tail call.
 
@@ -1340,6 +1402,7 @@ console.log(Reflect.get(user, 'age')); // 33
    ```
 
 ### Symbol description
+
  While creating symbols, you also can add a description to it for debugging purposes. But there was no method to access the description directly before ES2019. Considering this, ES2019 introduced a read-only description property to retrieve a string containing the description of the Symbol.
 
  This gives the possibility to access symbol description for different variations of Symbol objects
