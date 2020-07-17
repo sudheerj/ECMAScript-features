@@ -103,12 +103,43 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
 1. ### Variable Scoping
 
-The variable scoping determines the visibility or accessibility of a variable within the certain part of the program or region. In ES6, both `const` and `let` keywords allow developers to declare variables in the block scope.
-The `let` statement declares a block-scoped local variable
+The variable scoping determines the visibility or accessibility of a variable within the certain part of the program or region.
+
+In ES6, both `const` and `let` keywords allow developers to declare variables in the block scope.
+
+The `let` statement declares a block-scoped local variable which can be reassigned. i.e, `let` declaration creates a mutable variable.
+
+```js
+let a = 1;
+
+if (a === 1) {
+  let a = 2;
+
+  console.log(a); //2
+}
+
+console.log(a); //1
+```
+
+**const** variables are similar to **let** variables but they can't be changed through reassignment. i.e, The const declaration creates a read-only reference to a value.
+
+```js
+const a = 1;
+
+if (a === 1) {
+  const b = 2; // You cannot re-assign the value similar to let variable
+
+  console.log(b); //2
+}
+
+console.log(a); //1
+```
+
 
 2. ### Arrow functions
 
 The arrow functions provides a more concise syntax for writing function expressions by opting out the function and return keywords using fat arrow(=>) notation. Let's see how this arrow function looks like,
+
 ```js
 // Function Expression
 var multiplyFunc = function(a, b) {
@@ -194,6 +225,31 @@ const square = class Square {
   }
 }
 ```
+
+You can use **extend** keyword to use inheritance. This enables the subclass to get all features of a parent class.
+
+```js
+class Vehicle {
+  constructor(name) {
+    this.name = name;
+  }
+
+  start() {
+    console.log(`${this.name} vehicle started`);
+  }
+}
+
+class Car extends Vehicle {
+  start() {
+    console.log(`${this.name} car started`);
+  }
+}
+
+const car = new Car('BMW');
+console.log(car.start()); // BMW car started
+```
+
+**Note:** Even though ES6 classes looks similar to classes in other object oriented languages, such as Java, PHP, etc but they do not work exactly the same way.
 
 ### Enhanced object literals
 Object literals are extended to support setting the prototype at construction, shorthand for foo: foo assignments, defining methods, making super calls, and computing property names with expressions.
