@@ -125,15 +125,15 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     **const** variables are similar to **let** variables but they can't be changed through reassignment. i.e, The const declaration creates a read-only reference to a value.
 
     ```js
-    const a = 1;
+    const x = 1;
 
-    if (a === 1) {
-      const b = 2; // You cannot re-assign the value similar to let variable
+    if (x === 1) {
+        const y = 2; // You cannot re-assign the value similar to let variable
 
-      console.log(b); //2
+        console.log(y); //2
     }
 
-    console.log(a); //1
+    console.log(x); //1
     ```
 
 
@@ -331,7 +331,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     ```js
     const
       key = 'three',
-      obj = {
+      computedObj = {
         one: 1,
         two: 2,
         [key]: 3
