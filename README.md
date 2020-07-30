@@ -1199,8 +1199,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
    ```
    By the way, non-object argument will be coerced to an object
    ```js
-      const countries = ['India', 'Singapore'];
-      console.log(Object.entries(countries)); // [ ['0', 'India'], ['1', 'Singapore']]
+      const countriesArr = ['India', 'Singapore'];
+      console.log(Object.entries(countriesArr)); // [ ['0', 'India'], ['1', 'Singapore']]
 
       const country = 'India';
       console.log(Object.entries(country)); // [["0", "I"], ["1", "n"], ["2", "d"], ["3", "i"], ["4", "a"]]
