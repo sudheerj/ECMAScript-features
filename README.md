@@ -1466,12 +1466,12 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
    Whereas, **flatMap()** method combines `map()` and `flat()` into one method.  It first creates a new array with the return value of a given function and then concatenates all sub-array elements of the array.
    ```js
-   const numberArray = [[1], [2], [3], [4], [5]];
+   const numberArray1 = [[1], [2], [3], [4], [5]];
 
-   console.log(numberArray.flatMap(value => [value * 10]));  // [10, 20, 30, 40, 50]
+   console.log(numberArray1.flatMap(value => [value * 10]));  // [10, 20, 30, 40, 50]
    ```
 
-2. ### Object formEntries
+2. ### Object fromEntries
 
    In JavaScript, it is very commonn to transforming data from one format. ES2017 introduced `Object.entries()` method to objects into arrays.
 
@@ -1541,7 +1541,6 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
  console.log(Symbol().description); // unefined
 
  console.log(Symbol.iterator.description); // "Symbol.iterator"
-
  ```
 
 5. ### Optional catch binding
