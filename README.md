@@ -1386,10 +1386,10 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
    1. You can pass object to a function
 
        ```js
-        function myfunc({ a, ...x }) {
+        function myfunc1({ a, ...x }) {
             console.log(a, x); // 1, { b: 2, c: 3, d:4 }
         }
-        myfunc({
+        myfunc1({
           a: 1,
           b: 2,
           c: 3,
