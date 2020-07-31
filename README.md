@@ -1331,10 +1331,10 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
    ```
    But if the function parameter definition or function call only contains a comma, a syntax error will be thrown
    ```js
-   function func(,) {  // SyntaxError: missing formal parameter
+   function func1(,) {  // SyntaxError: missing formal parameter
      console.log('no args');
    };
-   func(,); // SyntaxError: expected expression, got ','
+   func1(,); // SyntaxError: expected expression, got ','
    ```
 
    **Note:** Trailing commas are not allowed in Rest Parameters and JSON.
