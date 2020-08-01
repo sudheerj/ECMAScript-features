@@ -462,34 +462,34 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     You can make the object iterable by defining a `Symbol.iterator` property on it.
 
     ```js
-         const collection = {
-           one: 1,
-           two: 2,
-           three: 3,
-           [Symbol.iterator]() {
-             const values = Object.keys(this);
-             let i = 0;
+     const collection = {
+       one: 1,
+       two: 2,
+       three: 3,
+       [Symbol.iterator]() {
+         const values = Object.keys(this);
+         let i = 0;
+         return {
+           next: () => {
              return {
-               next: () => {
-                 return {
-                   value: this[values[i++]],
-                   done: i > values.length
-                 }
-               }
-             };
+               value: this[values[i++]],
+               done: i > values.length
+             }
            }
          };
+       }
+     };
 
-         const iterator = collection[Symbol.iterator]();
+     const iterator = collection[Symbol.iterator]();
 
-         console.log(iterator.next());    // → {value: 1, done: false}
-         console.log(iterator.next());    // → {value: 2, done: false}
-         console.log(iterator.next());    // → {value: 3, done: false}
-         console.log(iterator.next());    // → {value: undefined, done: true}
+     console.log(iterator.next());    // → {value: 1, done: false}
+     console.log(iterator.next());    // → {value: 2, done: false}
+     console.log(iterator.next());    // → {value: 3, done: false}
+     console.log(iterator.next());    // → {value: undefined, done: true}
 
-         for (const value of collection) {
-           console.log(value);
-         }
+     for (const value of collection) {
+       console.log(value);
+     }
     ```
 
     The for...of statement creates a loop iterating over user defined collection object. But this loop can be used for built-in objects too.
@@ -733,7 +733,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(String.fromCodePoint(134071));  // "𠮷"
     ```
 
-19. ### Symbols
+18. ### Symbols
 
     Symbol is a new peculiar primitive data type of JavaScript, along with other primitive types such as string, number, boolean, null and undefined. The new symbol is created just by calling the Symbol function. i.e, Every time you call the Symbol function, you’ll get a new and completely unique value. You can also pass a parameter to Symbol(), which is useful for debugging purpose only.
 
@@ -775,7 +775,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(Symbol.for('foo') === Symbol.for('foo'));  // true
     ```
 
-18. ### Proxies
+19. ### Proxies
     The Proxy object is used to create a proxy for another object, which can intercept and redefine fundamental operations for that object such as property lookup, assignment, enumeration, function invocation etc. These are used in many libraries and some browser frameworks.
 
     The proxy object is created with two parameters with below syntax,
@@ -854,28 +854,28 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     The promise chaining structure would be as below,
 
     ```js
-        const promise = new Promise(function(resolve, reject) {
-                        setTimeout(() => resolve(1), 1000);
-                    });
+    const promise = new Promise(function(resolve, reject) {
+                    setTimeout(() => resolve(1), 1000);
+                });
 
-        promise.then(function(result) {
+    promise.then(function(result) {
 
-              console.log(result); // 1
-              return result * 2;
+          console.log(result); // 1
+          return result * 2;
 
-            }).then(function(result) {
+        }).then(function(result) {
 
-              console.log(result); // 2
-              return result * 3;
+          console.log(result); // 2
+          return result * 3;
 
-            }).then(function(result) {
+        }).then(function(result) {
 
-              console.log(result); // 6
-              return result * 4;
+          console.log(result); // 6
+          return result * 4;
 
-            }).catch(function(error){
-               console.log(error);
-            });
+        }).catch(function(error){
+           console.log(error);
+        });
     ```
 
 21. ### Reflect
@@ -1002,7 +1002,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     6. **:**
 
-13. ### Binary and Octal
+22. ### Binary and Octal
     ES5 provided numeric literals in octal (prefix 0), decimal (no prefix), and hexadecimal ( 0x) representation. ES6 added support for binary literals and improvements on octal literals.
 
     **1. Binary literals:**
