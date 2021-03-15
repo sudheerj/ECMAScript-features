@@ -167,7 +167,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     //3. Single parameter and multiple statements
     var even = number => {
-        if(number % 2) {
+        if(number%2) {
             console.log("Even");
         } else {
             console.log("Odd");
