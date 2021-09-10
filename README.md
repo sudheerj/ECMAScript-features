@@ -64,6 +64,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |21 | [Reflect](#reflect) |
 |22 | [Binary and Octal](#binary-and-octal) |
 |23 | [Proper Tail calls](#proper-tail-calls)|
+|24 | [Array find methods](#array-find-methods)
 |   | **ES2016 Or ES7** |
 |1  | [Array includes](#array-includes) |
 |2  | [Exponentiation Operator](#exponentiation-operator) |
@@ -1088,6 +1089,34 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(factorial(1000));
     console.log(factorial(10000));
    ```
+24. ### Array find methods
+    ES6 introduced few array methods and two of them are `Array.find()` and `Array.findIndex()`.
+
+  **Array.find()** 
+    This method returns the value of the first element in an array that satisfies the given test. Let's take an example of array with all even elements except one element and use `find` method to find the odd element.
+
+    ```js
+    let arr = [2, 4, 5, 6, 8, 10];
+
+    function isOdd(i) {
+      return i % 2 !== 0;
+    }
+
+    console.log(arr.find(isOdd)); // 5
+    ```
+  **Array.findIndex()**
+
+  This method returns the index of the first element in the array that satisfies the given test. Let's take an example of array with all even elements except one element and use `findIndex` method to find the index of odd element.
+
+    ```js
+    let arr = [2, 4, 5, 6, 8, 10];
+
+    function isOdd(i) {
+      return i % 2 !== 0;
+    }
+
+    console.log(arr.findIndex(isOdd)); //2
+    ```
 
    **[⬆ Back to Top](#table-of-contents)**
 
