@@ -137,6 +137,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(x); //1
     ```
 
+    **[⬆ Back to Top](#table-of-contents)**
 
 2. ### Arrow functions
 
@@ -211,7 +212,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
       }
     }
     ```
-
+    **[⬆ Back to Top](#table-of-contents)**
     2. **Class expressions:**
 
     ```js
