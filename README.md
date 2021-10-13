@@ -190,6 +190,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     greet(); // Hello World!
     ```
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 3. ### Classes
     The classes are introduced as syntactic sugar over existing prototype based inheritance and constructor functions. So this feature doesn't bring new object-oriented inheritance model to JavaScript.
 
@@ -212,7 +214,6 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
       }
     }
     ```
-    **[⬆ Back to Top](#table-of-contents)**
     2. **Class expressions:**
 
     ```js
@@ -255,6 +256,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     ```
 
     **Note:** Even though ES6 classes looks similar to classes in other object oriented languages, such as Java, PHP, etc but they do not work exactly the same way.
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 4. ### Enhanced object literals
 
@@ -340,6 +343,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
       };
     ```
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 5. ### Template literals
     Prior to ES6, JavaScript developers would need to do ugly string concatenation to creat dynamic strings.
 
@@ -365,6 +370,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
       border-radius: 3px;
     `
     ```
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 6. ### Destructuring
 
@@ -396,6 +403,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     3. Parameter definitions
     4. for-of loop
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 7. ### Default parameters
 
     Default parameters allow named parameters of a function to be initialized with default values if no value or undefined is passed.
@@ -420,6 +429,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     add(); // 30
     ```
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 8. ### Rest parameter
     The rest parameter is used to represent an indefinite number of arguments as an array. The important point here is only the function's last parameter can be a "rest parameter". This feature has been introduced to reduce the boilerplate code that was induced by the arguments.
 
@@ -434,6 +445,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(sum(1, 2, 3, 4)); // 10
     console.log(sum(1, 2, 3, 4, 5)); // 15
     ```
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 9. ### Spread Operator
     Spread Operator allows iterables( arrays / objects / strings ) to be expanded into single arguments/elements.
