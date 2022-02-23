@@ -137,6 +137,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(x); //1
     ```
 
+    **[⬆ Back to Top](#table-of-contents)**
 
 2. ### Arrow functions
 
@@ -189,6 +190,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     greet(); // Hello World!
     ```
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 3. ### Classes
     The classes are introduced as syntactic sugar over existing prototype based inheritance and constructor functions. So this feature doesn't bring new object-oriented inheritance model to JavaScript.
 
@@ -211,7 +214,6 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
       }
     }
     ```
-
     2. **Class expressions:**
 
     ```js
@@ -254,6 +256,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     ```
 
     **Note:** Even though ES6 classes looks similar to classes in other object oriented languages, such as Java, PHP, etc but they do not work exactly the same way.
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 4. ### Enhanced object literals
 
@@ -339,6 +343,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
       };
     ```
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 5. ### Template literals
     Prior to ES6, JavaScript developers would need to do ugly string concatenation to creat dynamic strings.
 
@@ -364,6 +370,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
       border-radius: 3px;
     `
     ```
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 6. ### Destructuring
 
@@ -395,6 +403,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     3. Parameter definitions
     4. for-of loop
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 7. ### Default parameters
 
     Default parameters allow named parameters of a function to be initialized with default values if no value or undefined is passed.
@@ -419,6 +429,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     add(); // 30
     ```
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 8. ### Rest parameter
     The rest parameter is used to represent an indefinite number of arguments as an array. The important point here is only the function's last parameter can be a "rest parameter". This feature has been introduced to reduce the boilerplate code that was induced by the arguments.
 
@@ -433,6 +445,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(sum(1, 2, 3, 4)); // 10
     console.log(sum(1, 2, 3, 4, 5)); // 15
     ```
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 9. ### Spread Operator
     Spread Operator allows iterables( arrays / objects / strings ) to be expanded into single arguments/elements.
@@ -450,6 +464,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     ```
 
     **Note:** The spread syntax is opposite of rest parameter.
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 10. ### Iterators & For..of
 
@@ -497,6 +513,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     **Note:** The abrupt iteration termination can be caused by break, throw or return.
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 11. ### Generators
     A generator is a function that can stop or suspend midway and then continue from where it stopped while maintaining the context(saved across re-entrances). It can be defined using a function keyword followed by an asterisk(i.e, function* ()).
 
@@ -517,6 +535,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     ```
 
     **Note:** We can use `yield*` to delegate to another generator function
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 12. ### Modules
     Modules are small units of independent, reusable code to be used as the building blocks in a Javascript application.
@@ -594,6 +614,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     ```
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 13. ### Set
 
     Set is a built-in object to store collections of unique values of any type.
@@ -610,6 +632,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(mySet.size) // 4
     console.log(mySet.has(2)); // true
     ```
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 14. ### Weakset
 
@@ -635,6 +659,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     john = null;
     ```
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 15. ### Map
 
@@ -670,6 +696,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
         }
        ```
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 16. ### Weakmap
 
     WeakMap object is a collection of key/value pairs in which the keys are weakly referenced. For this object, the keys must be objects and the values can be arbitrary values.
@@ -695,6 +723,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     weakMap.delete(obj1)
     console.log(weakMap.get(obj1)); //undefined
     ```
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 17. ### Unicode
 
@@ -733,6 +763,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     console.log(String.fromCodePoint(134071));  // "𠮷"
     ```
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 18. ### Symbols
 
@@ -775,6 +807,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(Symbol('foo') === Symbol('foo'));  // false
     console.log(Symbol.for('foo') === Symbol.for('foo'));  // true
     ```
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 19. ### Proxies
     The Proxy object is used to create a proxy for another object, which can intercept and redefine fundamental operations for that object such as property lookup, assignment, enumeration, function invocation etc. These are used in many libraries and some browser frameworks.
@@ -838,6 +872,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     person.age = 200;        // Throws an exception
     ```
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 20. ### Promises
 
     A promise is an object which represent the eventual completion or failure of an asynchronous operation.
@@ -878,6 +914,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
            console.log(error);
         });
     ```
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 21. ### Reflect
 
@@ -1003,6 +1041,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     6. **:**
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 22. ### Binary and Octal
     ES5 provided numeric literals in octal (prefix 0), decimal (no prefix), and hexadecimal ( 0x) representation. ES6 added support for binary literals and improvements on octal literals.
 
@@ -1051,6 +1091,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(invalidNum); // SyntaxError
     ```
 
+    **[⬆ Back to Top](#table-of-contents)**
 
 23. ### Proper Tail Calls
 
@@ -1089,6 +1130,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(factorial(1000));
     console.log(factorial(10000));
    ```
+   
+   **[⬆ Back to Top](#table-of-contents)**
+   
 24. ### Array find methods
     ES6 introduced few array methods and two of them are `Array.find()` and `Array.findIndex()`.
 
@@ -1154,6 +1198,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(numbers.includes(NaN)); // true
     console.log(numbers.includes(undefined)); // true
   ```
+  
+  **[⬆ Back to Top](#table-of-contents)**
+
 2. ### Exponentiation Operator
 
    The older versions of javascript uses `Math.pow` function to find the exponentiation of given numbers. ECMAScript 2016 introduced the exponentiation operator, **(similar to other languages such as Python or F#) to calculate the power computation in a clear representation using infix notation.
@@ -1199,6 +1246,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
      }
      logger();
      ```
+     
+  **[⬆ Back to Top](#table-of-contents)**
+  
 2. ### Object values
    Similar to Object.keys which iterate over JavaScript object’s keys, Object.values will do the same thing on values. i.e, The Object.values() method is introduced to returns an array of a given object's own enumerable property values in the same order as `for...in` loop.
 
@@ -1216,7 +1266,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(Object.values(['India', 'Singapore'])); // ['India', 'Singapore']
     console.log(Object.values('India')); // ['I', 'n', 'd', 'i', 'a']
    ```
-
+   
+   **[⬆ Back to Top](#table-of-contents)**
+   
 3. ### Object entries
    The `Object.entries()` method is introduced to returns an array of a given object's own enumerable string-keyed property [key, value] pairsin the same order as `for...in` loop.
    ```js
@@ -1236,7 +1288,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
       console.log(Object.entries(100)); // [], an empty array for any primitive type because it won't have any own properties
    ```
-
+   
+    **[⬆ Back to Top](#table-of-contents)**
+    
 4. ### Object property descriptors
 
    Property descriptors describe the attributes of a property. The `Object.getOwnPropertyDescriptors()` method returns all own property descriptors of a given object.
@@ -1260,6 +1314,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     const descriptors = Object.getOwnPropertyDescriptors(profile);
     console.log(descriptors); //  {age: {configurable: true, enumerable: true, writable: true }}
    ```
+   
+    **[⬆ Back to Top](#table-of-contents)**
 
 5. ### String padding
    Some strings and numbers(money, date, timers etc) need to be represented in a particular format. Both `padStart() & padEnd()` methods introduced to pad a string with another string until the resulting string reaches the supplied length.
@@ -1288,6 +1344,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
    console.log(label2 + ": " + value2); // Name:                John
                                         // Phone Number: (222)-333-3456
    ```
+   
+    **[⬆ Back to Top](#table-of-contents)**
 
 6. ### Shared memory and atomics
    The Atomics is a global object which provides atomic operations to be performed as static methods. They are used with SharedArrayBuffer(fixed-length binary data buffer) objects. The main use cases of these methods are,
@@ -1391,6 +1449,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
    In order to access asynchronous data sources, ES2018 introduced the AsyncIterator interface, an asynchronous iteration statement (for-await-of), and async generator functions.
 
+    **[⬆ Back to Top](#table-of-contents)**
+
 2. ### Object rest and spread operators
 
    ES2015 or ES6 introduced both rest parameters and spread operators to convert arguments to array and vice versa using three-dot(...) notation.
@@ -1432,6 +1492,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
         const myObject = { a: 1, b: 2, c: 3, d:4 };
         const myNewObject = { ...myObject, e: 5 }; // { a: 1, b: 2, c: 3, d: 4, e: 5 }
         ```
+        
+    **[⬆ Back to Top](#table-of-contents)**
 
 3. ### Promise finally
 
@@ -1499,6 +1561,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
    console.log(numberArray1.flatMap(value => [value * 10]));  // [10, 20, 30, 40, 50]
    ```
+   
+    **[⬆ Back to Top](#table-of-contents)**
 
 2. ### Object fromEntries
 
@@ -1537,6 +1601,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     Object.fromEntries(searchParams);    // => {param1: "foo", param2: "baz"}
    ```
+   
+   **[⬆ Back to Top](#table-of-contents)**
 
 3. ### String trimStart and trimEnd
    In order to make consistency with padStart/padEnd, ES2019 provided the standard functions named as `trimStart` and `trimEnd` to trim white spaces on the beginning and ending of a string. However for web compatilibity(avoid any breakage) `trimLeft` and `trimRight` will be an alias for `trimStart` and `trimEnd` respectively.
@@ -1553,6 +1619,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(messageTwo.trimStart()); //Hello World!!
     console.log(messageTwo.trimEnd()); //   Hello World!!
    ```
+   
+   **[⬆ Back to Top](#table-of-contents)**
 
 4. ### Symbol description
 
@@ -1571,6 +1639,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
  console.log(Symbol.iterator.description); // "Symbol.iterator"
  ```
+ 
+ **[⬆ Back to Top](#table-of-contents)**
 
 5. ### Optional catch binding
    Prior to ES9, if you don't need `error` variable and omit the same variable then catch() clause won't be invoked. Also, the linters complain about unused variables. Inorder to avoid this problem, the optional catch binding feature is introduced to make the binding parameter optional in the catch clause. If you want to completely ignore the error or you already know the error but you just want to react to that the this feature is going to be useful.
@@ -1599,6 +1669,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
        }
     } catch (unused) {}
    ```
+   
+   **[⬆ Back to Top](#table-of-contents)**
+   
 6. ### JSON Improvements
 
     JSON is used as a lightweight format for data interchange(to read and parse). The usage of JSON has been improved as part of ECMAScript specification. Basically there are 2 important changes related to JSON.
@@ -1630,6 +1703,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     ```js
     console.log(JSON.stringify("\uD800")); // '"\ud800"'
     ```
+    
+   **[⬆ Back to Top](#table-of-contents)**
 
 7. ### Array Stable Sort
     The sort method for arrays is stable in ES2020. i.e, If you have an array of objects and sort them on a given key, the elements in the list will retain their position relative to the other objects with the same key.​
@@ -1652,6 +1727,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     ]
     users.sort((a, b) => a.age - b.age);
     ```
+   **[⬆ Back to Top](#table-of-contents)**
 
 8. ### Function.toString()
     Functions have an instance method called `toString()` which return a string to represent the function code. Previous versions of ECMAScript removes white spaces,new lines and comments from the function code but it has been retained with original source code in ES2020.
@@ -1670,6 +1746,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     //       console.log(`Hello, ${msg}`);
     //   }
     ```
+    
+   **[⬆ Back to Top](#table-of-contents)**
 
 9. ### Private Class Variables
      In ES6, the classes are introduced to create reusable modules and variables are declared in clousure to make them private. Where as in ES2020, private class variables are introduced to allow the variables used in the class only. By just adding a simple hash symbol in front of our variable or function, you can reserve them entirely for internal to the class.
@@ -1733,6 +1811,8 @@ Most of these features already supported by some browsers and try out with babel
     console.log(1n == 1); // true
     ```
 
+   **[⬆ Back to Top](#table-of-contents)**
+
 2. ### Dynamic Import
     Static imports supports some of the important use cases such as static analysis, bundling tools, and tree shaking, it is also it's desirable to be able to dynamically load parts of a JavaScript application at runtime.
 
@@ -1770,6 +1850,8 @@ Most of these features already supported by some browsers and try out with babel
 
     **Note:** Dynamic import does not require scripts of `type="module"`
 
+   **[⬆ Back to Top](#table-of-contents)**
+
 3. ### Nullish Coalescing Operator
     The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand when its left-hand side operand is `null` or `undefined`, and otherwise returns its left-hand side operand. This operator replaces `||` operator to provide default values if you treat empty value or '', 0 and NaN as valid values. This is because the logical OR(||) operator treats(empty value or '', 0 and NaN) as falsy values and returns the right operand value which is wrong in this case. Hence, this operator truely checks for `nullish` values instead `falsy` values.
     ```js
@@ -1787,6 +1869,8 @@ Most of these features already supported by some browsers and try out with babel
     console.log(vehicle.car.speed ?? 90); // 0(zero is valid case for speed)
     ```
     In a short note, nullish operator returns a non-nullish value and || operator returns truthy values.
+    
+   **[⬆ Back to Top](#table-of-contents)**
 
 4. ### String matchAll
 
@@ -1804,6 +1888,8 @@ Most of these features already supported by some browsers and try out with babel
     ["test1", "e", "st1", "1", index: 0, input: "test1test2", groups: undefined]
     ["test2", "e", "st2", "2", index: 5, input: "test1test2", groups: undefined]
     ```
+    
+   **[⬆ Back to Top](#table-of-contents)**
 
 5. ### Optional chaining
 
@@ -1833,8 +1919,10 @@ Most of these features already supported by some browsers and try out with babel
     console.log(vehicle.car?.name ?? "Unknown"); // Unknown
     console.log(vehicle.car?.speed ?? 90); // 90
     ```
+    
+   **[⬆ Back to Top](#table-of-contents)**
 
-5. ### Promise.allSettled
+6. ### Promise.allSettled
 
     It is really helpful to log(especially to debug errors) about each promise when you are handling multiple promises. The  `Promise.allSettled()` method returns a new promise that resolves after all of the given promises have either fulfilled or rejected, with an array of objects describing the outcome of each promise.
     ```js
@@ -1849,7 +1937,9 @@ Most of these features already supported by some browsers and try out with babel
     ```
     As per the output, each outcome object returns `status` field which denotes either "fulfilled"(value present) or "rejected"(reason present)
 
-6. ### globalThis
+   **[⬆ Back to Top](#table-of-contents)**
+   
+7. ### globalThis
     Prior to ES2020, you need to write different syntax in different JavaScript environments(cross-platforms) just to access the global object. It is really a hard time for developers because you need to use `window, self, or frames` on the browser side, `global` on the nodejs, `self` on the web workers side.
 
     On the other hand, `this` keyword can be used inside functions for non-strict mode but it gives undefined in strict mode. If you think about `Function('return this')()` as a solution for above environments, it will fail for CSP enabled environments(where eval() is disabled).
