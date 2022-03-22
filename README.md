@@ -50,7 +50,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |7  | [Default parameters](#default-parameters) |
 |8  | [Rest parameter](#rest-parameter) |
 |9  | [Spread Operator](#spread-operator) |
-|10 | [Iterators & For..of](#iterators-&-for..of) |
+|10 | [Iterators & For..of](#iterators-&-forof) |
 |11 | [Generators](#generators) |
 |12 | [Modules](#modules) |
 |13 | [Set](#set) |
@@ -88,7 +88,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |5  | [Optional Catch Binding](#optional-catch-binding)|
 |6  | [JSON Improvements](#json-improvements)|
 |7  | [Array Stable Sort](#array-stable-sort)|
-|8  | [Function.toString()](#function.tostring())|
+|8  | [Function.toString()](#functiontostring())|
 |9  | [Private Class Variables](#private-class-variables)|
 |   | **ES2020 Or ES11**|
 |1  | [BigInt](#bigint) |
@@ -98,12 +98,12 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |5  | [Promise allSettled](#promiseallsettled)|
 |6  | [String matchAll](#string-matchall)|
 |7  | [globalThis](#globalthis)|
-|8  | [import.meta](#import.meta)|
-|9  | [for..in order](#for..in-order)|
+|8  | [import.meta](#importmeta)|
+|9  | [for..in order](#forin-order)|
 |   | **ES2021 Or ES12**|
-|1  | [replaceAll](#replace-all) |
+|1  | [replaceAll](#replaceall) |
 |2  | [promise.any](#promiseany) |
-|3  | [WeakRef](#weak-ref)|
+|3  | [WeakRef](#weakref)|
 |4  | [Numeric Separators](#numeric-separators)|
 |5  | [Logical Operators](#logical-operators)|
 
@@ -2119,8 +2119,10 @@ Most of these features already supported by some browsers and try out with babel
 
 5. ### Logical Operators
    Logical assignment operators combines the logical operations(&&, || or ??) with assignment. They are quite useful for assigning default values to variables.
+   
    **&&=:** 
-   The &&= operator performs the assignment only when the left operand is truthy.
+
+   The `&&=` operator performs the assignment only when the left operand is truthy.
    ```javascript
     let x = 10;
     let y = 20;
@@ -2137,7 +2139,9 @@ Most of these features already supported by some browsers and try out with babel
       x = y;
     }
    ```
+
    **||=:**
+   
    The ||= operator performs the assignment only when the left operand is falsy.
    ```javascript
       let x = 0;
@@ -2155,7 +2159,9 @@ Most of these features already supported by some browsers and try out with babel
       x = y;
     }
    ```
+
    **??=:**
+   
    The ??= operator performs the assignment only when the left operand is null or undefined.
    ```javascript
     let x;
@@ -2164,12 +2170,14 @@ Most of these features already supported by some browsers and try out with babel
     console.log(x); // 1
    ```
 
-  The above logical assignment operation can be expanded to:
+    The above logical assignment operation can be expanded to:
 
-   ```javascript
-    x = x ?? (x = y);
-    (OR)
-    if (!x) {
-      x = y;
-    }
-   ```
+    ```javascript
+      x = x ?? (x = y);
+      (OR)
+      if (!x) {
+        x = y;
+      }
+    ```
+
+    **[⬆ Back to Top](#table-of-contents)**
