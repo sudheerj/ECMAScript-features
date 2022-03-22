@@ -95,7 +95,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |2  | [Dynamic Import](#dynamic-import) |
 |3  | [Nullish Coalescing Operator](#nullish-coalescing-operator)|
 |4  | [Optional chaining](#optional-chaining)|
-|5  | [Promise allSettled](#promise-allsettled)|
+|5  | [Promise allSettled](#promiseallsettled)|
 |6  | [String matchAll](#string-matchall)|
 |7  | [globalThis](#globalthis)|
 |8  | [import.meta](#import.meta)|
