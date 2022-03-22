@@ -34,7 +34,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 | ES2018 Or ES9  | June 2018 |
 | ES2019 Or ES10  | June 2019 |
 | ES2020 Or ES11  | June 2020 |
-
+| ES2021 Or ES12  | June 2021 |
 
 ### Table of Contents
 
@@ -100,6 +100,12 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |7  | [globalThis](#globalthis)|
 |8  | [import.meta](#import.meta)|
 |9  | [for..in order](#for..in-order)|
+|   | **ES2021 Or ES12**|
+|1  | [replaceAll](#replace-all) |
+|2  | [promise.any](#promise.any) |
+|3  | [WeakRef](#weak-ref)|
+|4  | [Numeric Separators](#numeric-separators)|
+|5  | [Logical Operators](#logical-operators)|
 
 ## ES2015 Or ES6
 
@@ -1999,6 +2005,171 @@ Most of these features already supported by some browsers and try out with babel
 
     **[⬆ Back to Top](#table-of-contents)**
 
+## ES2021 Or ES12
+  ECMAScript 2021 or ES12 has been released in mid of 2021 with few important features which can be used JavaScript.
 
+1. ### replaceAll
+   The new `replaceAll()` method from `String` prototype is used to replace all the occurrences of a string from another string value. Earlier it was not possible to replace all the instances of a substring without the use of regex.
 
+   **Before ES2021**
+   ```javascript
+    console.log('10101010'.replace(new RegExp('0', 'g'), '1')); // 11111111
+    console.log('01010101'.replace(/0/g, '1')); // 11111111
+   ```
 
+   **After ES2021**
+   ```javascript
+    console.log('10101010'.replaceAll('0', '1')); // 11111111
+    console.log('01010101'.replaceAll('0', '1')); // 11111111
+   ```
+
+2. ### promise.any
+   The new `promise.any` method takes multiple promises and resolves to the value of the first promise which is successfully fulfilled.
+
+   ```javascript
+   let promise1 = new Promise((resolve) => setTimeout(resolve, 100, 'Resolves after 100ms'));
+   let promise2 = new Promise((resolve) => setTimeout(resolve, 200, 'Resolves after 200ms'));
+   let promise3 = new Promise((resolve, reject) => setTimeout(reject, 0) );
+
+   let promises = [promise1, promise2, promise3];
+
+    Promise.any(promises)
+        .then( value => console.log(value)); // Resolves after 100ms
+   ```
+
+   In case none of the promises resolved then it throws `AggregateError` exception.
+
+   ```javascript
+    (async () => {
+      try {
+          const output = await Promise.any([
+            Promise.reject('Error 1'),
+            Promise.reject('Error 2'),
+            Promise.reject('Error 3'),
+        ]);
+        console.log(`Output: ${output}`);
+      } catch (err) {
+          console.log(`Error: ${err.errors}`);
+      }
+    })(); 
+    // Error: Error1,Error2,Error3
+   ```
+3. ### WeakRef
+    WeakRef provides two new pieces of functionality
+      1. creating weak references to objects with the WeakRef class
+      2. running user-defined finalizers after objects are garbage-collected, with the FinalizationRegistry class
+    
+    **WeakRef:**
+    weak reference is a reference to an object that doesn’t prevent garbage collection if it is the only reference to the object in the memory.It’s useful when we don’t want to keep the object in memory forever(e.g, WebSocket). The main use of weak references is to implement caches or mappings to large objects for which you don't need to keep it in memory for rarely used objects.
+
+    Prior to ES12, WeakMaps and WeakSets are the only way to kind-of-weakly reference an object in JavaScript. Whereas WeakRef in ES12 provides actual weak references, enabling a window into the lifetime of an object.
+
+    Let's see an example of a weak reference object using `WeakRef` constructor and read the reference using `deref()` method
+
+    ```javascript
+    const myObject = new WeakRef({
+      name: ‘Sudheer’,
+      age: 34
+      });
+    console.log(myObject.deref()); //output: {name: “Sudheer”, age: 35}
+    console.log(myObject.deref().name); //output: Sudheer
+    ```
+    **Finalizers:**
+    A `FinalizationRegistry` object lets you request a callback when an object is garbage-collected. It works as a cleanup callback.
+
+    ```javascript
+    // Create new FinalizationRegistry:
+    const reg = new FinalizationRegistry((val) => {
+      console.log(val);
+    });
+
+    (() => {
+    // Create new object:
+      const obj = {}
+
+    // Register finalizer for the "obj" as first argument and value for callback function as second argument:
+      reg.register(obj, 'obj has been garbage-collected.')
+    })();
+    ```
+
+    **Note:** The finalization callback does not run immediately after garbage-collecting the event listener, so don't use it for important logic or metrics.
+4. ### Numeric Separators
+    Numeric separators are helpful to read large numbers(or numeric literals) in JavaScript by providing separation between digits using underscores(_). In otherwords, numeric literals are more readable by creating a visual separation between groups of digits. 
+
+    For example, one billion and one trillion becomes more readable with _ numeric separator,
+
+    ```javascript
+    const billion = 1000_000_000;
+    console.log(billion); // 1000000000
+
+    const trillion = 1000_000_000_000n; // BigInt number
+    console.log(trillion); // 1000000000000
+    ```
+
+    It can be used for binary and hex literals as well.
+
+    ```javascript
+    const binaryLiteral = 0b1010_1010;
+    console.log(binaryLiteral);
+    const hexLiteral = 0xFF_FF_FF_FF;
+    console.log(hexLiteral);
+    ```
+
+    **Note:** The separator can be placed anywhere within the number for readability purpose.
+
+5. ### Logical Operators
+   Logical assignment operators combines the logical operations(&&, || or ??) with assignment. They are quite useful for assigning default values to variables.
+   **&&=:** 
+   The &&= operator performs the assignment only when the left operand is truthy.
+   ```javascript
+    let x = 10;
+    let y = 20;
+    x &&= y;
+    console.log(x); // 20
+   ```
+
+   The above logical assignment operation can be expanded to:
+
+   ```javascript
+    x = x && (x = y); 
+    (OR)
+    if (x) {
+      x = y;
+    }
+   ```
+   **||=:**
+   The ||= operator performs the assignment only when the left operand is falsy.
+   ```javascript
+      let x = 0;
+      let y = 20;
+       x ||= y;
+      console.log(x); // 20
+   ```
+
+   The above logical assignment operation can be expanded to:
+
+   ```javascript
+    x = x || (x = y); 
+    (OR)
+    if (!x) {
+      x = y;
+    }
+   ```
+   **??=:**
+   The ??= operator performs the assignment only when the left operand is null or undefined.
+   ```javascript
+    let x;
+    let y = 1;
+    x ??= y;
+    console.log(x); // 1
+   ```
+
+  The above logical assignment operation can be expanded to:
+
+   ```javascript
+    x = x ?? (x = y);
+    (OR)
+    if (!x) {
+      x = y;
+    }
+   ```
