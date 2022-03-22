@@ -102,7 +102,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |9  | [for..in order](#for..in-order)|
 |   | **ES2021 Or ES12**|
 |1  | [replaceAll](#replace-all) |
-|2  | [promise.any](#promise.any) |
+|2  | [promise.any](#promiseany) |
 |3  | [WeakRef](#weak-ref)|
 |4  | [Numeric Separators](#numeric-separators)|
 |5  | [Logical Operators](#logical-operators)|
