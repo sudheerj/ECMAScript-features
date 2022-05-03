@@ -152,7 +152,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     ```js
     // Function Expression
     var multiplyFunc = function(a, b) {
-        return a * b;
+      return a * b;
     }
     console.log(multiplyFunc(2, 5)); // 10
 
@@ -165,34 +165,33 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     Let's list down all the variations of arrow functions,
     ```js
     //1. Single parameter and single statement
-    var message = name => console.log("Hello, " + name + "!");
+    const message = name => console.log("Hello, " + name + "!");
     message("Sudheer"); // Hello, Sudheer!
 
     //2. Multiple parameters and single statement
-    var multiply = (x, y) => x * y;
+    const multiply = (x, y) => x * y;
     console.log(multiply(2, 5)); // 10
 
-
     //3. Single parameter and multiple statements
-    var even = number => {
-        if(number%2) {
-            console.log("Even");
-        } else {
-            console.log("Odd");
-        }
+    const even = number => {
+      if(number%2) {
+        console.log("Even");
+      } else {
+        console.log("Odd");
+      }
     }
     even(5); // odd
 
     //4. Multiple parameters and multiple statements
-    var divide = (x, y) => {
-        if(y != 0) {
-            return x / y;
-        }
+    const divide = (x, y) => {
+      if(y != 0) {
+        return x / y;
+      }
     }
     console.log(divide(100, 5)); // 20
 
     //5. No parameter and single statement
-    var greet = () => console.log('Hello World!');
+    const greet = () => console.log('Hello World!');
     greet(); // Hello World!
     ```
 
@@ -278,7 +277,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     Let's see the ES5 representation
 
     ```js
-    var a = 1, b = 2, c = 3;
+    var a = 1, b = 2, c = 3,
       obj = {
         a: a,
         b: b,
@@ -289,13 +288,13 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     and it can be represented in a shorter syntax as below,
 
     ```js
-    var a = 1, b = 2, c = 3;
-      obj = {
-        a,
-        b,
-        c
-      };
-      console.log(obj);
+    const a = 1, b = 2, c = 3;
+    const obj = {
+      a,
+      b,
+      c
+    };
+    console.log(obj);
     ```
 
     2. **Method Shorthand:**
@@ -303,24 +302,24 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     ```js
     var calculation = {
-      sum:  function(a, b) { return a + b; },
+      sum: function(a, b) { return a + b; },
       multiply: function(a, b) { return a * b; }
     };
 
-    console.log( calculation.add(5, 3) );  // 15
-    console.log( calculation.multiply(5, 3) ); // 15
+    console.log(calculation.add(5, 3));  // 8
+    console.log(calculation.multiply(5, 3)); // 15
     ```
 
     This can be avoided in ES6,
 
     ```js
-    var calculation = {
+    const calculation = {
       sum(a, b) { return a + b; },
       multiply(a, b) { return a * b; }
     };
 
-    console.log( calculation.add(5, 3) );  // 15
-    console.log( calculation.multiply(5, 3) ); // 15
+    console.log(calculation.add(5, 3));  // 8
+    console.log(calculation.multiply(5, 3)); // 15
     ```
 
     3. **Computed Property Names:**
@@ -485,34 +484,34 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     You can make the object iterable by defining a `Symbol.iterator` property on it.
 
     ```js
-     const collection = {
-       one: 1,
-       two: 2,
-       three: 3,
-       [Symbol.iterator]() {
-         const values = Object.keys(this);
-         let i = 0;
-         return {
-           next: () => {
-             return {
-               value: this[values[i++]],
-               done: i > values.length
-             }
-           }
-         };
-       }
-     };
+    const collection = {
+      one: 1,
+      two: 2,
+      three: 3,
+      [Symbol.iterator]() {
+        const values = Object.keys(this);
+        let i = 0;
+        return {
+          next: () => {
+            return {
+              value: this[values[i++]],
+              done: i > values.length
+            }
+          }
+        };
+      }
+    };
 
-     const iterator = collection[Symbol.iterator]();
+    const iterator = collection[Symbol.iterator]();
 
-     console.log(iterator.next());    // → {value: 1, done: false}
-     console.log(iterator.next());    // → {value: 2, done: false}
-     console.log(iterator.next());    // → {value: 3, done: false}
-     console.log(iterator.next());    // → {value: undefined, done: true}
+    console.log(iterator.next());    // → {value: 1, done: false}
+    console.log(iterator.next());    // → {value: 2, done: false}
+    console.log(iterator.next());    // → {value: 3, done: false}
+    console.log(iterator.next());    // → {value: undefined, done: true}
 
-     for (const value of collection) {
-       console.log(value);
-     }
+    for (const value of collection) {
+      console.log(value);
+    }
     ```
 
     The for...of statement creates a loop iterating over user defined collection object. But this loop can be used for built-in objects too.
@@ -674,33 +673,33 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     Let's take a map with different types of primitives and objects as key-value pairs and various methods on it,
 
-       ```js
-        let typeMap = new Map();
+    ```js
+    let typeMap = new Map();
 
-        var keyObj = {'one': 1}
+    var keyObj = {'one': 1}
 
-        typeMap.set('10', 'string');   // a string key
-        typeMap.set(10, 'number');     // a numeric key
-        typeMap.set(true, 'boolean'); // a boolean key
-        typeMap.set(keyObj, 'object'); // an object key
-
-
-        console.log(typeMap.get(10)   ); // number
-        console.log(typeMap.get('10') ); // string
-        console.log(typeMap.get(keyObj)) // object
-        console.log(typeMap.get({'one': 1})) // undefined
-
-        console.log(typeMap.size ); // 3
-
-        for(let item of typeMap) {
-           console.log(item);
-        }
+    typeMap.set('10', 'string');   // a string key
+    typeMap.set(10, 'number');     // a numeric key
+    typeMap.set(true, 'boolean'); // a boolean key
+    typeMap.set(keyObj, 'object'); // an object key
 
 
-        for(let item in typeMap) {
-           console.log(item);
-        }
-       ```
+    console.log(typeMap.get(10)   ); // number
+    console.log(typeMap.get('10') ); // string
+    console.log(typeMap.get(keyObj)) // object
+    console.log(typeMap.get({'one': 1})) // undefined
+
+    console.log(typeMap.size ); // 3
+
+    for(let item of typeMap) {
+      console.log(item);
+    }
+
+
+    for(let item in typeMap) {
+      console.log(item);
+    }
+    ```
 
     **[⬆ Back to Top](#table-of-contents)**
 
@@ -748,7 +747,6 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(/^.$/.test(str)); // false, because length is 2
     console.log('\u20BB7); // 7!(wrong value)
     console.log(str === '\uD842\uDFB7'); // true
-
     ```
 
     ECMAScript 6 added full support for UTF-16 within strings and regular expressions. It introduces new Unicode literal form in strings and new RegExp u mode to handle code points, as well as new APIs(codePointAt, fromCodePoint) to process strings.
@@ -840,7 +838,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
       get: function(target, prop) {
         return prop in target ?
             target[prop] :
-            `${prop} does not exist';
+            `${prop} does not exist`;
       }
     };
 
@@ -898,27 +896,24 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     ```js
     const promise = new Promise(function(resolve, reject) {
-                    setTimeout(() => resolve(1), 1000);
-                });
+      setTimeout(() => resolve(1), 1000);
+    });
 
     promise.then(function(result) {
+        console.log(result); // 1
 
-          console.log(result); // 1
-          return result * 2;
+        return result * 2;
+      }).then(function(result) {
+        console.log(result); // 2
 
-        }).then(function(result) {
+        return result * 3;
+      }).then(function(result) {
+        console.log(result); // 6
 
-          console.log(result); // 2
-          return result * 3;
-
-        }).then(function(result) {
-
-          console.log(result); // 6
-          return result * 4;
-
-        }).catch(function(error){
-           console.log(error);
-        });
+        return result * 4;
+      }).catch(function(error){
+        console.log(error);
+      });
     ```
 
     **[⬆ Back to Top](#table-of-contents)**
@@ -949,20 +944,20 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     **Example:**
     ```js
     class User {
-        constructor(firstName, lastName) {
-            this.firstName = firstName;
-            this.lastName = lastName;
-        }
-        get fullName() {
-            return `${this.firstName} ${this.lastName}`;
-        }
+      constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+      }
+      get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+      }
     };
 
     let args = ['John', 'Emma'];
 
     let john = Reflect.construct(
-        User,
-        args
+      User,
+      args
     );
 
     console.log(john instanceof User);
@@ -995,27 +990,26 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     Let's define the age property on user object,
     ```js
     class User {
-        constructor(firstName, lastName) {
-            this.firstName = firstName;
-            this.lastName = lastName;
-        }
-        get fullName() {
-            return `${this.firstName} ${this.lastName}`;
-        }
+      constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+      }
+      get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+      }
     };
 
     let john = new User('John', 'Resig');
 
     if (Reflect.defineProperty(john, 'age', {
-            writable: true,
-            configurable: true,
-            enumerable: false,
-            value: 33,
-        })) {
-        console.log(john.age);
+        writable: true,
+        configurable: true,
+        enumerable: false,
+        value: 33,
+      })) {
+      console.log(john.age);
     } else {
-        console.log('Cannot define the age property on the user object.');
-
+      console.log('Cannot define the age property on the user object.');
     }
     ```
 
@@ -1106,25 +1100,25 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
    For example, the below classic or head recursion of factorial function relies on stack for each step. Each step need to be processed upto `n * factorial(n - 1)`
 
    ```js
-     function factorial(n) {
-       if (n === 0) {
-         return 1
-       }
-       return n * factorial(n - 1)
-     }
-     console.log(factorial(5)); //120
+    function factorial(n) {
+      if (n === 0) {
+        return 1
+      }
+      return n * factorial(n - 1)
+    }
+    console.log(factorial(5)); //120
    ```
 
    But if you use Tail recursion functions, they keep passing all the necessary data it needs down the recursion without relying on the stack.
 
    ```js
-     function factorial(n, acc = 1) {
-       if (n === 0) {
-         return acc
-       }
-       return factorial(n - 1, n * acc)
-     }
-     console.log(factorial(5)); //120
+    function factorial(n, acc = 1) {
+      if (n === 0) {
+        return acc
+      }
+      return factorial(n - 1, n * acc)
+    }
+    console.log(factorial(5)); //120
    ```
 
    The above pattern returns the same output as first one. But the accumulator keeps track of total as an argument without using stack memory on recursive calls.
@@ -1182,16 +1176,16 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
    ```js
     const array = [1,2,3,4,5,6];
     if(array.indexOf(5) > -1 ){
-    console.log("Found an element");
+      console.log("Found an element");
     }
    ```
    Whereas in ES7, `array.prototype.includes()` method is introduced as a direct approach to determine whether an array includes a certain value among its entries or not.
-   ```js
-   const array = [1,2,3,4,5,6];
-   if(array.includes(5)){
-   console.log("Found an element");
-   }
-   ```
+    ```js
+    const array = [1,2,3,4,5,6];
+    if(array.includes(5)){
+      console.log("Found an element");
+    }
+    ```
   In addition to this, `Array.prototype.includes()` handles NaN and Undefined values better than `Array.prototype.indexOf()` methods. i.e, If the array contains NaN and Undefined values then `indexOf()` does not return correct index while searching for NaN and Undefined.
   ```js
   let numbers = [1, 2, 3, 4, NaN, ,];
@@ -1200,9 +1194,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
   ```
   On the otherhand, `includes` method is able to find these elements
   ```js
-    let numbers = [1, 2, 3, 4, NaN, ,];
-    console.log(numbers.includes(NaN)); // true
-    console.log(numbers.includes(undefined)); // true
+  let numbers = [1, 2, 3, 4, NaN, ,];
+  console.log(numbers.includes(NaN)); // true
+  console.log(numbers.includes(undefined)); // true
   ```
   
   **[⬆ Back to Top](#table-of-contents)**
@@ -1226,32 +1220,31 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
 1. ### Async functions
 
-   In ES6, Promises were introduced to solve the famous callback hell problem. When a series of nested asynchronous functions need to be executed in order, it leads to a callback hell
-   ```js
-   function task() {
-     task1((response1) => {
-       task2(response1, (response2) => {
-         task3(response2, (response3) => {
-           // etc...
-         };
-       });
-     });
-   }
-   ```
-   But the Chained Promises creates complex flow for asynchronous code.
+  In ES6, Promises were introduced to solve the famous callback hell problem. When a series of nested asynchronous functions need to be executed in order, it leads to a callback hell
+  ```js
+  function task() {
+    task1((response1) => {
+      task2(response1, (response2) => {
+        task3(response2, (response3) => {
+          // etc...
+        };
+      });
+    });
+  }
+  ```
+  But the Chained Promises creates complex flow for asynchronous code.
 
-   Async functions were introduced as a combination of promises and generators to give us the possibility of writing asynchronous in a synchronous manner. i.e, This function is going to be declared with the `async` keyword which enable asynchronous, promise-based behavior to be written in a cleaner style by avoiding promise chains.  These functions can contain zero or more `await` expressions.
+  Async functions were introduced as a combination of promises and generators to give us the possibility of writing asynchronous in a synchronous manner. i.e, This function is going to be declared with the `async` keyword which enable asynchronous, promise-based behavior to be written in a cleaner style by avoiding promise chains.  These functions can contain zero or more `await` expressions.
 
-   Let's take a below async function example,
+  Let's take a below async function example,
 
-     ```js
-     async function logger() {
-
-       let data = await fetch('http://someapi.com/users'); // pause until fetch returns
-       console.log(data)
-     }
-     logger();
-     ```
+  ```js
+  async function logger() {
+    let data = await fetch('http://someapi.com/users'); // pause until fetch returns
+      console.log(data)
+  }
+  logger();
+  ```
      
   **[⬆ Back to Top](#table-of-contents)**
   
@@ -1268,21 +1261,21 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
    By the way, non-object argument will be coerced to an object
 
-   ```js
-    console.log(Object.values(['India', 'Singapore'])); // ['India', 'Singapore']
-    console.log(Object.values('India')); // ['I', 'n', 'd', 'i', 'a']
-   ```
+  ```js
+  console.log(Object.values(['India', 'Singapore'])); // ['India', 'Singapore']
+  console.log(Object.values('India')); // ['I', 'n', 'd', 'i', 'a']
+  ```
    
    **[⬆ Back to Top](#table-of-contents)**
    
 3. ### Object entries
    The `Object.entries()` method is introduced to returns an array of a given object's own enumerable string-keyed property [key, value] pairsin the same order as `for...in` loop.
    ```js
-       const countries = {
-         IN: 'India',
-         SG: 'Singapore',
-       }
-       Object.entries(countries) // [["IN", "India"], ["SG", "Singapore"]]
+      const countries = {
+        IN: 'India',
+        SG: 'Singapore',
+      }
+      Object.entries(countries) // [["IN", "India"], ["SG", "Singapore"]]
    ```
    By the way, non-object argument will be coerced to an object
    ```js
@@ -1346,9 +1339,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
    const value1 = "John"
    const value2 = "(222)-333-3456";
 
-   console.log((label1 + ': ').padEnd(20, ' ') + value1);
-   console.log(label2 + ": " + value2); // Name:                John
-                                        // Phone Number: (222)-333-3456
+   console.log((label1 + ': ').padEnd(20, ' ') + value1); // Name:                     John
+   console.log(label2 + ": " + value2); // Phone Number: (222)-333-3456
    ```
    
     **[⬆ Back to Top](#table-of-contents)**
@@ -1417,16 +1409,16 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 7. ### Trailing commas
    Trailing commas are  allowed in parameter definitions and function calls
    ```js
-   function func(a,b,) { // declaration
-     console.log(a, b);
-   }
+    function func(a,b,) { // declaration
+      console.log(a, b);
+    }
    func(1,2,); // invocation
    ```
    But if the function parameter definition or function call only contains a comma, a syntax error will be thrown
    ```js
-   function func1(,) {  // SyntaxError: missing formal parameter
-     console.log('no args');
-   };
+    function func1(,) {  // SyntaxError: missing formal parameter
+      console.log('no args');
+    };
    func1(,); // SyntaxError: expected expression, got ','
    ```
 
@@ -1444,11 +1436,11 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     const arr = ['a', 'b', 'c', 'd'];
     const syncIterator = arr[Symbol.iterator]();
 
-    console.log(syncIterator.next());    //{value: a, done: false}
-    console.log(syncIterator.next());    //{value: b, done: false}
-    console.log(syncIterator.next());    //{value: c, done: false}
-    console.log(syncIterator.next());    //{value: d, done: false}
-    console.log(syncIterator.next());    //{value: undefined, done: true}
+    console.log(syncIterator.next()); // {value: a, done: false}
+    console.log(syncIterator.next()); // {value: b, done: false}
+    console.log(syncIterator.next()); // {value: c, done: false}
+    console.log(syncIterator.next()); // {value: d, done: false}
+    console.log(syncIterator.next()); // {value: undefined, done: true}
    ```
 
    But these iterators are only suitable for representing synchronous data sources.
@@ -1482,7 +1474,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
        ```js
         function myfunc1({ a, ...x }) {
-            console.log(a, x); // 1, { b: 2, c: 3, d:4 }
+          console.log(a, x); // 1, { b: 2, c: 3, d:4 }
         }
         myfunc1({
           a: 1,
@@ -1507,12 +1499,12 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
    ```js
    myPromise
-       .then(result => {
-           // process the result and then clean up the resources
-       })
-       .catch(error => {
-           // handle the error and then clean up the resources
-       });
+      .then(result => {
+        // process the result and then clean up the resources
+      })
+      .catch(error => {
+        // handle the error and then clean up the resources
+      });
    ```
 
    The `finally()` method is useful if you want to do some processing or resource cleanup once the promise is settled(i.e either fulfilled or rejected).
@@ -1525,9 +1517,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
         .then(data => data.json())
         .catch(err => console.error(err))
         .finally(() => {
-            isLoading = false;
-            console.log('Finished loading!!');
-          })
+          isLoading = false;
+          console.log('Finished loading!!');
+        })
    ```
 
     **[⬆ Back to Top](#table-of-contents)**
@@ -1556,16 +1548,16 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     const flattenedArrTwoLevel = numberArray.flat(2);
     const flattenedCharArrOneLevel = charArray.flat(1);
 
-    console.log(flattenedArrOneLevel);    // [1, 2, [3], 4, 5, 6]
-    console.log(flattenedArrTwoLevel);    // [1, 2, 3, 4, 5, 6]
-    console.log(flattenedCharArrOneLevel);    // ['a', 'b', 'c', 'd', 'e']
+    console.log(flattenedArrOneLevel); // [1, 2, [3], 4, 5, 6]
+    console.log(flattenedArrTwoLevel); // [1, 2, 3, 4, 5, 6]
+    console.log(flattenedCharArrOneLevel); // ['a', 'b', 'c', 'd', 'e']
    ```
 
    Whereas, **flatMap()** method combines `map()` and `flat()` into one method.  It first creates a new array with the return value of a given function and then concatenates all sub-array elements of the array.
    ```js
    const numberArray1 = [[1], [2], [3], [4], [5]];
 
-   console.log(numberArray1.flatMap(value => [value * 10]));  // [10, 20, 30, 40, 50]
+   console.log(numberArray1.flatMap(value => [value * 10])); // [10, 20, 30, 40, 50]
    ```
    
     **[⬆ Back to Top](#table-of-contents)**
@@ -1655,15 +1647,15 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
    ```js
     // With binding parameter(<ES9)
     try {
-        ···
+      ···
     } catch (error) {
-        ···
+      ···
     }
     // Without binding parameter(ES9)
     try {
-        ···
+      ···
     } catch {
-        ···
+      ···
     }
    ```
    For example, the feature detection on a browser is one of the most common case
@@ -1671,8 +1663,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     let isTheFeatureImplemented = false;
     try {
       if(isFeatureSupported()) {
-       isTheFeatureImplemented = true;
-       }
+        isTheFeatureImplemented = true;
+      }
     } catch (unused) {}
    ```
    
@@ -1758,16 +1750,16 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 9. ### Private Class Variables
      In ES6, the classes are introduced to create reusable modules and variables are declared in clousure to make them private. Where as in ES2020, private class variables are introduced to allow the variables used in the class only. By just adding a simple hash symbol in front of our variable or function, you can reserve them entirely for internal to the class.
      ```js
-     class User {
-       #message = "Welcome to ES2020"
+      class User {
+        #message = "Welcome to ES2020"
 
-       login() { console.log(this.#message) }
-     }
+        login() { console.log(this.#message) }
+      }
 
-     const user = new User()
+      const user = new User()
 
-     user.login() // Welcome to ES2020
-     console.log(user.#message) // Uncaught SyntaxError: Private field '#
+      user.login() // Welcome to ES2020
+      console.log(user.#message) // Uncaught SyntaxError: Private field '#
      ```
 
      **Note:** As shown in the above code, If you still try to access the variable directly from the object then you will receive syntax error.
@@ -1827,30 +1819,30 @@ Most of these features already supported by some browsers and try out with babel
     <script>
     const moduleSpecifier = './message.js';
     import(moduleSpecifier)
-        .then((module) => {
-            module.default(); // Hello, default export
-            module.sayGoodBye(); //Bye, named export
-        })
-        .catch( err => console.log('loading error'));
+      .then((module) => {
+        module.default(); // Hello, default export
+        module.sayGoodBye(); //Bye, named export
+      })
+      .catch(err => console.log('loading error'));
     </script>
     ```
     ```js
     <script>
     (async function() {
-        const moduleSpecifier = './message.js';
-        const messageModule = await import(moduleSpecifier);
-        messageModule.default(); // Hello, default export
-        messageModule.sayGoodBye(); //Bye, named export
+      const moduleSpecifier = './message.js';
+      const messageModule = await import(moduleSpecifier);
+      messageModule.default(); // Hello, default export
+      messageModule.sayGoodBye(); //Bye, named export
     })();
     </script>
     ```
     and the imported module appears with both default and named exports
     ```js
     export default () => {
-       return "Hello, default export";
+      return "Hello, default export";
     }
     export const sayGoodBye = () => {
-       return "Bye, named export"
+      return "Bye, named export"
     }
     ```
 
@@ -1862,10 +1854,10 @@ Most of these features already supported by some browsers and try out with babel
     The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand when its left-hand side operand is `null` or `undefined`, and otherwise returns its left-hand side operand. This operator replaces `||` operator to provide default values if you treat empty value or '', 0 and NaN as valid values. This is because the logical OR(||) operator treats(empty value or '', 0 and NaN) as falsy values and returns the right operand value which is wrong in this case. Hence, this operator truely checks for `nullish` values instead `falsy` values.
     ```js
     let vehicle = {
-        car: {
-            name: "",
-            speed: 0
-        }
+      car: {
+        name: "",
+        speed: 0
+      }
     };
 
     console.log(vehicle.car.name || "Unknown"); // Unknown
@@ -1908,10 +1900,10 @@ Most of these features already supported by some browsers and try out with babel
     };
 
     let vehicle1 = {
-        car: {
-            name: 'ABC',
-            speed: 90
-        }
+      car: {
+        name: 'ABC',
+        speed: 90
+      }
     };
 
     console.log(vehicle.car?.name); // TypeError: Cannot read property 'name' of undefined
@@ -1937,9 +1929,9 @@ Most of these features already supported by some browsers and try out with babel
     const promise2 = new Promise((resolve, reject) => setTimeout(reject, 1000));
 
     Promise.allSettled([promise1, promise2]).then(data => console.log(data)); // [
-                                                                                 Object { status: "fulfilled", value: 100},
-                                                                                 Object { status: "rejected", reason: undefined}
-                                                                                 ]
+                                                                              // Object { status: "fulfilled", value: 100},
+                                                                              // Object { status: "rejected", reason: undefined}
+                                                                              // ]
     ```
     As per the output, each outcome object returns `status` field which denotes either "fulfilled"(value present) or "rejected"(reason present)
 
@@ -2042,14 +2034,14 @@ Most of these features already supported by some browsers and try out with babel
    ```javascript
     (async () => {
       try {
-          const output = await Promise.any([
-            Promise.reject('Error 1'),
-            Promise.reject('Error 2'),
-            Promise.reject('Error 3'),
+        const output = await Promise.any([
+          Promise.reject('Error 1'),
+          Promise.reject('Error 2'),
+          Promise.reject('Error 3'),
         ]);
         console.log(`Output: ${output}`);
       } catch (err) {
-          console.log(`Error: ${err.errors}`);
+        console.log(`Error: ${err.errors}`);
       }
     })(); 
     // Error: Error1,Error2,Error3
@@ -2070,7 +2062,7 @@ Most of these features already supported by some browsers and try out with babel
     const myObject = new WeakRef({
       name: ‘Sudheer’,
       age: 34
-      });
+    });
     console.log(myObject.deref()); //output: {name: “Sudheer”, age: 35}
     console.log(myObject.deref().name); //output: Sudheer
     ```
@@ -2144,10 +2136,10 @@ Most of these features already supported by some browsers and try out with babel
    
    The ||= operator performs the assignment only when the left operand is falsy.
    ```javascript
-      let x = 0;
-      let y = 20;
-       x ||= y;
-      console.log(x); // 20
+    let x = 0;
+    let y = 20;
+      x ||= y;
+    console.log(x); // 20
    ```
 
    The above logical assignment operation can be expanded to:
