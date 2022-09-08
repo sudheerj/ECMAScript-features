@@ -2165,7 +2165,7 @@ Most of these features already supported by some browsers and try out with babel
     The above logical assignment operation can be expanded to:
 
     ```javascript
-      x = x ?? (x = y);
+      x ?? (x = y);
       (OR)
       if (!x) {
         x = y;
