@@ -13,7 +13,7 @@ var calculation = {
     multiply(a, b) { return a * b; }
 };
 
-console.log( calculation.add(5, 3) );  // 15
+console.log( calculation.sum(5, 3) );  // 15
 console.log( calculation.multiply(5, 3) ); // 15
 
 // Computed Property Names
