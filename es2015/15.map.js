@@ -13,7 +13,7 @@ console.log(typeMap.get('10') ); // string
 console.log(typeMap.get(keyObj)) // object
 console.log(typeMap.get({'one': 1})) // undefined
 
-console.log(typeMap.size ); // 3
+console.log(typeMap.size ); // 4
 
 for(let item of typeMap) {
     console.log(item);

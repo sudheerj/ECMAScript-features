@@ -13,7 +13,7 @@ const handler = {
 
     const user = new Proxy(target, handler);
     console.log(user.name); // John
-    console.log(user.age); // John
+    console.log(user.age); // 3
     console.log(user.gender); // gender does not exist
     
 // validations
@@ -35,7 +35,7 @@ let ageValidator = {
   }
 };
 
-const person = new Proxy({}, validator);
+const person = new Proxy({}, ageValidator);
 
 person.age = 30;
 console.log(person.age); // 30

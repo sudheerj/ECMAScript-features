@@ -306,7 +306,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
       multiply: function(a, b) { return a * b; }
     };
 
-    console.log(calculation.add(5, 3));  // 8
+    console.log(calculation.sum(5, 3));  // 8
     console.log(calculation.multiply(5, 3)); // 15
     ```
 
@@ -318,7 +318,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
       multiply(a, b) { return a * b; }
     };
 
-    console.log(calculation.add(5, 3));  // 8
+    console.log(calculation.sum(5, 3));  // 8
     console.log(calculation.multiply(5, 3)); // 15
     ```
 
@@ -844,7 +844,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     const user = new Proxy(target, handler);
     console.log(user.name); // John
-    console.log(user.age); // John
+    console.log(user.age); // 3
     console.log(user.gender); // gender does not exist
     ```
 
@@ -868,7 +868,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
       }
     };
 
-    const person = new Proxy({}, validator);
+    const person = new Proxy({}, ageValidator);
 
     person.age = 30;
     console.log(person.age); // 30
@@ -1571,7 +1571,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
    ```js
         const obj = {'a': '1', 'b': '2', 'c': '3' };
         const arr = Object.entries(obj);
-        console.log(obj); // [ ['a', '1'], ['b', '2'], ['c', '3'] ]
+        console.log(arr); // [ ['a', '1'], ['b', '2'], ['c', '3'] ]
    ```
 
    But if you want to get the object back from an array then you need iterate and convert it as below,
