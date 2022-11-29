@@ -353,7 +353,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 5. ### Template literals
     Prior to ES6, JavaScript developers would need to do ugly string concatenation to creat dynamic strings.
 
-    Template literals allows you to work with strings in a new way compared to ES5. These are just string literals allowing embedded expressions denoted by the dollar sign and curly braces (${expression}). Also, these literals are enclosed by the backtick (` `) character instead of double or single quotes.
+    Template literals allows you to work with strings in a new way compared to ES5. These are just string literals allowing embedded expressions denoted by the dollar sign and curly braces (`${expression}`). Also, these literals are enclosed by the backtick (`` ` ``) character instead of double or single quotes.
 
     ES6 has two new kinds of literals:
 
@@ -745,7 +745,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(text.charCodeAt(1));    // 57271(2nd code unit)
 
     console.log(/^.$/.test(str)); // false, because length is 2
-    console.log('\u20BB7); // 7!(wrong value)
+    console.log('\u20BB7'); // 7!(wrong value)
     console.log(str === '\uD842\uDFB7'); // true
     ```
 
