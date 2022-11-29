@@ -680,14 +680,14 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     typeMap.set('10', 'string');   // a string key
     typeMap.set(10, 'number');     // a numeric key
-    typeMap.set(true, 'boolean'); // a boolean key
+    typeMap.set(true, 'boolean');  // a boolean key
     typeMap.set(keyObj, 'object'); // an object key
 
 
-    console.log(typeMap.get(10)   ); // number
-    console.log(typeMap.get('10') ); // string
-    console.log(typeMap.get(keyObj)) // object
-    console.log(typeMap.get({'one': 1})) // undefined
+    console.log(typeMap.get(10));         // number
+    console.log(typeMap.get('10'));       // string
+    console.log(typeMap.get(keyObj));     // object
+    console.log(typeMap.get({'one': 1})); // undefined
 
     console.log(typeMap.size ); // 3
 
@@ -712,8 +712,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     ```js
     var weakMap = new WeakMap();
 
-    var obj1  = {}
-    var obj2  = {}
+    var obj1 = {}
+    var obj2 = {}
 
 
     weakMap.set(obj1, 1);
@@ -738,7 +738,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     ```js
     let str = '𠮷';
 
-    console.log(str.length);             // 2
+    console.log(str.length);            // 2
     console.log(text.charAt(0));        // ""
     console.log(text.charAt(1));        // ""
     console.log(text.charCodeAt(0));    // 55362(1st code unit)
@@ -765,7 +765,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(str.codePointAt(0)); // 134071
     console.log(str.codePointAt(1)); // 57271
 
-    console.log(String.fromCodePoint(134071));  // "𠮷"
+    console.log(String.fromCodePoint(134071)); // "𠮷"
     ```
 
     **[⬆ Back to Top](#table-of-contents)**
@@ -808,8 +808,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     //3. Equality Checks
 
-    console.log(Symbol('foo') === Symbol('foo'));  // false
-    console.log(Symbol.for('foo') === Symbol.for('foo'));  // true
+    console.log(Symbol('foo') === Symbol('foo')); // false
+    console.log(Symbol.for('foo') === Symbol.for('foo')); // true
     ```
 
     **[⬆ Back to Top](#table-of-contents)**
@@ -872,7 +872,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     person.age = 30;
     console.log(person.age); // 30
-    person.age = 'old';    // Throws an exception
+    person.age = 'old';      // Throws an exception
     person.age = 200;        // Throws an exception
     ```
 
@@ -884,7 +884,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     It is in one of these states:
 
-    **pending:**  Represents initial state, neither fulfilled nor rejected.
+    **pending:** Represents initial state, neither fulfilled nor rejected.
     **fulfilled:** Indicates that the operation is completed successfully.
     **rejected:** Indicates that the operation is failed.
 
