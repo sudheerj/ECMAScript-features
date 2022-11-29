@@ -591,7 +591,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     // module "my-module.js"
 
     export default function add(...args) {
-                     return args.reduce((num, tot) => tot + num);
+      return args.reduce((num, tot) => tot + num);
     }
     ```
 
