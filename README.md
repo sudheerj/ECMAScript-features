@@ -353,7 +353,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 5. ### Template literals
     Prior to ES6, JavaScript developers would need to do ugly string concatenation to creat dynamic strings.
 
-    Template literals allows you to work with strings in a new way compared to ES5. These are just string literals allowing embedded expressions denoted by the dollar sign and curly braces (${expression}). Also, these literals are enclosed by the backtick (` `) character instead of double or single quotes.
+    Template literals allows you to work with strings in a new way compared to ES5. These are just string literals allowing embedded expressions denoted by the dollar sign and curly braces (`${expression}`). Also, these literals are enclosed by the backtick (`` ` ``) character instead of double or single quotes.
 
     ES6 has two new kinds of literals:
 
@@ -591,7 +591,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     // module "my-module.js"
 
     export default function add(...args) {
-                     return args.reduce((num, tot) => tot + num);
+      return args.reduce((num, tot) => tot + num);
     }
     ```
 
@@ -680,14 +680,14 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     typeMap.set('10', 'string');   // a string key
     typeMap.set(10, 'number');     // a numeric key
-    typeMap.set(true, 'boolean'); // a boolean key
+    typeMap.set(true, 'boolean');  // a boolean key
     typeMap.set(keyObj, 'object'); // an object key
 
 
-    console.log(typeMap.get(10)   ); // number
-    console.log(typeMap.get('10') ); // string
-    console.log(typeMap.get(keyObj)) // object
-    console.log(typeMap.get({'one': 1})) // undefined
+    console.log(typeMap.get(10));         // number
+    console.log(typeMap.get('10'));       // string
+    console.log(typeMap.get(keyObj));     // object
+    console.log(typeMap.get({'one': 1})); // undefined
 
     console.log(typeMap.size ); // 3
 
@@ -712,8 +712,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     ```js
     var weakMap = new WeakMap();
 
-    var obj1  = {}
-    var obj2  = {}
+    var obj1 = {}
+    var obj2 = {}
 
 
     weakMap.set(obj1, 1);
@@ -738,14 +738,14 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     ```js
     let str = '𠮷';
 
-    console.log(str.length);             // 2
+    console.log(str.length);            // 2
     console.log(text.charAt(0));        // ""
     console.log(text.charAt(1));        // ""
     console.log(text.charCodeAt(0));    // 55362(1st code unit)
     console.log(text.charCodeAt(1));    // 57271(2nd code unit)
 
     console.log(/^.$/.test(str)); // false, because length is 2
-    console.log('\u20BB7); // 7!(wrong value)
+    console.log('\u20BB7'); // 7!(wrong value)
     console.log(str === '\uD842\uDFB7'); // true
     ```
 
@@ -765,7 +765,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(str.codePointAt(0)); // 134071
     console.log(str.codePointAt(1)); // 57271
 
-    console.log(String.fromCodePoint(134071));  // "𠮷"
+    console.log(String.fromCodePoint(134071)); // "𠮷"
     ```
 
     **[⬆ Back to Top](#table-of-contents)**
@@ -808,8 +808,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     //3. Equality Checks
 
-    console.log(Symbol('foo') === Symbol('foo'));  // false
-    console.log(Symbol.for('foo') === Symbol.for('foo'));  // true
+    console.log(Symbol('foo') === Symbol('foo')); // false
+    console.log(Symbol.for('foo') === Symbol.for('foo')); // true
     ```
 
     **[⬆ Back to Top](#table-of-contents)**
@@ -872,7 +872,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     person.age = 30;
     console.log(person.age); // 30
-    person.age = 'old';    // Throws an exception
+    person.age = 'old';      // Throws an exception
     person.age = 200;        // Throws an exception
     ```
 
@@ -884,7 +884,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     It is in one of these states:
 
-    **pending:**  Represents initial state, neither fulfilled nor rejected.
+    **pending:** Represents initial state, neither fulfilled nor rejected.
     **fulfilled:** Indicates that the operation is completed successfully.
     **rejected:** Indicates that the operation is failed.
 
