@@ -2,10 +2,6 @@
 
 > Click :star:if you like the project. Pull Request are highly appreciated. Follow me [@SudheerJonna](https://twitter.com/SudheerJonna) for technical updates.
 
-## Downloading PDF/Epub formats
-
-You can download the PDF and Epub version of this repository from the latest run on the [actions tab](https://github.com/sudheerj/ECMAScript-cheatsheet/actions).
-
 ## How to run examples
 ```cmd
 npm install
@@ -35,6 +31,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 | ES2019 Or ES10  | June 2019 |
 | ES2020 Or ES11  | June 2020 |
 | ES2021 Or ES12  | June 2021 |
+| ES2022 Or ES13  | June 2022 |
 
 ### Table of Contents
 
@@ -106,6 +103,13 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |3  | [WeakRef](#weakref)|
 |4  | [Numeric Separators](#numeric-separators)|
 |5  | [Logical Operators](#logical-operators)|
+|   | **ES2022 Or ES13**|
+|1  | [Top level await](#top-level-await) |
+|2  | [Class fields](#class-fields) |
+|3  | [Array at()](#array-at())|
+|4  | [Error cause](#error-cause)|
+|5  | [hasOwn](#has-own)|
+|6  | [Regex match indices](#regex-match-indices)| 
 
 ## ES2015 Or ES6
 
@@ -2173,3 +2177,257 @@ Most of these features already supported by some browsers and try out with babel
     ```
 
     **[⬆ Back to Top](#table-of-contents)**
+
+## ES2022 Or ES13
+  ECMAScript 2022 or ES13 has been released in the month of June 2022 with some of important features in JavaScript.
+
+1. ### Top-level await
+
+   In ES2022, it is possible to use `await` outside of the asynchronous (async) function scope, which makes it easier to use at the module level. This feaure delays the execution of current and parent modules until the imported module is loaded.
+
+   Let's take an example of `await` usage prior to ES2022,
+
+   ```javascript
+    import posts from './posts';
+
+    const getPosts = async() => {
+      let posts = await posts();
+      return posts;
+    }
+   ```
+
+   The usage of `await` is straightword with ES2022 as below,
+
+   ```javascript
+   let posts = await posts();
+   ```
+
+   There are few use cases to know the benefits of this top-level await.
+
+   #### Usecases
+
+   1. **Dynamic dependency pathing:**
+      When you have a dynamic path for a dependency that depends on a runtime value, then await is helpful to load or import the messages at runtime.
+     ```javascript
+     const messages = await import(`./messages-${language}.js`);
+     ```
+   2. **Dependency fallbacks:**
+     If the imported module is failed to load, then fallback module loaded used to load the dependency.
+     ```javascript
+     let lodash;
+      try {
+        lodash = await import('https://first.domain.com/lodash');
+      } catch {
+        lodash = await import('https://second.domain.com/lodash');
+      }
+     ```
+
+   3. **Resource initialization:**
+      This feature can be used to initialize an app with Database.
+
+      ```javascript
+      import { dbConnector} from './dbUtils.js'
+      //connect to database
+      const connection = await dbConnector.connect();
+      export default function(){ 
+        connection.list()
+      }
+      ```
+
+   **[⬆ Back to Top](#table-of-contents)**
+
+2. ### Class fields
+
+   ES2015 introduced classes to javascript and class properties are defined in the constructor. In the below example, the Employee class has two fields defined in the constructor.
+
+   ```javascript
+    class Employee  {
+    
+    constructor() {
+      this.name = "John"; //public
+      this._age=35; //private
+    }
+
+    const employee = new Employee();
+    employee.name = "Jack";
+    employee._age =35; //No error
+   ```
+
+    In the above example, the private `_age` property can be accessed and modified outside of the class. The prefix `_` is just a naming convention for private field and won't enforce any strict rule.
+
+    ES2022 introduced private and static fields to the classes.
+
+   1. **Public and private fields or methods:**
+    ES2022 introduced public and private properties or methods like other programming languages. These properties and methods can be defined outside the constructor and private fields prefixed with # symbol followed by variable name.
+
+    In the below example, the Employee class has been defined with private variable outside the constructor.
+
+     ```javascript
+     class Employee  {
+        name = "John";
+        #age=35;
+       constructor() {
+        }
+
+        #getAge() {
+          return #age
+        }
+      
+     }
+
+      const employee = new Employee();
+      employee.name = "Jack";
+      employee.#age = 35; // Throws an error
+    ```
+
+   2. **Static fields and methods:**
+
+      Static fields and methods are applied to the class level and they can be accessed without an instance of a class. These fields and methods declared with `static` keyword
+
+      Let's define a employee class with static field and methods declated with `static` keyword.
+
+      ```javascript
+      class Employee{
+        name = "John";
+        static #employerName="Github"
+
+        static #getEmployerName() {
+          return #employerName
+        }
+      }
+      const employee = new Employee();
+      employee.emp = "Jack";
+      employee.#employerName = 35; // Throws an error
+
+    ```
+**[⬆ Back to Top](#table-of-contents)**
+
+3. ### Array .at() method
+   The `.at()` method is used to access an array or string elements by passing the negative index value. i.e, It allows accessing values from the end of an array or from a string. 
+
+   Before ES2022, You should have to access the elements from the end as below,
+
+   ```javascript
+   const array = [1, 2, 3, 4, 5];
+   console.log(array[array.length - 2]); //4
+   console.log(array.slice(-2)[0]); //4
+
+   const string = '12345';
+   console.log(string[string.length - 2]); // '4'
+   console.log(string.slice(-2)[0]); // '4'
+   ```
+
+   Now you should be able to write:
+
+   ```javascript
+   const array = [1, 2, 3, 4, 5];
+   console.log(array.at(-2)); // 4
+
+   const string = '12345';
+   console.log(string.at(-2));
+   ```
+
+   **[⬆ Back to Top](#table-of-contents)**
+
+4. ### Error Cause
+
+   The `cause` property is added to the Error() constructor as an extra parameter which allow errors to be chained similar to Java-like stack traces in error chains.
+
+   In the below example, let's catch an error from JSON processing and re-throw it with a new meaningful message along with the original cause of the error.
+
+   ```javascript
+   function processUserData(arrayData) {
+      return arrayData.map(data => {
+          try {
+            const json = JSON.parse(data);
+            return json;
+          } catch (err) {
+            throw new Error(
+              `Data processing failed`,
+              {cause: err}
+            );
+          }
+        });
+    }
+   ```
+
+   **[⬆ Back to Top](#table-of-contents)**
+
+5. ### hasOwn
+   
+   The new `Object.hasOwn()` method is a replacement or improved version of `Object.prototype.hasOwnProperty`. It is a static method that returns true if the specified object has the indicated property as its own property. If the property is inherited, or does not exist, the method returns false.
+   
+   It's not only more concise and readable but also overcomes the below limitations of `hasOwnProperty`.
+
+   1. **When `hasOwnProperty`overwritten:**
+
+      There are cases where you need to define customized `hasOwnProperty` on the object. When you try to apply `hasOwnProperty` to determine the own property or not, it throws an error as shown in below example.
+
+      ```javascript
+      const user = {
+        age: 35, 
+        hasOwnProperty: ()=> {
+          return false;
+        }
+      };
+
+      user.hasOwnProperty('age') // throws a TypeError
+      ```
+
+      This issue can be solved by hasOwn method .
+
+      ```javascript
+      const user = {
+        age: 35, 
+        hasOwnProperty: ()=> {
+          return false;
+        }
+      };
+
+      user.hasOwn('age') // true
+      ```
+
+   2. **Create an object with create(null) function:**
+
+     If you create new object with help of create(null) function, then newly created object doesn’t inherit from Object.prototype. So it doesn't have hasOwnProperty method. 
+     
+     Let's take an example to verify hasOwnProperty on an object created with create(null) function.
+     ```javascript
+     const user = Object.create(null);
+     user.age = 35;
+     user.hasOwnProperty('age'); // throws a TypeError
+     ```
+
+     In this case, hasOwn() method can be used to determine the own property.
+
+     ```javascript
+      const user = Object.create(null);
+      user.age = 35;
+      user.hasOwn('age'); // true
+     ```
+
+   **[⬆ Back to Top](#table-of-contents)**
+
+6. ### Regex match indices
+
+   Regex match has been upgraded to include more information about the matching groups. The additional information includes starting and ending indices of matches in a RegExp with the usage of `\d` flag in the input string.
+
+   Let's take an example of regex pattern on the input string without `\d` flag and the information of the matches.
+
+   ```javascript
+    const regexPatter = /Jack/g;
+    const input = 'Authos: Jack, Alexander and Jacky';
+    const result = [...input.matchAll(regexPatter)];
+    console.log(result[0]); // ['Jack', index: 8, input: 'Authos: Jack, Alex and Jacky', groups: undefined]
+   ```
+
+   Whereas `\d` flag provides an additional array with the indices of the different elements that match the regex,
+
+  ```javascript
+    const regexPatter = /(Jack)/gd;
+    const input = 'Authos: Jack, Alexander and Jacky';
+    const result = [...input.matchAll(regexPatter)];
+    console.log(result[0]); // ['Jack', 'Jack', index: 8, input: 'Authos: Jack, Alexander and Jacky', groups: undefined, indices: Array(2)]
+   ```
+
+   **[⬆ Back to Top](#table-of-contents)**
