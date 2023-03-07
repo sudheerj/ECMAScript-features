@@ -1910,7 +1910,7 @@ Most of these features already supported by some browsers and try out with babel
       }
     };
 
-    console.log(vehicle.car?.name); // TypeError: Cannot read property 'name' of undefined
+    console.log(vehicle.car.name); // TypeError: Cannot read property 'name' of undefined
 
     console.log(vehicle.car?.name); // Undefined
     console.log(vehicle.car?.speed); // Undefined
