@@ -2455,15 +2455,15 @@ Most of these features already supported by some browsers and try out with babel
    console.log(reverseNumbers.find(isOdd)); // 5
    console.log(reverseNumbers.findIndex(isOdd)); // 4
    ```
-  This process is going to be simiplified in ES2023 release using **findLast()** and **findLastIndex()** methods.
+   This process is going to be simiplified in ES2023 release using **findLast()** and **findLastIndex()** methods.
 
-  ```javascript
-  const isOdd = (number) => number % 2 === 1;
-  const numbers = [1, 2, 3, 4, 5];
+   ```javascript
+   const isOdd = (number) => number % 2 === 1;
+   const numbers = [1, 2, 3, 4, 5];
 
-  console.log(numbers.findLast(isOdd)); // 5
-  console.log(numbers.findLastIndex(isOdd)); // 4
-  ```
+   console.log(numbers.findLast(isOdd)); // 5
+   console.log(numbers.findLastIndex(isOdd)); // 4
+   ```
 
 2. ### hashbang-syntax
    Hashbang(as known as shebang) grammer has been supported with a sequence of characters(#!) at the beginning of an executable script to define the interpreter for the program to run. In other words, this syntax is helpful to tell the operating system which interpreter to use while executing the script.
@@ -2474,6 +2474,7 @@ Most of these features already supported by some browsers and try out with babel
    'use strict';
    console.log("Hello world from hashbang syntax");
    ```
+
 3. ### symbols-as-weakmap-keys
    Prior to ES2023, WeakMaps are only limited to allow objects as keys because objects are unique and cannot be re-created. Since symbols are the only primitives in ECMAScript that allows unique values, WeakMap API has been extended with symbols as keys instead of just using objects.
 
@@ -2493,6 +2494,7 @@ Most of these features already supported by some browsers and try out with babel
 
     console.log(weak.get(key)); //ES2023
    ```
+   
 4. ### change-array-by-copy
    Both **Array** and **TypedArray** has built-in methods such as **reverse()**, **sort()** and **splice()** to perform common actions like sorting, reverse the array elements and replacing(or removing) elements. But these methods are mutating the original array. Where as ES2023 has provided additional methods such as **toReversed()**, **toSorted()**, **toSpliced** and **with()** methods which returns new array copies instead of mutating the original array.
 
