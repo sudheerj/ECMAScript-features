@@ -32,6 +32,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 | ES2020 Or ES11  | June 2020 |
 | ES2021 Or ES12  | June 2021 |
 | ES2022 Or ES13  | June 2022 |
+| ES2023 Or ES14  | June 2023 |
 
 ### Table of Contents
 
@@ -110,6 +111,11 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |4  | [Error cause](#error-cause)|
 |5  | [hasOwn](#has-own)|
 |6  | [Regex match indices](#regex-match-indices)| 
+|   | **ES2023 Or ES14**|
+|1  | [Find array from last](#find-array-from-last) |
+|2  | [Hashbang syntax](#hashbang-syntax) |
+|3  | [Symbols as WeakMap keys](#symbols-as-weakmap-keys)|
+|4  | [Change Array by Copy](#change-array-by-copy)|
 
 ## ES2015 Or ES6
 
@@ -2428,6 +2434,91 @@ Most of these features already supported by some browsers and try out with babel
     const input = 'Authos: Jack, Alexander and Jacky';
     const result = [...input.matchAll(regexPatter)];
     console.log(result[0]); // ['Jack', 'Jack', index: 8, input: 'Authos: Jack, Alexander and Jacky', groups: undefined, indices: Array(2)]
+   ```
+
+   **[⬆ Back to Top](#table-of-contents)**
+
+## ES2023 Or ES14
+  ECMAScript 2023 or ES14 has been released in the month of June 2023 with some of important features like adding new methods for searching and altering the arrays, supporting symbols as keys for WeakMap API and standardizing the hashbang syntax in JavaScript.
+
+1. ### find-array-from-last
+
+   This release introduced two new array methods named **findLast()** and **findLastIndex()** to search an array element from the last. Their functionality is similar to **find()** and **findIndex()** but searching starts from the end of an array. These methods are available on **Array** and **TypedArray** prototypes. This feature provides an efficient way for reverse order search by eliminating the process of manual array reversal.
+
+   For example, let's see the usage of finding odd elements from end of an array prior to ES2023. There are no direct methods available to search element from end of an array. Hence, the array needs to be reversed first before applying **first()** and **firstIndex()** methods.
+
+   ```javascript
+   const isOdd = (number) => number % 2 === 1;
+   const numbers = [1, 2, 3, 4, 5];
+   const reverseNumbers = [5, 4, 3, 2, 1];
+
+   console.log(reverseNumbers.find(isOdd)); // 5
+   console.log(reverseNumbers.findIndex(isOdd)); // 4
+   ```
+  This process is going to be simiplified in ES2023 release using **findLast()** and **findLastIndex()** methods.
+
+  ```javascript
+  const isOdd = (number) => number % 2 === 1;
+  const numbers = [1, 2, 3, 4, 5];
+
+  console.log(numbers.findLast(isOdd)); // 5
+  console.log(numbers.findLastIndex(isOdd)); // 4
+  ```
+
+2. ### hashbang-syntax
+   Hashbang(as known as shebang) grammer has been supported with a sequence of characters(#!) at the beginning of an executable script to define the interpreter for the program to run. In other words, this syntax is helpful to tell the operating system which interpreter to use while executing the script.
+
+   For example, the below javacript file will be executed in NodeJS interpreter from Unix commandline.
+   ```javascript
+   #!/usr/bin/env node
+   'use strict';
+   console.log("Hello world from hashbang syntax");
+   ```
+3. ### symbols-as-weakmap-keys
+   Prior to ES2023, WeakMaps are only limited to allow objects as keys because objects are unique and cannot be re-created. Since symbols are the only primitives in ECMAScript that allows unique values, WeakMap API has been extended with symbols as keys instead of just using objects.
+
+   As an example, the usage of WeakMap with objects as keys prior to ES2023 looks like below
+   ```javascript
+    const weak = new WeakMap();
+    const objKey = { x:10 };
+
+    weak.set(objKey, "ES2023");
+    console.log(weak.get(objKey)); //ES2023
+   ```
+   In ES2023, it is possible to use symbols as keys
+   ```javascript
+    const weak = new WeakMap();
+    const key = Symbol("ref");
+    weak.set(key, "ES2023"); 
+
+    console.log(weak.get(key)); //ES2023
+   ```
+4. ### change-array-by-copy
+   Both **Array** and **TypedArray** has built-in methods such as **reverse()**, **sort()** and **splice()** to perform common actions like sorting, reverse the array elements and replacing(or removing) elements. But these methods are mutating the original array. Where as ES2023 has provided additional methods such as **toReversed()**, **toSorted()**, **toSpliced** and **with()** methods which returns new array copies instead of mutating the original array.
+
+   For example, these additional methods returns new array copies for number array without mutating the original array as shown below,
+   ```javascript
+    const numbers = [1, 3, 2, 4, 5];
+
+    // toReversed
+    const reversedArray = numbers.toReversed();
+    console.log(reversedArray); // [5, 4, 2, 3, 1]
+    console.log(numbers); // [1, 3, 2, 4, 5]
+
+    // toSorted
+    const sortedArray = numbers.toSorted();
+    console.log(sortedArray); // [1, 2, 3, 4, 5]
+    console.log(numbers); // [1, 3, 2, 4, 5]
+
+    // toSpliced
+    const splicedArray = numbers.toSpliced(1, 3);
+    console.log(splicedArray); // [1, 5]
+    console.log(numbers); // [1, 3, 2, 4, 5]
+
+    // with
+    const replaceWithArray = numbers.with(2, 10);
+    console.log(replaceWithArray); // [1, 3, 10, 4, 5]
+    console.log(numbers); // [1, 3, 2, 4, 5]
    ```
 
    **[⬆ Back to Top](#table-of-contents)**
