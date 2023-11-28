@@ -489,7 +489,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     An iterator implements the Iterator protocol by having a next() method that returns an object with two properties:
 
     1. **value:** The next value in the iteration sequence.
-    2. **done:** returns rue if the last value in the sequence has already been consumed.
+    2. **done:** returns true if the last value in the sequence has already been consumed.
 
     You can make the object iterable by defining a `Symbol.iterator` property on it.
 
