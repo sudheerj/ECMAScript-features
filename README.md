@@ -116,6 +116,15 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |2  | [Hashbang syntax](#hashbang-syntax) |
 |3  | [Symbols as WeakMap keys](#symbols-as-weakmap-keys)|
 |4  | [Change Array by Copy](#change-array-by-copy)|
+|   | **ES2024 Or ES15**|
+|1  | [GroupBy into objects and maps](#groupby-into-objects-and-maps) |
+|2  | [Temporal API](#temporal-api) |
+|3  | [Well formed unicode strings](#well-formed-unicode-strings) |
+|4  | [Atomic waitSync](#atomic-waitsync) |
+|5  | [RegEx v Flag and string properties](#regEx-v-flag-and-string-properties) |
+|6  | [Pipeline Operator](#pipeline-operator) |
+|7  | [Records and Tuples](#records-and-tuples) |
+|8  | [Decorators](#decorators) |
 
 ## ES2015 Or ES6
 
@@ -2441,7 +2450,7 @@ Most of these features already supported by some browsers and try out with babel
 ## ES2023 Or ES14
   ECMAScript 2023 or ES14 has been released in the month of June 2023 with some of important features like adding new methods for searching and altering the arrays, supporting symbols as keys for WeakMap API and standardizing the hashbang syntax in JavaScript.
 
-1. ### find-array-from-last
+1. ### Find array from last
 
    This release introduced two new array methods named **findLast()** and **findLastIndex()** to search an array element from the last. Their functionality is similar to **find()** and **findIndex()** but searching starts from the end of an array. These methods are available on **Array** and **TypedArray** prototypes. This feature provides an efficient way for reverse order search by eliminating the process of manual array reversal.
 
@@ -2465,7 +2474,7 @@ Most of these features already supported by some browsers and try out with babel
    console.log(numbers.findLastIndex(isOdd)); // 4
    ```
 
-2. ### hashbang-syntax
+2. ### Hashbang syntax
    Hashbang(as known as shebang) grammer has been supported with a sequence of characters(#!) at the beginning of an executable script to define the interpreter for the program to run. In other words, this syntax is helpful to tell the operating system which interpreter to use while executing the script.
 
    For example, the below javacript file will be executed in NodeJS interpreter from Unix commandline.
@@ -2475,7 +2484,7 @@ Most of these features already supported by some browsers and try out with babel
    console.log("Hello world from hashbang syntax");
    ```
 
-3. ### symbols-as-weakmap-keys
+3. ### Symbols as weakmap keys
    Prior to ES2023, WeakMaps are only limited to allow objects as keys because objects are unique and cannot be re-created. Since symbols are the only primitives in ECMAScript that allows unique values, WeakMap API has been extended with symbols as keys instead of just using objects.
 
    As an example, the usage of WeakMap with objects as keys prior to ES2023 looks like below
@@ -2495,7 +2504,7 @@ Most of these features already supported by some browsers and try out with babel
     console.log(weak.get(key)); //ES2023
    ```
    
-4. ### change-array-by-copy
+4. ### Change array by copy
    Both **Array** and **TypedArray** has built-in methods such as **reverse()**, **sort()** and **splice()** to perform common actions like sorting, reverse the array elements and replacing(or removing) elements. But these methods are mutating the original array. Where as ES2023 has provided additional methods such as **toReversed()**, **toSorted()**, **toSpliced** and **with()** methods which returns new array copies instead of mutating the original array.
 
    For example, these additional methods returns new array copies for number array without mutating the original array as shown below,
@@ -2524,3 +2533,90 @@ Most of these features already supported by some browsers and try out with babel
    ```
 
    **[⬆ Back to Top](#table-of-contents)**
+
+## ES2024 or ES15
+
+   ES2024 is planned to be release in June 2024 with a couple of features and enhancements for the developers to make coding in JavaScript more efficient, readable, and robust.
+
+1. ### GroupBy into objects and maps:
+
+   The `Object.groupBy()` method is used to group object elements of an iterable(like array) based on string values returned from a callback function. It returns an object with each group name as key and respective array of elements as value. The elements in the returned object and the original object are the same. i.e, If you change the internal structure of the elements, it will be reflected in both original and returned object. 
+
+   In the following example, persons are into categories into several groups based on their age.
+
+   ```javascript
+    const persons = [
+      {name:"John", age:70},
+      {name:"Kane", age:5},
+      {name:"Jack", age:50},
+      {name:"Rambo", age:15}
+    ];
+
+    // Callback function to categorize people based on age 
+    function callbackFunc({ age }) {
+      if(age >= 60) {
+          return "senior";
+      } else if(age > 17 && age < 60) {
+          return "adult";
+      }
+      else {
+          return "kid";
+      }
+    }
+
+    const result = Object.groupBy(persons, callbackFunc);
+
+    console.log("Kids: ");
+    for (let [x,y] of result.kid.entries()) {
+      console.log(y.name + " " + y.age);
+    }
+
+    console.log("Adults: ");
+    for (let [x,y] of result.adult.entries()) {
+      console.log(y.name + " " + y.age);
+    }
+
+    console.log("Seniors: ");
+    for (let [x,y] of result.senior.entries()) {
+      console.log(y.name + " " + y.age);
+    }
+   ```
+   The `Map.groupBy()` method is also used to group elements of an object but the result is in the form of a map.
+
+   ```javascript
+    const persons = [
+      {name:"John", age:70},
+      {name:"Kane", age:5},
+      {name:"Jack", age:50},
+      {name:"Rambo", age:15}
+    ];
+
+    // Callback function to categorize people based on age 
+    function callbackFunc({ age }) {
+      if(age >= 60) {
+          return "senior";
+      } else if(age > 17 && age < 60) {
+          return "adult";
+      }
+      else {
+          return "kid";
+      }
+    }
+
+    const result = Map.groupBy(persons, callbackFunc);
+
+    console.log("Kids: ");
+    for (let x of result.get("kid")) {
+      console.log(x.name + " " + x.age);
+    }
+
+    console.log("Adults: ");
+    for (let x of result.get("adult")) {
+      console.log(x.name + " " + x.age);
+    }
+
+    console.log("Seniors: ");
+    for (let x of result.get("senior")) {
+      console.log(x.name + " " + x.age);
+    }
+   ``` 
