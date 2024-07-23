@@ -2619,4 +2619,92 @@ Most of these features already supported by some browsers and try out with babel
     for (let x of result.get("senior")) {
       console.log(x.name + " " + x.age);
     }
-   ``` 
+   ```
+
+   2. ### Temporal API
+
+      The Temporal API is a modern API for working with dates and times, used to supersede the original Date API. It provides a more comprehensive and user-friendly way to handle date and time manipulation.
+
+   3. ### Well formed unicode strings
+      Unicode strings are mainly used for representing a wide range of characters from different languages and symbols. In UTF-16, strings which contain lone surrogates(16-bit Code Unit) are considered as "malformed" or "not well formatted". These lone surrogates can be of two types,
+
+        1. **Leading surrogates:** Range between `0XD800` to `0XDBFF`
+        2. **Trailing Surrogate:** Range between `0XDC00` to `0XDFFF`
+
+      Well-Formed Unicode Strings feature introduced below two string methods to check and convert into wellformed strings.
+
+      1. **String.prototype.isWellFormed:**
+        This method is used to check if the string contains lone surrogates or not. Returns `true`, if unicode string is not present. The following stings can be verified either as well-formed or not well-formed strigns,
+
+        ```javascript
+        const str1 = "Hello World \uD815";
+        const str2 = "Welcome to ES2024";
+        const str3 = "Welcome to ES2024 😀";
+
+        console.log(str1.isWellFormed()); // false
+        console.log(str2.isWellFormed()); // true
+        console.log(str2.isWellFormed()); // true
+        ```
+
+        **Note:** Emojis are considered as well-formed unicode strings.
+
+      2. **String.prototype.toWellFormed:**
+         This method is used to return a string by converting unpaired surrogate(i.e, leading and trailing surrogates) code points with `U+FFFD` Replacement characters.
+
+        ```javascript
+        const str1 = "Hello World \uD815";
+        const str2 = "Welcome to ES2024";
+
+        console.log(str1.toWellFormed()); // Hello World �
+        console.log(str2.toWellFormed()); // Welcome to ES2024
+        ```
+
+        These two methods are mainly helpful for developers to work with string encoding without any errors. For example, the below encoding process throws an error due to lone surrogates,
+
+        ```javascript
+        const url = "https://somedomain.com/query=\uD423";
+
+        try {
+          console.log(encodeURI(url));
+        } catch (e) {
+          console.log('Error:', e.message); // Expected: URIError: URI malformed
+        }
+        ```
+
+        After applying `toWellFormed()` method, the lone surrogate is replaced with the Unicode replacement character (U+FFFD). It make sure `encodeURI()` is processed without errors.
+
+        ```javascript
+          console.log(encodeURI(url.toWellFormed())); // https://somedomain.com/query=%ED%90%A3
+        ```
+   4. ### Atomic waitSync
+      The `Atomics.waitAsync()` is a static method that waits asynchronously on a shared memory location and returns a Promise. It is non-blocking as compared to `Atomics.wait()` and can be used on the main thread. The syntax looks like below,
+
+      ```javascript
+      Atomics.waitAsync(typedArray, ind, val, timeOut);
+      ```
+      If the promise is not fulfilled then it will lead to a 'time-out' status otherwise the status will always be 'ok' once the promise has been fulfilled.
+
+      Let's take a shared Int32Array. Here it waits asynchrously for position 0 and expects a result 0 waiting for 500ms.
+
+      ```javascript
+      const arrayBuffer = new SharedArrayBuffer(1024);
+      const arr = new Int32Array(arrayBuffer);
+
+      Atomics.waitAsync(arr, 0 , 0 , 500); // { async: true, value: Promise {<pending>}}
+
+      Atomics.notify(arr, 0); // { async: true, value: Promise {<fulfilled>: 'ok'} }
+      ```
+      After that, the notify method awakes the waiting agent(i.e, array) that are sleeping in waiting queue and the promise is fulfilled.
+
+      Remember that, SharedArrayBuffer have been disabled on most browsers unless you specify `Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy` headers. For example, 
+     
+      `
+      Cross-Origin-Opener-Policy: same-origin
+      Cross-Origin-Embedder-Policy: require-corp
+      `
+
+      **Note:** There will be a TypeError if typedArray is not an **Int32Array** or **BigInt64Array** that views a SharedArrayBuffer.
+
+   5. ### RegEx v Flag and string properties
+
+   **[⬆ Back to Top](#table-of-contents)**
