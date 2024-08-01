@@ -122,9 +122,10 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |3  | [Well formed unicode strings](#well-formed-unicode-strings) |
 |4  | [Atomic waitSync](#atomic-waitsync) |
 |5  | [RegEx v Flag and string properties](#regEx-v-flag-and-string-properties) |
-|6  | [Pipeline Operator](#pipeline-operator) |
-|7  | [Records and Tuples](#records-and-tuples) |
-|8  | [Decorators](#decorators) |
+|6 |  [Promise withResolvers](#promise-withResolvers) |
+|7  | [Pipeline Operator](#pipeline-operator) |
+|8  | [Records and Tuples](#records-and-tuples) |
+|9  | [Decorators](#decorators) |
 
 ## ES2015 Or ES6
 
@@ -2706,5 +2707,38 @@ Most of these features already supported by some browsers and try out with babel
       **Note:** There will be a TypeError if typedArray is not an **Int32Array** or **BigInt64Array** that views a SharedArrayBuffer.
 
    5. ### RegEx v Flag and string properties
+   6. ### Promise withResolvers
+      When you are creating a new Promise object, usually you pass `resolve` and `reject` functions to the executor of promise constructor as shown below:
+   
+      ```javascript
+      const promise = new Promise((resolve, reject) =>{
+          setTimeout(() =>  { Math.random() > 0.5 ? resolve("Success") : reject("Error")}, 1000);
+        });
+      promise.then(result => console.log(result)).catch(error => console.error(error));
+      ```
+
+      In this constructor pattern, it is possile call the `resolve` and `reject` functions inside the promise constructor only. But if you want these functions outside of the promise constructor, you often have to write the following boilerplate code.
+
+      ```javascript
+      let resolve, reject;
+      const promise = new Promise((res, rej) => {
+        resolve = res;
+        reject = rej;
+      });
+
+      setTimeout(() =>  { Math.random() > 0.5 ? resolve("Success") : reject("Error")}, 1000);
+      promise.then(result => console.log(result)).catch(error => console.error(error));
+      ```
+
+      The above code is simplified with `Promise.withResolvers()` in ES2024, it's a static method factory that returns an object containing a new Promise along with two functions one for resolve and other one for reject. These two functions corresponding to the two parameters passed to the executor of the Promise() constructor shown in the initial code snippets. 
+
+      The concise version of earlier code snippet looks like below,
+
+      ```javascript
+      const { promise, resolve, reject} = Promise.withResolvers();
+
+      setTimeout(() =>  { Math.random() > 0.5 ? resolve("Success") : reject("Error")},1000);
+      promise.then(result => console.log(result)).catch(error => console.error(error));
+      ```
 
    **[⬆ Back to Top](#table-of-contents)**
