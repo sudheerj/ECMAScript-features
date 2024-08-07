@@ -48,7 +48,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |7  | [Default parameters](#default-parameters) |
 |8  | [Rest parameter](#rest-parameter) |
 |9  | [Spread Operator](#spread-operator) |
-|10 | [Iterators & For..of](#iterators-&-forof) |
+|10 | [Iterators & For..of](#iterators--forof) |
 |11 | [Generators](#generators) |
 |12 | [Modules](#modules) |
 |13 | [Set](#set) |
@@ -62,7 +62,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |21 | [Reflect](#reflect) |
 |22 | [Binary and Octal](#binary-and-octal) |
 |23 | [Proper Tail calls](#proper-tail-calls)|
-|24 | [Array find methods](#array-find-methods)
+|24 | [Array find methods](#array-find-methods) |
 |   | **ES2016 Or ES7** |
 |1  | [Array includes](#array-includes) |
 |2  | [Exponentiation Operator](#exponentiation-operator) |
@@ -80,13 +80,13 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |3  | [Promise finally](#promise-finally) |
 |   | **ES2019 Or ES10**|
 |1  | [Array flat and flatMap](#array-flat-and-flatmap) |
-|2  | [Object formEntries](#object-formentries) |
+|2  | [Object fromEntries](#object-fromentries) |
 |3  | [String trimStart and trimEnd](#string-trimstart-and-trimend) |
 |4  | [Symbol description](#symbol-description)|
 |5  | [Optional Catch Binding](#optional-catch-binding)|
 |6  | [JSON Improvements](#json-improvements)|
 |7  | [Array Stable Sort](#array-stable-sort)|
-|8  | [Function.toString()](#functiontostring())|
+|8  | [Function.toString()](#functiontostring)|
 |9  | [Private Class Variables](#private-class-variables)|
 |   | **ES2020 Or ES11**|
 |1  | [BigInt](#bigint) |
@@ -107,9 +107,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |   | **ES2022 Or ES13**|
 |1  | [Top level await](#top-level-await) |
 |2  | [Class fields](#class-fields) |
-|3  | [Array at()](#array-at())|
+|3  | [Array .at() method](#array-at-method)|
 |4  | [Error cause](#error-cause)|
-|5  | [hasOwn](#has-own)|
+|5  | [hasOwn](#hasown)|
 |6  | [Regex match indices](#regex-match-indices)| 
 |   | **ES2023 Or ES14**|
 |1  | [Find array from last](#find-array-from-last) |
