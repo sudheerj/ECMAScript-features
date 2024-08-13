@@ -33,6 +33,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 | ES2021 Or ES12  | June 2021 |
 | ES2022 Or ES13  | June 2022 |
 | ES2023 Or ES14  | June 2023 |
+| ES2024 Or ES15  | June 2024 |
 
 ### Table of Contents
 
@@ -1623,7 +1624,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
    **[⬆ Back to Top](#table-of-contents)**
 
 3. ### String trimStart and trimEnd
-   In order to make consistency with padStart/padEnd, ES2019 provided the standard functions named as `trimStart` and `trimEnd` to trim white spaces on the beginning and ending of a string. However for web compatilibity(avoid any breakage) `trimLeft` and `trimRight` will be an alias for `trimStart` and `trimEnd` respectively.
+   In order to make consistency with padStart/padEnd, ES2019 provided the standard functions named as `trimStart` and `trimEnd` to trim white spaces on the beginning and ending of a string. However for web compatibility(avoid any breakage) `trimLeft` and `trimRight` will be an alias for `trimStart` and `trimEnd` respectively.
 
    Let's see the usage with an example,
    ```js
@@ -1871,7 +1872,7 @@ Most of these features already supported by some browsers and try out with babel
    **[⬆ Back to Top](#table-of-contents)**
 
 3. ### Nullish Coalescing Operator
-    The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand when its left-hand side operand is `null` or `undefined`, and otherwise returns its left-hand side operand. This operator replaces `||` operator to provide default values if you treat empty value or '', 0 and NaN as valid values. This is because the logical OR(||) operator treats(empty value or '', 0 and NaN) as falsy values and returns the right operand value which is wrong in this case. Hence, this operator truely checks for `nullish` values instead `falsy` values.
+    The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand when its left-hand side operand is `null` or `undefined`, and otherwise returns its left-hand side operand. This operator replaces `||` operator to provide default values if you treat empty value or '', 0 and NaN as valid values. This is because the logical OR(||) operator treats(empty value or '', 0 and NaN) as falsy values and returns the right operand value which is wrong in this case. Hence, this operator truly checks for `nullish` values instead `falsy` values.
     ```js
     let vehicle = {
       car: {
@@ -2300,7 +2301,7 @@ Most of these features already supported by some browsers and try out with babel
 
       Static fields and methods are applied to the class level and they can be accessed without an instance of a class. These fields and methods declared with `static` keyword
 
-      Let's define a employee class with static field and methods declated with `static` keyword.
+      Let's define a employee class with static field and methods declared with `static` keyword.
 
       ```javascript
       class Employee{
@@ -2476,9 +2477,9 @@ Most of these features already supported by some browsers and try out with babel
    ```
 
 2. ### Hashbang syntax
-   Hashbang(as known as shebang) grammer has been supported with a sequence of characters(#!) at the beginning of an executable script to define the interpreter for the program to run. In other words, this syntax is helpful to tell the operating system which interpreter to use while executing the script.
+   Hashbang(as known as shebang) grammar has been supported with a sequence of characters(#!) at the beginning of an executable script to define the interpreter for the program to run. In other words, this syntax is helpful to tell the operating system which interpreter to use while executing the script.
 
-   For example, the below javacript file will be executed in NodeJS interpreter from Unix commandline.
+   For example, the below javascript file will be executed in NodeJS interpreter from Unix commandline.
    ```javascript
    #!/usr/bin/env node
    'use strict';
@@ -2626,6 +2627,14 @@ Most of these features already supported by some browsers and try out with babel
 
       The Temporal API is a modern API for working with dates and times, used to supersede the original Date API. It provides a more comprehensive and user-friendly way to handle date and time manipulation.
 
+      It contains the following core objects,
+      1. Temporal.PlainDate
+      2. Temporal.PlainTime
+      3. Temporal.PlainDateTime
+      4. Temporal.PlainYearMonth
+      5. Temporal.PlainMonthDay
+      6. Temporal.ZonedDateTime
+
    3. ### Well formed unicode strings
       Unicode strings are mainly used for representing a wide range of characters from different languages and symbols. In UTF-16, strings which contain lone surrogates(16-bit Code Unit) are considered as "malformed" or "not well formatted". These lone surrogates can be of two types,
 
@@ -2685,7 +2694,7 @@ Most of these features already supported by some browsers and try out with babel
       ```
       If the promise is not fulfilled then it will lead to a 'time-out' status otherwise the status will always be 'ok' once the promise has been fulfilled.
 
-      Let's take a shared Int32Array. Here it waits asynchrously for position 0 and expects a result 0 waiting for 500ms.
+      Let's take a shared Int32Array. Here it waits asynchronously for position 0 and expects a result 0 waiting for 500ms.
 
       ```javascript
       const arrayBuffer = new SharedArrayBuffer(1024);
@@ -2717,7 +2726,7 @@ Most of these features already supported by some browsers and try out with babel
       promise.then(result => console.log(result)).catch(error => console.error(error));
       ```
 
-      In this constructor pattern, it is possile call the `resolve` and `reject` functions inside the promise constructor only. But if you want these functions outside of the promise constructor, you often have to write the following boilerplate code.
+      In this constructor pattern, it is possible call the `resolve` and `reject` functions inside the promise constructor only. But if you want these functions outside of the promise constructor, you often have to write the following boilerplate code.
 
       ```javascript
       let resolve, reject;
