@@ -235,8 +235,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
         return this.length * this.length;
       }
 
-      set area(value) {
-        this.area = value;
+      set length(value) {
+        this.length = value;
       }
     }
     ```
@@ -252,8 +252,8 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
         return this.length * this.length;
       }
 
-      set area(value) {
-        this.area = value;
+      set length(value) {
+        this.length = value;
       }
     }
     ```
