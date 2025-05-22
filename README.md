@@ -34,6 +34,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 | ES2022 Or ES13  | June 2022 |
 | ES2023 Or ES14  | June 2023 |
 | ES2024 Or ES15  | June 2024 |
+| ES2025 Or ES16  | June 2025 |
 
 ### Table of Contents
 
@@ -127,6 +128,11 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 |7  | [Pipeline Operator](#pipeline-operator) |
 |8  | [Records and Tuples](#records-and-tuples) |
 |9  | [Decorators](#decorators) |
+|   | **ES2025 Or ES16**|
+|1  | [Set Methods](#set-methods) |
+|2  | [Iterator Helpers](#iterator-helpers) |
+|3  | [Temporal API](#temporal-api-es2025) |
+|4  | [Decorator Metadata](#decorator-metadata) |
 
 ## ES2015 Or ES6
 
@@ -2749,5 +2755,270 @@ Most of these features already supported by some browsers and try out with babel
       setTimeout(() =>  { Math.random() > 0.5 ? resolve("Success") : reject("Error")},1000);
       promise.then(result => console.log(result)).catch(error => console.error(error));
       ```
+
+   **[⬆ Back to Top](#table-of-contents)**
+
+## ES2025 or ES16
+
+ES2025 is planned to be released in June 2025 with several new features and enhancements for JavaScript developers. These features aim to improve developer productivity and code readability.
+
+1. ### Set Methods
+
+   ES2025 introduces several new methods to the Set prototype that make working with sets more convenient and expressive. These methods provide operations commonly found in set theory, such as union, intersection, and difference.
+
+   ```javascript
+   // Create some sample sets
+   const set1 = new Set([1, 2, 3, 4, 5]);
+   const set2 = new Set([3, 4, 5, 6, 7]);
+
+   // Union - combines elements from both sets
+   const union = set1.union(set2);
+   console.log([...union]); // [1, 2, 3, 4, 5, 6, 7]
+
+   // Intersection - elements present in both sets
+   const intersection = set1.intersection(set2);
+   console.log([...intersection]); // [3, 4, 5]
+
+   // Difference - elements in first set but not in second
+   const difference = set1.difference(set2);
+   console.log([...difference]); // [1, 2]
+
+   // Symmetric Difference - elements in either set but not in both
+   const symDifference = set1.symmetricDifference(set2);
+   console.log([...symDifference]); // [1, 2, 6, 7]
+   ```
+
+   The new Set methods include:
+
+   1. **Set.prototype.union()**: Returns a new Set containing all elements from both sets.
+   2. **Set.prototype.intersection()**: Returns a new Set containing elements present in all sets.
+   3. **Set.prototype.difference()**: Returns a new Set containing elements present in the first set but not in the second.
+   4. **Set.prototype.symmetricDifference()**: Returns a new Set containing elements present in either set but not in both.
+   5. **Set.prototype.isSubsetOf()**: Returns a boolean indicating if the set is a subset of the given set.
+   6. **Set.prototype.isSupersetOf()**: Returns a boolean indicating if the set is a superset of the given set.
+   7. **Set.prototype.isDisjointFrom()**: Returns a boolean indicating if the set has no elements in common with the given set.
+
+   These methods can be particularly useful for data processing, filtering, and comparison operations.
+
+   ```javascript
+   // Practical example: Finding common interests between users
+   const user1Interests = new Set(["coding", "reading", "music", "hiking"]);
+   const user2Interests = new Set(["gaming", "music", "movies", "hiking"]);
+
+   // Find common interests
+   const commonInterests = user1Interests.intersection(user2Interests);
+   console.log([...commonInterests]); // ["music", "hiking"]
+
+   // Find unique interests of user1
+   const uniqueInterests = user1Interests.difference(user2Interests);
+   console.log([...uniqueInterests]); // ["coding", "reading"]
+   ```
+
+   **[⬆ Back to Top](#table-of-contents)**
+
+2. ### Iterator Helpers
+
+   ES2025 introduces Iterator Helpers, which provide a set of utility methods that can be chained together to perform operations on iterators in a more readable and functional way. This feature makes working with iterators more convenient and expressive.
+
+   ```javascript
+   // Create a generator function
+   function* generateNumbers() {
+     yield 1;
+     yield 2;
+     yield 3;
+     yield 4;
+     yield 5;
+   }
+
+   // Use iterator helpers to transform the values
+   const result = generateNumbers()[Symbol.iterator]()
+     .filter(x => x > 1)      // Keep only values greater than 1
+     .map(x => x * 10)        // Multiply each value by 10
+     .take(3)                 // Take only the first 3 values
+     .toArray();              // Convert to an array
+
+   console.log(result); // [20, 30, 40]
+   ```
+
+   The new Iterator Helper methods include:
+
+   1. **Iterator.prototype.map()**: Maps each value in the iterator to a new value.
+   2. **Iterator.prototype.filter()**: Filters values in the iterator based on a predicate.
+   3. **Iterator.prototype.take()**: Takes a specified number of values from the iterator.
+   4. **Iterator.prototype.drop()**: Skips a specified number of values from the iterator.
+   5. **Iterator.prototype.flatMap()**: Maps each value and flattens the result.
+   6. **Iterator.prototype.reduce()**: Reduces the iterator to a single value.
+   7. **Iterator.prototype.toArray()**: Converts the iterator to an array.
+   8. **Iterator.prototype.forEach()**: Executes a function for each value in the iterator.
+   9. **Iterator.prototype.some()**: Checks if some values satisfy a condition.
+   10. **Iterator.prototype.every()**: Checks if all values satisfy a condition.
+
+   Iterator Helpers are particularly useful for processing streams of data in a memory-efficient way:
+
+   ```javascript
+   function* generateUserData() {
+     yield { id: 1, name: "Alice", age: 25 };
+     yield { id: 2, name: "Bob", age: 30 };
+     yield { id: 3, name: "Charlie", age: 35 };
+     yield { id: 4, name: "Dave", age: 40 };
+   }
+
+   // Find users over 30, extract their names, and take the first 2
+   const olderUserNames = generateUserData()[Symbol.iterator]()
+     .filter(user => user.age > 30)
+     .map(user => user.name)
+     .take(2)
+     .toArray();
+
+   console.log(olderUserNames); // ["Charlie", "Dave"]
+   ```
+
+   **[⬆ Back to Top](#table-of-contents)**
+
+3. ### Temporal API {#temporal-api-es2025}
+
+   The Temporal API is a new date and time API for JavaScript that addresses many of the limitations of the existing Date object. It provides a modern, immutable, and more intuitive way to work with dates and times.
+
+   ```javascript
+   // Get the current date
+   const today = Temporal.Now.plainDate();
+   console.log(today.toString()); // e.g., "2025-06-01"
+
+   // Create a specific date
+   const date = Temporal.PlainDate.from("2025-06-01");
+   console.log("Year:", date.year);      // 2025
+   console.log("Month:", date.month);    // 6
+   console.log("Day:", date.day);        // 1
+   console.log("Day of week:", date.dayOfWeek); // e.g., 7 (Sunday)
+
+   // Date arithmetic
+   const futureDate = date.add({ months: 1, days: 15 });
+   console.log(futureDate.toString()); // "2025-07-16"
+
+   // Calculate duration between dates
+   const duration = date.until(futureDate);
+   console.log(duration.toString()); // "P1M15D" (1 month, 15 days)
+   ```
+
+   The Temporal API includes several objects for different date/time representations:
+
+   1. **Temporal.Now**: Provides methods to get the current date and time in various formats.
+   2. **Temporal.Instant**: Represents a fixed point in time (like a timestamp).
+   3. **Temporal.PlainDate**: Represents a calendar date without time or timezone.
+   4. **Temporal.PlainTime**: Represents wall-clock time without date or timezone.
+   5. **Temporal.PlainDateTime**: Combines date and time without timezone.
+   6. **Temporal.ZonedDateTime**: Full date, time, and timezone information.
+   7. **Temporal.Duration**: Represents a length of time.
+   8. **Temporal.TimeZone**: Represents a timezone.
+   9. **Temporal.Calendar**: Represents a calendar system.
+
+   The Temporal API is particularly useful for applications that need to handle dates and times across different timezones:
+
+   ```javascript
+   // Calculate flight duration between timezones
+   function calculateFlightDuration(departure, arrival) {
+     const departureTZ = Temporal.ZonedDateTime.from(departure);
+     const arrivalTZ = Temporal.ZonedDateTime.from(arrival);
+     return departureTZ.until(arrivalTZ);
+   }
+
+   const flightDeparture = "2025-06-01T08:30:00-04:00[America/New_York]";
+   const flightArrival = "2025-06-01T22:15:00+02:00[Europe/Paris]";
+   console.log("Flight duration:", calculateFlightDuration(flightDeparture, flightArrival).toString());
+   // e.g., "PT9H45M" (9 hours, 45 minutes)
+   ```
+
+   **[⬆ Back to Top](#table-of-contents)**
+
+4. ### Decorator Metadata
+
+   ES2025 enhances JavaScript decorators by allowing them to associate metadata with decorated elements. This provides a standard way to attach and retrieve metadata for classes, methods, and properties.
+
+   ```javascript
+   // Define a decorator that attaches metadata
+   function apiEndpoint(path, method = "GET") {
+     return function(target, context) {
+       context.metadata = { 
+         ...context.metadata,
+         api: { path, method }
+       };
+       return target;
+     };
+   }
+
+   // Define a class with decorated methods
+   class UserService {
+     @apiEndpoint("/users", "GET")
+     getAllUsers() {
+       // Implementation...
+     }
+
+     @apiEndpoint("/users/:id", "GET")
+     getUserById(id) {
+       // Implementation...
+     }
+
+     @apiEndpoint("/users", "POST")
+     createUser(name, age) {
+       // Implementation...
+     }
+   }
+
+   // Access the metadata
+   function generateApiDocs(serviceClass) {
+     const methodNames = Object.getOwnPropertyNames(serviceClass.prototype)
+       .filter(name => name !== 'constructor');
+
+     for (const methodName of methodNames) {
+       const method = serviceClass.prototype[methodName];
+       const metadata = method.context?.metadata;
+
+       if (metadata && metadata.api) {
+         console.log(`${metadata.api.method} ${metadata.api.path} - ${methodName}`);
+       }
+     }
+   }
+
+   generateApiDocs(UserService);
+   // Output:
+   // GET /users - getAllUsers
+   // GET /users/:id - getUserById
+   // POST /users - createUser
+   ```
+
+   Decorator Metadata is particularly useful for:
+
+   1. **API Documentation**: Automatically generating documentation from code.
+   2. **Validation**: Defining validation rules for method parameters.
+   3. **Dependency Injection**: Specifying dependencies for classes and methods.
+   4. **Serialization**: Defining how objects should be serialized/deserialized.
+   5. **Framework Integration**: Providing metadata for frameworks to use.
+
+   ```javascript
+   // Example of parameter validation with decorator metadata
+   function validateParams(target, context) {
+     const originalMethod = target.value;
+     const methodMetadata = context.metadata;
+
+     target.value = function(...args) {
+       if (methodMetadata && methodMetadata.params) {
+         const validations = methodMetadata.params;
+
+         for (let i = 0; i < validations.length; i++) {
+           const validation = validations[i];
+           const arg = args[i];
+
+           if (validation.required && (arg === undefined || arg === null)) {
+             throw new Error(`Parameter ${i} is required for ${context.name}`);
+           }
+         }
+       }
+
+       return originalMethod.apply(this, args);
+     };
+
+     return target;
+   }
+   ```
 
    **[⬆ Back to Top](#table-of-contents)**
