@@ -5,12 +5,12 @@
 ## How to run examples
 ```cmd
 npm install
-npx babel-node es2020/bigint // Try other examples too
+npx babel-node es2020\bigint.js  # Try other examples too
 ```
 
 # What is ECMAScript?
 
-**ECMAScript** is the scripting language which acts as the basis of JavaScript. ECMAScript standardized by the ECMA International standards organization in the ECMA-262 and ECMA-402 specifications.
+**ECMAScript** is the scripting language which acts as the basis of JavaScript. ECMAScript is standardized by the ECMA International standards organization in the ECMA-262 and ECMA-402 specifications.
 Each proposal for an ECMAScript feature goes through the following maturity stages:
 
 1. Stage 0: Strawman;
@@ -1151,9 +1151,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(factorial(1000));
     console.log(factorial(10000));
    ```
-   
+
    **[⬆ Back to Top](#table-of-contents)**
-   
+
 24. ### Array find methods
     ES6 introduced few array methods and two of them are `Array.find()` and `Array.findIndex()`.
 
@@ -1219,7 +1219,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
   console.log(numbers.includes(NaN)); // true
   console.log(numbers.includes(undefined)); // true
   ```
-  
+
   **[⬆ Back to Top](#table-of-contents)**
 
 2. ### Exponentiation Operator
@@ -1266,9 +1266,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
   }
   logger();
   ```
-     
+
   **[⬆ Back to Top](#table-of-contents)**
-  
+
 2. ### Object values
    Similar to Object.keys which iterate over JavaScript object’s keys, Object.values will do the same thing on values. i.e, The Object.values() method is introduced to returns an array of a given object's own enumerable property values in the same order as `for...in` loop.
 
@@ -1286,9 +1286,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
   console.log(Object.values(['India', 'Singapore'])); // ['India', 'Singapore']
   console.log(Object.values('India')); // ['I', 'n', 'd', 'i', 'a']
   ```
-   
+
    **[⬆ Back to Top](#table-of-contents)**
-   
+
 3. ### Object entries
    The `Object.entries()` method is introduced to returns an array of a given object's own enumerable string-keyed property [key, value] pairsin the same order as `for...in` loop.
    ```js
@@ -1308,9 +1308,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
       console.log(Object.entries(100)); // [], an empty array for any primitive type because it won't have any own properties
    ```
-   
+
     **[⬆ Back to Top](#table-of-contents)**
-    
+
 4. ### Object property descriptors
 
    Property descriptors describe the attributes of a property. The `Object.getOwnPropertyDescriptors()` method returns all own property descriptors of a given object.
@@ -1334,7 +1334,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     const descriptors = Object.getOwnPropertyDescriptors(profile);
     console.log(descriptors); //  {age: {configurable: true, enumerable: true, writable: true }}
    ```
-   
+
     **[⬆ Back to Top](#table-of-contents)**
 
 5. ### String padding
@@ -1363,7 +1363,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
    console.log((label1 + ': ').padEnd(20, ' ') + value1); // Name:                     John
    console.log(label2 + ": " + value2); // Phone Number: (222)-333-3456
    ```
-   
+
     **[⬆ Back to Top](#table-of-contents)**
 
 6. ### Shared memory and atomics
@@ -1511,7 +1511,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
         const myObject = { a: 1, b: 2, c: 3, d:4 };
         const myNewObject = { ...myObject, e: 5 }; // { a: 1, b: 2, c: 3, d: 4, e: 5 }
         ```
-        
+
     **[⬆ Back to Top](#table-of-contents)**
 
 3. ### Promise finally
@@ -1580,7 +1580,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
    console.log(numberArray1.flatMap(value => [value * 10])); // [10, 20, 30, 40, 50]
    ```
-   
+
     **[⬆ Back to Top](#table-of-contents)**
 
 2. ### Object fromEntries
@@ -1620,7 +1620,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
     Object.fromEntries(searchParams);    // => {param1: "foo", param2: "baz"}
    ```
-   
+
    **[⬆ Back to Top](#table-of-contents)**
 
 3. ### String trimStart and trimEnd
@@ -1638,7 +1638,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     console.log(messageTwo.trimStart()); //Hello World!!
     console.log(messageTwo.trimEnd()); //   Hello World!!
    ```
-   
+
    **[⬆ Back to Top](#table-of-contents)**
 
 4. ### Symbol description
@@ -1658,7 +1658,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
  console.log(Symbol.iterator.description); // "Symbol.iterator"
  ```
- 
+
  **[⬆ Back to Top](#table-of-contents)**
 
 5. ### Optional catch binding
@@ -1688,9 +1688,9 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
       }
     } catch (unused) {}
    ```
-   
+
    **[⬆ Back to Top](#table-of-contents)**
-   
+
 6. ### JSON Improvements
 
     JSON is used as a lightweight format for data interchange(to read and parse). The usage of JSON has been improved as part of ECMAScript specification. Basically there are 2 important changes related to JSON.
@@ -1722,7 +1722,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     ```js
     console.log(JSON.stringify("\uD800")); // '"\ud800"'
     ```
-    
+
    **[⬆ Back to Top](#table-of-contents)**
 
 7. ### Array Stable Sort
@@ -1765,7 +1765,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
     //       console.log(`Hello, ${msg}`);
     //   }
     ```
-    
+
    **[⬆ Back to Top](#table-of-contents)**
 
 9. ### Private Class Variables
@@ -1888,7 +1888,7 @@ Most of these features already supported by some browsers and try out with babel
     console.log(vehicle.car.speed ?? 90); // 0(zero is valid case for speed)
     ```
     In a short note, nullish operator returns a non-nullish value and || operator returns truthy values.
-    
+
    **[⬆ Back to Top](#table-of-contents)**
 
 4. ### String matchAll
@@ -1907,7 +1907,7 @@ Most of these features already supported by some browsers and try out with babel
     ["test1", "e", "st1", "1", index: 0, input: "test1test2", groups: undefined]
     ["test2", "e", "st2", "2", index: 5, input: "test1test2", groups: undefined]
     ```
-    
+
    **[⬆ Back to Top](#table-of-contents)**
 
 5. ### Optional chaining
@@ -1938,7 +1938,7 @@ Most of these features already supported by some browsers and try out with babel
     console.log(vehicle.car?.name ?? "Unknown"); // Unknown
     console.log(vehicle.car?.speed ?? 90); // 90
     ```
-    
+
    **[⬆ Back to Top](#table-of-contents)**
 
 6. ### Promise.allSettled
@@ -1957,7 +1957,7 @@ Most of these features already supported by some browsers and try out with babel
     As per the output, each outcome object returns `status` field which denotes either "fulfilled"(value present) or "rejected"(reason present)
 
    **[⬆ Back to Top](#table-of-contents)**
-   
+
 7. ### globalThis
     Prior to ES2020, you need to write different syntax in different JavaScript environments(cross-platforms) just to access the global object. It is really a hard time for developers because you need to use `window, self, or frames` on the browser side, `global` on the nodejs, `self` on the web workers side.
 
@@ -2071,7 +2071,7 @@ Most of these features already supported by some browsers and try out with babel
     WeakRef provides two new pieces of functionality
       1. creating weak references to objects with the WeakRef class
       2. running user-defined finalizers after objects are garbage-collected, with the FinalizationRegistry class
-    
+
     **WeakRef:**
     weak reference is a reference to an object that doesn’t prevent garbage collection if it is the only reference to the object in the memory.It’s useful when we don’t want to keep the object in memory forever(e.g, WebSocket). The main use of weak references is to implement caches or mappings to large objects for which you don't need to keep it in memory for rarely used objects.
 
@@ -2132,7 +2132,7 @@ Most of these features already supported by some browsers and try out with babel
 
 5. ### Logical Operators
    Logical assignment operators combines the logical operations(&&, || or ??) with assignment. They are quite useful for assigning default values to variables.
-   
+
    **&&=:** 
 
    The `&&=` operator performs the assignment only when the left operand is truthy.
@@ -2154,7 +2154,7 @@ Most of these features already supported by some browsers and try out with babel
    ```
 
    **||=:**
-   
+
    The ||= operator performs the assignment only when the left operand is falsy.
    ```javascript
     let x = 0;
@@ -2174,7 +2174,7 @@ Most of these features already supported by some browsers and try out with babel
    ```
 
    **??=:**
-   
+
    The ??= operator performs the assignment only when the left operand is null or undefined.
    ```javascript
     let x;
@@ -2259,7 +2259,7 @@ Most of these features already supported by some browsers and try out with babel
 
    ```javascript
     class Employee  {
-    
+
     constructor() {
       this.name = "John"; //public
       this._age=35; //private
@@ -2289,7 +2289,7 @@ Most of these features already supported by some browsers and try out with babel
         #getAge() {
           return #age
         }
-      
+
      }
 
       const employee = new Employee();
@@ -2371,9 +2371,9 @@ Most of these features already supported by some browsers and try out with babel
    **[⬆ Back to Top](#table-of-contents)**
 
 5. ### hasOwn
-   
+
    The new `Object.hasOwn()` method is a replacement or improved version of `Object.prototype.hasOwnProperty`. It is a static method that returns true if the specified object has the indicated property as its own property. If the property is inherited, or does not exist, the method returns false.
-   
+
    It's not only more concise and readable but also overcomes the below limitations of `hasOwnProperty`.
 
    1. **When `hasOwnProperty`overwritten:**
@@ -2407,7 +2407,7 @@ Most of these features already supported by some browsers and try out with babel
    2. **Create an object with create(null) function:**
 
      If you create new object with help of create(null) function, then newly created object doesn’t inherit from Object.prototype. So it doesn't have hasOwnProperty method. 
-     
+
      Let's take an example to verify hasOwnProperty on an object created with create(null) function.
      ```javascript
      const user = Object.create(null);
@@ -2505,7 +2505,7 @@ Most of these features already supported by some browsers and try out with babel
 
     console.log(weak.get(key)); //ES2023
    ```
-   
+
 4. ### Change array by copy
    Both **Array** and **TypedArray** has built-in methods such as **reverse()**, **sort()** and **splice()** to perform common actions like sorting, reverse the array elements and replacing(or removing) elements. But these methods are mutating the original array. Where as ES2023 has provided additional methods such as **toReversed()**, **toSorted()**, **toSpliced** and **with()** methods which returns new array copies instead of mutating the original array.
 
@@ -2707,7 +2707,7 @@ Most of these features already supported by some browsers and try out with babel
       After that, the notify method awakes the waiting agent(i.e, array) that are sleeping in waiting queue and the promise is fulfilled.
 
       Remember that, SharedArrayBuffer have been disabled on most browsers unless you specify `Cross-Origin-Opener-Policy` and `Cross-Origin-Embedder-Policy` headers. For example, 
-     
+
       `
       Cross-Origin-Opener-Policy: same-origin
       Cross-Origin-Embedder-Policy: require-corp
@@ -2718,7 +2718,7 @@ Most of these features already supported by some browsers and try out with babel
    5. ### RegEx v Flag and string properties
    6. ### Promise withResolvers
       When you are creating a new Promise object, usually you pass `resolve` and `reject` functions to the executor of promise constructor as shown below:
-   
+
       ```javascript
       const promise = new Promise((resolve, reject) =>{
           setTimeout(() =>  { Math.random() > 0.5 ? resolve("Success") : reject("Error")}, 1000);
