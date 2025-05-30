@@ -1296,7 +1296,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
    **[⬆ Back to Top](#table-of-contents)**
 
 3. ### Object entries
-   The `Object.entries()` method is introduced to returns an array of a given object's own enumerable string-keyed property [key, value] pairsin the same order as `for...in` loop.
+   The `Object.entries()` method is introduced to returns an array of a given object's own enumerable string-keyed property [key, value] pairs in the same order as `for...in` loop.
    ```js
       const countries = {
         IN: 'India',
@@ -1591,7 +1591,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
 2. ### Object fromEntries
 
-   In JavaScript, it is very commonn to transforming data from one format. ES2017 introduced `Object.entries()` method to objects into arrays.
+   In JavaScript, it is very common to transforming data from one format. ES2017 introduced `Object.entries()` method to objects into arrays.
 
    **Object to Array:**
 
@@ -1660,7 +1660,7 @@ Each proposal for an ECMAScript feature goes through the following maturity stag
 
  console.log(Symbol('').description); // ''
 
- console.log(Symbol().description); // unefined
+ console.log(Symbol().description); // undefined
 
  console.log(Symbol.iterator.description); // "Symbol.iterator"
  ```
@@ -2004,7 +2004,7 @@ Most of these features already supported by some browsers and try out with babel
     ```
     The above URL can be either URL from which the script was obtained (for external scripts), or the document base URL of the containing document (for inline scripts).
 
-    **Note:** Remember `import` is not really an object but `import.meta` is provided as an object which is extensible, and its properties are writable, configurable, and enumerable.
+    **Note:** Remember `import` is not really an object but `import.meta` is provided as an object which is extensible, and its properties are writeable, configurable, and enumerable.
 
 9. ### for..in order
 
@@ -2113,7 +2113,7 @@ Most of these features already supported by some browsers and try out with babel
 
     **Note:** The finalization callback does not run immediately after garbage-collecting the event listener, so don't use it for important logic or metrics.
 4. ### Numeric Separators
-    Numeric separators are helpful to read large numbers(or numeric literals) in JavaScript by providing separation between digits using underscores(_). In otherwords, numeric literals are more readable by creating a visual separation between groups of digits. 
+    Numeric separators are helpful to read large numbers(or numeric literals) in JavaScript by providing separation between digits using underscores(_). In other words, numeric literals are more readable by creating a visual separation between groups of digits. 
 
     For example, one billion and one trillion becomes more readable with _ numeric separator,
 
@@ -2206,7 +2206,7 @@ Most of these features already supported by some browsers and try out with babel
 
 1. ### Top-level await
 
-   In ES2022, it is possible to use `await` outside of the asynchronous (async) function scope, which makes it easier to use at the module level. This feaure delays the execution of current and parent modules until the imported module is loaded.
+   In ES2022, it is possible to use `await` outside of the asynchronous (async) function scope, which makes it easier to use at the module level. This feature delays the execution of current and parent modules until the imported module is loaded.
 
    Let's take an example of `await` usage prior to ES2022,
 
@@ -2219,7 +2219,7 @@ Most of these features already supported by some browsers and try out with babel
     }
    ```
 
-   The usage of `await` is straightword with ES2022 as below,
+   The usage of `await` is straightforward with ES2022 as below,
 
    ```javascript
    let posts = await posts();
@@ -2472,7 +2472,7 @@ Most of these features already supported by some browsers and try out with babel
    console.log(reverseNumbers.find(isOdd)); // 5
    console.log(reverseNumbers.findIndex(isOdd)); // 4
    ```
-   This process is going to be simiplified in ES2023 release using **findLast()** and **findLastIndex()** methods.
+   This process is going to be simplified in ES2023 release using **findLast()** and **findLastIndex()** methods.
 
    ```javascript
    const isOdd = (number) => number % 2 === 1;
@@ -2650,7 +2650,7 @@ Most of these features already supported by some browsers and try out with babel
       Well-Formed Unicode Strings feature introduced below two string methods to check and convert into wellformed strings.
 
       1. **String.prototype.isWellFormed:**
-        This method is used to check if the string contains lone surrogates or not. Returns `true`, if unicode string is not present. The following stings can be verified either as well-formed or not well-formed strigns,
+        This method is used to check if the string contains lone surrogates or not. Returns `true`, if unicode string is not present. The following stings can be verified either as well-formed or not well-formed strings,
 
         ```javascript
         const str1 = "Hello World \uD815";
